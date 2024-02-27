@@ -1,1 +1,3 @@
-# Global Sales Analysis
+#  E-Commerce Sales Analysis
+
+## PROJECT SUMMARY
