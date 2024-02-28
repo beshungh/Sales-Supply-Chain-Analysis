@@ -8,12 +8,12 @@ This project aims to extract actionable insights from this [Global Superstore da
 
 The project utilizes datasets, namely "customers.csv," "orders.csv," "products.csv," and "returns.csv," to present a thorough analysis of sales transactions across different markets, covering a wide range of product categories and sub-categories. These datasets contain essential information, including product details (Product ID, Category, Sub-Category, and Product Name), sales metrics (Sales, Quantity, Discount, Profit), logistical details (Shipping Cost, Order Priority), order specifics (Order ID, Region), and return information (Returned, Order ID, Customer ID, Product ID.
 
-### Tools
+### Tools Used 
 
 - Excel - Database Normalization,Data Cleaning 
 - PostgreSQL - Exploratory Data Analysis
 - Tableau - Creating reports
-- Python - Developed a Jupyter Notebook that Automatically import .csv file to PostgreSQL
+- Python - Developed a Jupyter Notebook that Automatically import .csv files to PostgreSQL
 
   
 ### Preparation of Data
@@ -113,9 +113,19 @@ In 2NF, I ensured each non-prime attribute is fully functionally dependent on th
 
 #### Importing the .csv Files into PostgreSQL 
 
+Being a data analyst is not always about building dashboards and reports,its also about how fast you implement your tasks as an analyst.Being a PostgreSQL fan i face a lost of challengings importing my large data set in into the database,unlike the other Relational database management system softwares where is it very easy to import data,in postgresql,each schema needs to be created manuelly so imagine having a csv file which has 15 plus columns,this takes alot of time creating each schema,converting the datatypes to postgres datatype.So i used Juypter Notebook to develop a script to automates the tedious task of creating each schema and importing data into postgresql allowing for a seamless and time-saving workflow.
+
+
+
+
+
+
+
+
+
 
 ### Exploratory Data Analysis in PostgreSQL
-EDA involved exploring the Global Superstore dataset to answer Key questions.The key questions were grouped into two:
+The EDA involved exploring the Global Superstore dataset to answer Key questions.These key questions were grouped into two part:
 
 ###### Primary Questions
   - Which region incurs the highest shipping costs, and how does it compare to other regions?
