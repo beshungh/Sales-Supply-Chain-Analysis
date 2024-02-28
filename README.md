@@ -181,9 +181,10 @@ for file, dataframe in df.items():
         password=password,
         port=port_id
     )
+       # This section of the code is just a snippet. If you need the entire code, please get in touch with me at beshungh@gmail.com.
+
 ```
 
-FOR THE COMPLETE CODE [Email me](beshungh@gmail.com)
 
 
 ### Exploratory Data Analysis in PostgreSQL
@@ -208,7 +209,7 @@ The EDA involved exploring the Global Superstore dataset to answer Key questions
  - Identify products with the highest and lowest discounts.
  - What is the total shipping cost for each region?
  - Calculate the average shipping cost for different categories.
- - Analyze the distribution of orders based on priority.
+ - Analyse the distribution of orders based on priority.
  - Calculate the average profit for different order priorities.
  - Determine the percentage of returned orders.
  - Identify the products with the highest return rates.
