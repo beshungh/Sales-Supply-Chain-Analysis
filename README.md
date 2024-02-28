@@ -142,6 +142,13 @@ import psycopg2
 # Find CSV files in the current directory
 csv_files = [file for file in os.listdir(os.getcwd()) if file.endswith('.csv')]
 
+# Create a new directory
+dataset_dir = 'datasets'
+try:
+    os.mkdir(dataset_dir)
+except FileExistsError:
+    pass
+
 # Iterate over DataFrames, clean column names, and upload to PostgreSQL
 replacements = {
     'object': 'varchar',
@@ -181,11 +188,39 @@ for file, dataframe in df.items():
         password=password,
         port=port_id
     )
-       # This section of the code is just a snippet. If you need the entire code, please get in touch with me at beshungh@gmail.com.
+
+    # When all the tables are imported into the database these are the output messages
+
+Moved Customers.csv to datasets
+Moved Orders.csv to datasets
+Moved Products.csv to datasets
+Moved Returns.csv to datasets
+Using ISO-8859-1 encoding for Customers.csv
+Using ISO-8859-1 encoding for Orders.csv
+Using ISO-8859-1 encoding for Products.csv
+Using ISO-8859-1 encoding for Returns.csv
+Opened the database successfully for customers
+customers was created successfully
+File Customers.csv opened in memory
+File Customers.csv copied to database
+Opened the database successfully for orders
+orders was created successfully
+File Orders.csv opened in memory
+File Orders.csv copied to database
+Opened the database successfully for products
+products was created successfully
+File Products.csv opened in memory
+File Products.csv copied to database
+Opened the database successfully for returns
+returns was created successfully
+File Returns.csv opened in memory
+File Returns.csv copied to database
+All tables have been successfully imported into the database.
+
+
+   # This section of the code is just a snippet. If you need the entire code, please get in touch with me at beshungh@gmail.com.
 
 ```
-
-
 
 ### Exploratory Data Analysis in PostgreSQL
 The EDA involved exploring the Global Superstore dataset to answer Key questions.These key questions were grouped into two part:
