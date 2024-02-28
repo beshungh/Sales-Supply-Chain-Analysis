@@ -1,4 +1,4 @@
-#  E-Commerce Sales Analysis
+# Global Superstore Sales Analysis
 
 ### PROJECT SUMMARY
 
@@ -115,8 +115,41 @@ In 2NF, I ensured each non-prime attribute is fully functionally dependent on th
 
 
 ### Exploratory Data Analysis in PostgreSQL
-EDA involved exploring the Global Superstore dataset to answer Key questions, such as:
+EDA involved exploring the Global Superstore dataset to answer Key questions.The key questions were grouped into two:
 
+  - Primary Questions
+  - Which region incurs the highest shipping costs, and how does it compare to other regions?
+  - What is the average shipping cost for different product categories, and are there any significant variations?
+  - How are our orders distributed among different priorities, and is there any impact on profitability?
+  - What is the average profit associated with different order priorities, and are there trends or patterns?
+  - What percentage of our orders are being returned, and is there a specific product category with a high return rate?
+  - Which products have the highest return rates, and what impact do returns have on overall sales and profit?
+
+1. What is the total sales amount for each category and sub-category?
+2. Which product has the highest and lowest sales?
+3. What is the overall profit for each region?
+4. Identify the products with the highest and lowest profits.
+5. Which category has the highest and lowest quantity sold?
+6. What is the average quantity sold for each sub-category?
+7. Analyse the impact of discounts on sales and profit.
+8. Identify products with the highest and lowest discounts.
+9. What is the total shipping cost for each region?
+10. Calculate the average shipping cost for different categories.
+11. Analyze the distribution of orders based on priority.
+12. Calculate the average profit for different order priorities.
+13. Determine the percentage of returned orders.
+14. Identify the products with the highest return rates.
+15. Compare sales and profit across different regions.
+16. Identify regions with the highest and lowest sales.
+17. Analyse the sales and profit trends over different years.
+18. Compare the performance of different product categories
+19. Identify the most popular product categories.
+20. Which region incurs the highest shipping costs, and how does it compare to other regions?
+21. What is the average shipping cost for different product categories, and are there any significant variations?
+22. How are our orders distributed among different priorities, and is there any impact on profitability?
+23. What is the average profit associated with different order priorities, and are there trends or patterns?
+24. What percentage of our orders are being returned, and is there a specific product category with a high return rate?
+25. Which products have the highest return rates, and what impact do returns have on overall sales and profit?
 
 #### Data Cleaning
 
