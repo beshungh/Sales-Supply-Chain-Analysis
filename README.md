@@ -113,15 +113,77 @@ In 2NF, I ensured each non-prime attribute is fully functionally dependent on th
 
 #### Importing the .csv Files into PostgreSQL 
 
-Being a data analyst is not always about building dashboards and reports,its also about how fast you implement your tasks as an analyst.Being a PostgreSQL fan i face a lost of challengings importing my large data set in into the database,unlike the other Relational database management system softwares where is it very easy to import data,in postgresql,each schema needs to be created manuelly so imagine having a csv file which has 15 plus columns,this takes alot of time creating each schema,converting the datatypes to postgres datatype.So i used Juypter Notebook to develop a script to automates the tedious task of creating each schema and importing data into postgresql allowing for a seamless and time-saving workflow.
+Being a data analyst involves more than just creating dashboards; efficiency in task implementation is crucial. As a PostgreSQL user I face a lot challenges when importing large datasets into my database due to the manual creation of schemas and datatype conversions before the data can be imported. In difference to some other Relational Database Management System (RDBMS), where importing data is relatively straightforward, PostgreSQL present hurdles. One notable challenge is the manual creation of schemas, especially when dealing with extensive CSV files that encompass numerous columns. In PostgreSQL, each schema needs to be accurately created, and the conversion of data types to PostgreSQL-compatible formats adds an additional layer of complexity.
+To overcome this, I utilised Jupyter Notebook to develop a python script using (os, shutil, NumPy, pandas and psycopg2) to automate schema creation and data import tasks, streamlining the workflow. This approach not only saved me time but also ensured accuracy, reducing errors associated with manual processes.
 
+Features and Workflow:
+1. File Organization:
+The script begins by identifying all CSV files in the current directory. It then creates a new directory named 'datasets' (or uses an existing one) and moves the CSV files into this directory. This step ensures a well-organized and centralized location for dataset management.
+2. CSV to Pandas DataFrames:
+The script utilizes the Pandas library to read each CSV file into a Pandas DataFrame. It handles potential encoding issues, using ISO-8859-1 encoding when necessary, showcasing attention to data integrity.
+3. Table Creation and Column Transformation:
+The script dynamically generates table names based on file names and cleanses column names to remove spaces, special characters, and ensure compatibility with PostgreSQL conventions. It then iterates over each DataFrame, determining column data types and creating corresponding tables in the PostgreSQL database.
+4. PostgreSQL Database Connection:
+The script establishes a connection to the PostgreSQL database using user-defined parameters such as hostname, database name, username, password, and port. This ensures flexibility for connecting to various PostgreSQL instances.
+5. Data Import:
+The script employs the psycopg2 library to execute SQL commands for table creation and data import. It leverages PostgreSQL's COPY command, a high-performance mechanism for loading large amounts of data. This method significantly enhances the speed of data import compared to traditional row-by-row insertion.
+6. Granting Permissions:
+To ensure data accessibility, the script grants SELECT permissions on the created tables to the 'public' role, providing transparency and security in data sharing.
+7. Closing Connections:
+The script responsibly closes the database connection after each iteration, promoting resource efficiency and preventing potential connection issues.
 
+```python
+import os
+import shutil
+import numpy as np
+import pandas as pd
+import psycopg2
 
+# Find CSV files in the current directory
+csv_files = [file for file in os.listdir(os.getcwd()) if file.endswith('.csv')]
 
+# Iterate over DataFrames, clean column names, and upload to PostgreSQL
+replacements = {
+    'object': 'varchar',
+    'float64': 'float',
+    'int64': 'bigint',
+    'timedelta64[ns]': 'varchar',
+    'datetime64[ns]': 'timestamp',
+    'bool': 'boolean',
+    'datetime64': 'timestamp'
+}
 
+hostname = 'localhost'
+database = 'covid19'
+username = 'postgres'
+password = 'password'
+port_id = 5432
 
+for file, dataframe in df.items():
+    clean_table_name = file.lower().replace(" ", "_").replace("?", "") \
+        .replace("-", "_").replace("/", "_").replace("\\", "_").replace("%", "") \
+        .replace(")", "").replace("(", "").replace("$", "")
 
+    table_name = clean_table_name.split('.')[0]
 
+    dataframe.columns = [col.lower().replace(" ", "_").replace("?", "").replace("¢", "") \
+                         .replace("-", "_").replace("/", "_").replace("\\", "_").replace("%", "") \
+                         .replace(")", "").replace("(", "").replace("$", "").replace(".", "")
+                         for col in dataframe.columns]
+
+    col_str = ", ".join("{} {}".format(n, replacements.get(str(d), 'varchar')) for (n, d) in
+                        zip(dataframe.columns, dataframe.dtypes))
+
+    conn = psycopg2.connect(
+        host=hostname,
+        dbname=database,
+        user=username,
+        password=password,
+        port=port_id
+    )
+```
+
+FOR THE COMPLETE CODE [Email me](beshungh@gmail.com)
 
 
 ### Exploratory Data Analysis in PostgreSQL
