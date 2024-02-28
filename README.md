@@ -2,7 +2,7 @@
 
 ### PROJECT SUMMARY
 
-This project aims to extract actionable insights from this Global Superstore dataset and visualize the results through dashboards. This process will assist decision-makers in optimizing supply chain processes and gaining a more profound understanding of the company's performance.
+This project aims to extract actionable insights from this [Global Superstore dataset](https://www.kaggle.com/datasets/endofnight17j03/global-superstore) and visualize the results through dashboards. This process will assist decision-makers in optimizing supply chain processes and gaining a more profound understanding of the company's performance.
 
 ### Data Source
 
@@ -12,7 +12,7 @@ The project utilizes datasets, namely "customers.csv," "orders.csv," "products.c
 
 - Excel - Database Normalization,Data Cleaning 
 - PostgreSQL - Exploratory Data Analysis
-- Tableau - Creating reports [Download here](https://tableau.com)
+- Tableau - Creating reports
 - Python - Developed a Jupyter Notebook that Automatically import .csv file to PostgreSQL
 
   
