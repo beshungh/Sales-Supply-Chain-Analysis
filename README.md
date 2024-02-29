@@ -288,6 +288,17 @@ ON orders.product_id = products.product_id)
 GROUP BY category
 ORDER BY avg_shipping_cost DESC,shipping_cost_stddev DESC
 
+3. -- Cleaning the profit column to remove non-numeric characters like '$' and ','
+
+UPDATE orders
+SET profit = REGEXP_REPLACE(profit, '[^0-9-]', '','g');
+
+4. -- Converting Profit column datatype From Character varying to bigint
+
+ALTER TABLE orders
+ALTER COLUMN profit TYPE NUMERIC
+USING profit::NUMERIC;
+
 
 
 
