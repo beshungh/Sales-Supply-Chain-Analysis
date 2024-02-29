@@ -265,6 +265,7 @@ After my Exploratory data analysis in PostgreSQL,I saved the results in .xlsx an
 ### Data Analysis Queries in PostgreSQL
 ```sql
 1. -- Region that incurs the highest shipping costs
+
 SELECT region,ROUND(SUM(shipping_cost)::numeric,2) AS total_shipping_cost
 FROM customers
 INNER JOIN orders
