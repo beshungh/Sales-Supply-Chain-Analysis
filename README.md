@@ -254,14 +254,62 @@ The EDA involved exploring the Global Superstore dataset to answer Key questions
  - Compare the performance of different product categories
  - Identify the most popular product categories.
 
-#### Data Cleaning
+### Data Cleaning
 
 After my Exploratory data analysis in PostgreSQL,I saved the results in .xlsx and performed the following tasks in Excel:
 1. Removig duplicates.
 2. Removing Incomplete Values.
 3. Coverting data to different datatypes.
 
-### Data Analysis
+
+### Data Analysis Queries in PostgreSQL
+```sql
+1. -- Region that incurs the highest shipping costs
+SELECT region,ROUND(SUM(shipping_cost)::numeric,2) AS total_shipping_cost
+FROM customers
+INNER JOIN orders
+ON customers.customer_id = orders.customer_id
+GROUP BY region
+ORDER BY total_shipping_cost DESC
+--LIMIT 1;
+2.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
+### Results/Findings
+1. "Western Europe" had the highest total shipping costs, followed by "Oceania" and "Central America."
+![Highest shipping cost](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/88f76f83-5d16-48ed-a384-f05ea73891fa)
+
+
+
+
+
+### Recommendations
+
+Based on the insights derived from this analysis, I propose implementing the following measures:
+
+1. The company should consider establishing partnerships with local distributors or logistics firms in Western Europe. This collaborative approach aims to harness their regional expertise, potentially leading to a reduction in shipping costs.
 
 
 
