@@ -286,18 +286,40 @@ FROM orders
 INNER JOIN products
 ON orders.product_id = products.product_id)
 GROUP BY category
-ORDER BY avg_shipping_cost DESC,shipping_cost_stddev DESC
+ORDER BY avg_shipping_cost DESC,shipping_cost_stddev DESC;
 
 3. -- Cleaning the profit column to remove non-numeric characters like '$' and ','
 
 UPDATE orders
 SET profit = REGEXP_REPLACE(profit, '[^0-9-]', '','g');
 
-4. -- Converting Profit column datatype From Character varying to bigint
+4. -- Converting Profit column datatype From Character varying to numeric
 
 ALTER TABLE orders
 ALTER COLUMN profit TYPE NUMERIC
 USING profit::NUMERIC;
+
+5. -- Cleaning the sales column to remove non-numeric characters like '$' and ','
+
+UPDATE sales
+SET sales = REGEXP_REPLACE(sales, '[^0-9-]', '','g');
+
+6. -- Converting sales column datatype From Character varying to numeric
+
+ALTER TABLE orders
+ALTER COLUMN sales TYPE NUMERIC
+USING sales::NUMERIC;
+
+7. -- Order priority and impact on profitability
+
+SELECT order_priority,
+COUNT(*) AS order_count,
+SUM(profit) AS total_profit,
+ROUND(AVG(profit),2) AS average_profit,
+ROUND(AVG(profit / sales),2) AS profit_margin
+FROM orders
+GROUP BY order_priority
+ORDER BY order_priority ASC;
 
 
 
