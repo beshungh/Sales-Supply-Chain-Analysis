@@ -118,18 +118,21 @@ To overcome this, I utilised Jupyter Notebook to develop a python script using (
 
 Features and Workflow:
 1. File Organization:
-The script begins by identifying all CSV files in the current directory. It then creates a new directory named 'datasets' (or uses an existing one) and moves the CSV files into this directory. This step ensures a well-organized and centralized location for dataset management.
-2. CSV to Pandas DataFrames:
+The script begins by identifying all CSV files in the current directory. It then creates a new directory named 'datasets' (or uses an existing one) and moves the CSV files into this directory.
+This step ensures a well-organized and centralized location for dataset management.
+3. CSV to Pandas DataFrames:
 The script utilizes the Pandas library to read each CSV file into a Pandas DataFrame. It handles potential encoding issues, using ISO-8859-1 encoding when necessary, showcasing attention to data integrity.
-3. Table Creation and Column Transformation:
-The script dynamically generates table names based on file names and cleanses column names to remove spaces, special characters, and ensure compatibility with PostgreSQL conventions. It then iterates over each DataFrame, determining column data types and creating corresponding tables in the PostgreSQL database.
-4. PostgreSQL Database Connection:
+4. Table Creation and Column Transformation:
+The script dynamically generates table names based on file names and cleanses column names to remove spaces, special characters, and ensure compatibility with PostgreSQL conventions.
+It then iterates over each DataFrame, determining column data types and creating corresponding tables in the PostgreSQL database.
+5. PostgreSQL Database Connection:
 The script establishes a connection to the PostgreSQL database using user-defined parameters such as hostname, database name, username, password, and port. This ensures flexibility for connecting to various PostgreSQL instances.
-5. Data Import:
-The script employs the psycopg2 library to execute SQL commands for table creation and data import. It leverages PostgreSQL's COPY command, a high-performance mechanism for loading large amounts of data. This method significantly enhances the speed of data import compared to traditional row-by-row insertion.
-6. Granting Permissions:
+6. Data Import:
+The script employs the psycopg2 library to execute SQL commands for table creation and data import. It leverages PostgreSQL's COPY command, a high-performance mechanism for loading large amounts of data.
+This method significantly enhances the speed of data import compared to traditional row-by-row insertion.
+8. Granting Permissions:
 To ensure data accessibility, the script grants SELECT permissions on the created tables to the 'public' role, providing transparency and security in data sharing.
-7. Closing Connections:
+9. Closing Connections:
 The script responsibly closes the database connection after each iteration, promoting resource efficiency and preventing potential connection issues.
 
 ```python
@@ -226,7 +229,7 @@ All tables have been successfully imported into the database.
 The EDA involved exploring the Global Superstore dataset to answer Key questions.These key questions were grouped into two part:
 
 ###### Primary Questions
-  - Which region incurs the highest shipping costs, and how does it compare to other regions?
+  - Which region incur the highest shipping costs, and how does it compare to other regions?
   - What is the average shipping cost for different product categories, and are there any significant variations?
   - How are our orders distributed among different priorities, and is there any impact on profitability?
   - What is the average profit associated with different order priorities, and are there trends or patterns?
@@ -273,7 +276,17 @@ ON customers.customer_id = orders.customer_id
 GROUP BY region
 ORDER BY total_shipping_cost DESC
 --LIMIT 1;
-2.
+
+2. -- Average shipping cost for different product categories, and significant variations
+
+SELECT category,ROUND(AVG(shipping_cost)::INT,2) AS Avg_shipping_cost,ROUND(STDDEV(shipping_cost)::INT,2) AS Shipping_cost_STDDEV
+FROM(
+SELECT order_id,products.product_id,category,shipping_cost
+FROM orders
+INNER JOIN products
+ON orders.product_id = products.product_id)
+GROUP BY category
+ORDER BY avg_shipping_cost DESC,shipping_cost_stddev DESC
 
 
 
@@ -299,8 +312,26 @@ ORDER BY total_shipping_cost DESC
 ```
 
 ### Results/Findings
-1. "Western Europe" had the highest total shipping costs, followed by "Oceania" and "Central America."
-![Highest shipping cost](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/88f76f83-5d16-48ed-a384-f05ea73891fa)
+
+1. ![Highest shipping cost](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/88f76f83-5d16-48ed-a384-f05ea73891fa)
+
+- Western Europe had the highest total shipping costs, followed by Oceania and Central America.
+
+
+2. ![Average shipping cost for different product categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/2c73be25-2430-4b80-9caa-186486a4f066)
+
+ - Technology products have the highest average shipping cost among the categories, and there is a significant variation reflected by the high standard deviation. This may be due to factors like the fragility or higher value of technology items, leading 
+   to specialized packaging and shipping requirements.
+
+ - The average shipping cost for Furniture was relatively high, and there was a significant variation as indicated by the high standard deviation.This suggests that shipping costs for Furniture items varies widely.
+
+ - The average shipping cost for Office Supplies were lower compared to Furniture, and there was a moderate level of variation as indicated by the standard deviation. Office Supplies might have standard shipping requirements, resulting in lower overall costs.
+
+
+
+
+
+
 
 
 
@@ -308,9 +339,12 @@ ORDER BY total_shipping_cost DESC
 
 ### Recommendations
 
-Based on the insights derived from this analysis, I propose implementing the following measures:
+Based on the insights derived from this analysis, The company should:
 
-1. The company should consider establishing partnerships with local distributors or logistics firms in Western Europe. This collaborative approach aims to harness their regional expertise, potentially leading to a reduction in shipping costs.
+1. Consider establishing partnerships with local distributors or logistics firms in Western Europe. This collaborative approach will aim to harness their regional expertise, potentially leading to a reduction in shipping costs.
+2. Investigate the factors contributing to the high variation in shipping costs for Technology products. it should explore potential partnerships or negotiated rates with carriers to reduce shipping costs without compromising on the safety of the products.
+3. Consider optimizing the shipping process for Furniture items. Exploring potential partnerships with logistics companies for bulk shipping discounts or negotiating better rates based on shipping volume.
+4. Continue monitoring shipping costs for Office Supplies and explore opportunities for further cost reduction. it should also consider negotiating better rates with shipping carriers based on the consistent shipping patterns of these items.
 
 
 
