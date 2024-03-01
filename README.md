@@ -114,7 +114,7 @@ In 2NF, I ensured each non-prime attribute is fully functionally dependent on th
 #### Importing the .csv Files into PostgreSQL 
 
 Being a data analyst involves more than just creating dashboards; efficiency in task implementation is crucial. As a PostgreSQL user I face a lot challenges when importing large datasets into my database due to the manual creation of schemas and datatype conversions before the data can be imported. In difference to some other Relational Database Management System (RDBMS), where importing data is relatively straightforward, PostgreSQL present hurdles. One notable challenge is the manual creation of schemas, especially when dealing with extensive CSV files that encompass numerous columns. In PostgreSQL, each schema needs to be accurately created, and the conversion of data types to PostgreSQL-compatible formats adds an additional layer of complexity.
-To overcome this, I utilised Jupyter Notebook to develop a python utility tool using (os, shutil, NumPy, pandas and psycopg2) to automate schema creation and data import tasks, streamlining the workflow. This approach not only saved me time but also ensured accuracy, reducing errors associated with manual processes.
+To overcome this, I utilised Jupyter Notebook to develop a python script using (os, shutil, NumPy, pandas and psycopg2) to automate schema creation and data import tasks, streamlining the workflow. This approach not only saved me time but also ensured accuracy, reducing errors associated with manual processes.
 
 Features and Workflow:
 1. File Organization:
