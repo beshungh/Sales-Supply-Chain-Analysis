@@ -226,36 +226,15 @@ All tables have been successfully imported into the database.
 ```
 
 ### Exploratory Data Analysis in PostgreSQL
-The EDA involved exploring the Global Superstore dataset to answer Key questions.These key questions were grouped into two part:
+The EDA involved exploring the Global Superstore dataset to answer Key questions.These key questions are:
 
-###### Primary Questions
   - Which region incur the highest shipping costs, and how does it compare to other regions?
   - What is the average shipping cost for different product categories, and are there any significant variations?
   - How are our orders distributed among different priorities, and is there any impact on profitability?
-  - What is the average profit associated with different order priorities, and are there trends or patterns?
+  - Which product categories and sub-categories are driving the majority of our profits, and how can we optimise our product mix or marketing efforts to enhance profitability in underperforming categories?
   - What percentage of our orders are being returned, and is there a specific product category with a high return rate?
   - Which products have the highest return rates, and what impact do returns have on overall sales and profit?
 
-###### Secondary Questions
- - What is the total sales amount for each category and sub-category?
- - Which product has the highest and lowest sales?
- - What is the overall profit for each region?
- - Identify the products with the highest and lowest profits.
- - Which category has the highest and lowest quantity sold?
- - What is the average quantity sold for each sub-category?
- - Analyse the impact of discounts on sales and profit.
- - Identify products with the highest and lowest discounts.
- - What is the total shipping cost for each region?
- - Calculate the average shipping cost for different categories.
- - Analyse the distribution of orders based on priority.
- - Calculate the average profit for different order priorities.
- - Determine the percentage of returned orders.
- - Identify the products with the highest return rates.
- - Compare sales and profit across different regions.
- - Identify regions with the highest and lowest sales.
- - Analyse the sales and profit trends over different years.
- - Compare the performance of different product categories
- - Identify the most popular product categories.
 
 ### Data Cleaning
 
@@ -321,6 +300,14 @@ FROM orders
 GROUP BY order_priority
 ORDER BY order_priority ASC;
 
+8. -- sub_categories driving the majority of our profits
+
+SELECT category,sub_category,SUM(profit) AS total_profit
+FROM products
+INNER JOIN orders 
+ON products.product_id = orders.product_id
+GROUP BY category,sub_category
+ORDER BY total_profit DESC;
 
 
 
@@ -353,12 +340,37 @@ ORDER BY order_priority ASC;
 
 2. ![Average shipping cost for different product categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/2c73be25-2430-4b80-9caa-186486a4f066)
 
- - Technology products have the highest average shipping cost among the categories, and there is a significant variation reflected by the high standard deviation. This may be due to factors like the fragility or higher value of technology items, leading 
+ - Technology products have the highest average shipping cost among the categories, and there is a significant variation reflected by the high standard deviation. This may 
+   be due to factors like the fragility or higher value of technology items, leading 
    to specialized packaging and shipping requirements.
 
- - The average shipping cost for Furniture was relatively high, and there was a significant variation as indicated by the high standard deviation.This suggests that shipping costs for Furniture items varies widely.
+ - The average shipping cost for Furniture was relatively high, and there was a significant variation as indicated by the high standard deviation.This suggests that 
+   shipping costs for Furniture items varies widely.
 
- - The average shipping cost for Office Supplies were lower compared to Furniture, and there was a moderate level of variation as indicated by the standard deviation. Office Supplies might have standard shipping requirements, resulting in lower overall costs.
+ - The average shipping cost for Office Supplies were lower compared to Furniture, and there was a moderate level of variation as indicated by the standard deviation. 
+   Office Supplies might have standard shipping requirements, resulting in lower overall costs.
+
+
+3. ![Priority orders](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/f4a4ad93-8cc0-41b4-b7a5-03efb62f86ab)
+
+  
+ - While Critical priority orders have the lowest count, they contribute significantly to total profit with a higher average profit per order.
+   
+ - High priority orders have a substantial order count and contribute significantly to total profit. However, the average profit per order is slightly lower compared to Critical priority.
+
+ - Although Low and Medium priority orders have higher order counts, their individual contribution to profit is lower.
+
+ - Across all priority levels, the profit margins are consistent at around 5-6%.
+
+
+4. ![sub_categories driving the majority of our profits](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/8965613a-0c8c-434f-9386-2d43c6ad872a)
+
+   - The highest profits come from the Technology category, particularly "Phones" and "Copiers."
+   - Office Supplies category contributes significantly, with "Storage," "Bookcases," and "Chairs" being top performers.
+   - Furniture category has both profitable ("Chairs," "Bookcases") and underperforming ("Tables") sub-categories.
+
+   
+
 
 
 
@@ -378,8 +390,19 @@ Based on the insights derived from this analysis, The company should:
 2. Investigate the factors contributing to the high variation in shipping costs for Technology products. it should explore potential partnerships or negotiated rates with carriers to reduce shipping costs without compromising on the safety of the products.
 3. Consider optimizing the shipping process for Furniture items. Exploring potential partnerships with logistics companies for bulk shipping discounts or negotiating better rates based on shipping volume.
 4. Continue monitoring shipping costs for Office Supplies and explore opportunities for further cost reduction. it should also consider negotiating better rates with shipping carriers based on the consistent shipping patterns of these items.
+5. Consider strategies to increase Critical priority orders as they have a higher average profit. This may involve targeted marketing, promotions, or improved service for critical items.
+6. Analyse high-priority items to identify opportunities for increasing the average profit per order. This could involve negotiating better supplier deals, optimizing shipping costs, or offering complementary products.
+7. Explore ways to increase efficiency in handling low and medium-priority orders. This could involve optimising supply chain processes, reducing overhead costs, or exploring partnerships for cost-effective solutions.
+8. Keep a close eye on profit margins and implement measures to maintain or improve them. This might involve monitoring costs, revising pricing strategies, or negotiating better terms with suppliers.
+9. Consider expanding product offerings or enhancing marketing efforts in the "Technology" category since it has a high profitability .
+10. Analyse factors contributing to the negative profit in the "Tables" sub-category. It should identify whether it's due to pricing, demand, or other issues and develop strategies to address these.
+11. Focus marketing efforts on high-profit products like "Phones" and "Copiers" to maximize returns.
 
 
+
+### Limitations 
+
+I had to remove all the currency sig
 
 
 
