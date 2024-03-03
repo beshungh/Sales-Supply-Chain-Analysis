@@ -363,11 +363,11 @@ ORDER BY total_profit DESC;
  - Across all priority levels, the profit margins are consistent at around 5-6%.
 
 
-4. ![sub_categories driving the majority of our profits](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/8965613a-0c8c-434f-9386-2d43c6ad872a)
+4. ![sub_categories driving the majority of our profits](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/ec326a4d-2d37-411a-bd52-d7af2a310a94)
 
-   - The highest profits come from the Technology category, particularly "Phones" and "Copiers."
-   - Office Supplies category contributes significantly, with "Storage," "Bookcases," and "Chairs" being top performers.
-   - Furniture category has both profitable ("Chairs," "Bookcases") and underperforming ("Tables") sub-categories.
+  - "Technology" and specifically "Phones" are the top contributors to profits, followed by "Copiers." These products seem to be performing exceptionally well.
+  - "Office Supplies" also contribute significantly, with "Storage," "Binders," and "Art" being the top performers.
+  - "Furniture" as a category has mixed performance. While "Bookcases" and "Chairs" are profitable, "Tables" show a negative profit, indicating potential issues in this sub-category.
 
    
 
@@ -397,8 +397,6 @@ Based on the insights derived from this analysis, The company should:
 9. Consider expanding product offerings or enhancing marketing efforts in the "Technology" category since it has a high profitability .
 10. Analyse factors contributing to the negative profit in the "Tables" sub-category. It should identify whether it's due to pricing, demand, or other issues and develop strategies to address these.
 11. Focus marketing efforts on high-profit products like "Phones" and "Copiers" to maximize returns.
-
-
 
 ### Limitations 
 
