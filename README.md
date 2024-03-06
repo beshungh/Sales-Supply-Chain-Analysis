@@ -2,7 +2,7 @@
 
 ### PROJECT SUMMARY
 
-This project aims to extract actionable insights from this [Global Superstore dataset](https://www.kaggle.com/datasets/endofnight17j03/global-superstore) and visualise the results. This process will assist decision-makers in optimizing supply chain processes and gaining a more profound understanding of the company's performance.
+This project aims to extract actionable insights from this [Global Superstore dataset](https://www.kaggle.com/datasets/endofnight17j03/global-superstore) and generate reports for shareholders. This process will assist decision-makers in optimizing supply chain processes and gaining a more profound understanding of the company's performance.
 
 ### Data Source
 
