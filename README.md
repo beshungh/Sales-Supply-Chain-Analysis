@@ -232,7 +232,6 @@ The EDA involved exploring the Global Superstore dataset to answer Key questions
   - What is the average shipping cost for different product categories, and are there any significant variations?
   - How are our orders distributed among different priorities, and is there any impact on profitability?
   - Which product categories and sub-categories are driving the majority of our profits, and how can we optimise our product mix or marketing efforts to enhance profitability in underperforming categories?
-  - What percentage of our orders are being returned, and is there a specific product category with a high return rate?
   - Which products have the highest return rates, and what impact do returns have on overall sales and profit?
 
 
@@ -369,6 +368,15 @@ ORDER BY total_profit DESC;
   - "Office Supplies" also contribute significantly, with "Storage," "Binders," and "Art" being the top performers.
   - "Furniture" as a category has mixed performance. While "Bookcases" and "Chairs" are profitable, "Tables" show a negative profit, indicating potential issues in this sub-category.
 
+
+5. ![products with the highest return rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/50cbe2b7-3bb0-4f41-bbf8-d631eb91bd67)
+
+- Products like "Chromcraft Conference Table, Fully Assembled" and "Chromcraft Computer Table, Rectangular" have a 100% return rate.
+- Some products with high return rates also exhibit significant negative profit values, such as "Chromcraft Conference Table, Fully Assembled" with a profit of 398564 but a return rate of 100%.
+- 
+
+
+
    
 
 
@@ -397,10 +405,12 @@ Based on the insights derived from this analysis, The company should:
 9. Consider expanding product offerings or enhancing marketing efforts in the "Technology" category since it has a high profitability .
 10. Analyse factors contributing to the negative profit in the "Tables" sub-category. It should identify whether it's due to pricing, demand, or other issues and develop strategies to address these.
 11. Focus marketing efforts on high-profit products like "Phones" and "Copiers" to maximize returns.
+12. Implement stringent quality control measures for products with high return rates. Ensure that product descriptions are accurate and provide comprehensive information to set realistic customer expectations.
+13. Implement a system to continuously monitor return rates and customer feedback. Regularly analyze the data to identify trends and make informed decisions about product offerings and improvements
 
 ### Limitations 
 
-I had to remove all the currency sig
+  The dataset were not normalized,i had to manauelly normalize it to make my analysis accurate.
 
 
 
