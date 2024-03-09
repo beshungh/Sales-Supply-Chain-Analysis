@@ -6,16 +6,15 @@ This project aims to extract actionable insights from this [Global Superstore da
 
 ### Data Source
 
-The project utilizes datasets, namely "customers.csv," "orders.csv," "products.csv," and "returns.csv," to present a thorough analysis of sales transactions across different markets, covering a wide range of product categories and sub-categories. These datasets contain essential information, including product details (Product ID, Category, Sub-Category, and Product Name), sales metrics (Sales, Quantity, Discount, Profit), logistical details (Shipping Cost, Order Priority), order specifics (Order ID, Region), and return information (Returned, Order ID, Customer ID, Product ID.
+The project utilises datasets, namely "customers.csv," "orders.csv," "products.csv," and "returns.csv," to present a thorough analysis of sales transactions across different markets, covering a wide range of product categories and sub-categories. These datasets contain essential information, including product details (Product ID, Category, Sub-Category, and Product Name), sales metrics (Sales, Quantity, Discount, Profit), logistical details (Shipping Cost, Order Priority), order specifics (Order ID, Region), and return information (Returned, Order ID, Customer ID, Product ID).
 
 ### Tools Used 
 
 - Excel - Database Normalization,Data Cleaning 
-- PostgreSQL - Exploratory Data Analysis
+- PostgreSQL - Exploratory Data Analysis and Data Cleaning
 - Tableau - Creating reports
-- Python - Developed a Jupyter Notebook that Automatically import .csv files to PostgreSQL
+- Python - Developed a Jupyter Notebook to Automatically import .csv files to PostgreSQL
 
-  
 ### Preparation of Data
 
 #### Database Normalization
@@ -33,7 +32,7 @@ To minimize redundancy, dependency and optimize performance, I normalized the da
    - City
    - State
    - Country
-   -	Region
+   - Region
    - Market
 
 - Products Table (1NF):
@@ -117,11 +116,11 @@ Being a data analyst involves more than just creating dashboards; efficiency in 
 To overcome this, I utilised Jupyter Notebook to develop a python script using (os, shutil, NumPy, pandas and psycopg2) to automate schema creation and data import tasks, streamlining the workflow. This approach not only saved me time but also ensured accuracy, reducing errors associated with manual processes.
 
 Features and Workflow:
-1. File Organization:
+1. File Organisation:
 The script begins by identifying all CSV files in the current directory. It then creates a new directory named 'datasets' (or uses an existing one) and moves the CSV files into this directory.
-This step ensures a well-organized and centralized location for dataset management.
+This step ensures a well-organised and centralised location for dataset management.
 3. CSV to Pandas DataFrames:
-The script utilizes the Pandas library to read each CSV file into a Pandas DataFrame. It handles potential encoding issues, using ISO-8859-1 encoding when necessary, showcasing attention to data integrity.
+The script utilises the Pandas library to read each CSV file into a Pandas DataFrame. It handles potential encoding issues, using ISO-8859-1 encoding when necessary, showcasing attention to data integrity.
 4. Table Creation and Column Transformation:
 The script dynamically generates table names based on file names and cleanses column names to remove spaces, special characters, and ensure compatibility with PostgreSQL conventions.
 It then iterates over each DataFrame, determining column data types and creating corresponding tables in the PostgreSQL database.
@@ -142,7 +141,7 @@ import numpy as np
 import pandas as pd
 import psycopg2
 
-# Find CSV files in the current directory
+# Find CSV files in my current working directory
 csv_files = [file for file in os.listdir(os.getcwd()) if file.endswith('.csv')]
 
 # Create a new directory
@@ -152,28 +151,35 @@ try:
 except FileExistsError:
     pass
 
-# Iterate over DataFrames, clean column names, and upload to PostgreSQL
-replacements = {
-    'object': 'varchar',
-    'float64': 'float',
-    'int64': 'bigint',
-    'timedelta64[ns]': 'varchar',
-    'datetime64[ns]': 'timestamp',
-    'bool': 'boolean',
-    'datetime64': 'timestamp'
-}
+# Move the CSV files to the new directory
+for csv in csv_files:
+    src_path = os.path.abspath(csv)
+    dest_path = os.path.join(dataset_dir, csv)
+    try:
+        shutil.move(src_path, dest_path)
+        print(f"Moved {csv} to {dataset_dir}")
+    except FileNotFoundError:
+        print(f"File not found: {csv}")
+    except shutil.Error as e:
+        print(f"Error moving file {csv}: {e}")
 
-hostname = 'localhost'
-database = 'covid19'
-username = 'postgres'
-password = 'password'
-port_id = 5432
+# Read CSV files into Pandas DataFrames
+df = {}
+for file in csv_files:
+    file_path = os.path.join(dataset_dir, file)
+    try:
+        df[file] = pd.read_csv(file_path, encoding="ISO-8859-1")
+        print(f"Using ISO-8859-1 encoding for {file}")
+    except UnicodeDecodeError:
+        print(f"Error decoding file {file}")
 
+# Clean table names and column names
 for file, dataframe in df.items():
     clean_table_name = file.lower().replace(" ", "_").replace("?", "") \
         .replace("-", "_").replace("/", "_").replace("\\", "_").replace("%", "") \
         .replace(")", "").replace("(", "").replace("$", "")
 
+# Remove .csv extension from clean_table_name
     table_name = clean_table_name.split('.')[0]
 
     dataframe.columns = [col.lower().replace(" ", "_").replace("?", "").replace("¢", "") \
@@ -181,9 +187,31 @@ for file, dataframe in df.items():
                          .replace(")", "").replace("(", "").replace("$", "").replace(".", "")
                          for col in dataframe.columns]
 
+   # Replacement dictionary that maps pandas datatypes to PostgreSQL datatypes
+    replacements = {
+    'object': 'varchar',
+    'float64': 'double precision',
+    'float32': 'real',
+    'int64': 'bigint',
+    'int32': 'integer',
+    'int16': 'smallint',
+    'timedelta64[ns]': 'varchar',
+    'timedelta64': 'interval',
+    'datetime64[ns]': 'timestamp',
+    'bool': 'boolean',
+    'datetime64': 'timestamp'}
+    
+    # Table Schema
     col_str = ", ".join("{} {}".format(n, replacements.get(str(d), 'varchar')) for (n, d) in
                         zip(dataframe.columns, dataframe.dtypes))
 
+    # Open a database connection
+    hostname = 'localhost'
+    database = 'globalsuperstore'
+    username = 'postgres'
+    password = 'password'
+    port_id = 5432
+    
     conn = psycopg2.connect(
         host=hostname,
         dbname=database,
@@ -191,8 +219,35 @@ for file, dataframe in df.items():
         password=password,
         port=port_id
     )
+    cursor = conn.cursor()
+    print(f'Opened the database successfully for {table_name}')
 
-    # When all the tables are imported into the database these are the output messages
+    # Drop table with same name
+    cursor.execute(f"DROP TABLE IF EXISTS {table_name};")
+    
+    # Create SQL table
+    cursor.execute(f"CREATE TABLE {table_name} ({col_str});")
+    print(f'{table_name} was created successfully')
+
+    # Save dataframe to csv file
+    dataframe.to_csv(file, header=dataframe.columns, index=False, encoding='utf-8')
+
+    # Open csv file,save it as an object
+    with open(file) as my_file:
+        print(f'File {file} opened in memory')
+        
+    # Upload to database    
+        cursor.copy_expert(sql=f"COPY {table_name} FROM STDIN WITH CSV HEADER DELIMITER AS ',';", file=my_file)
+        print(f'File {file} copied to database')
+
+    # Open permission for any user that access the database
+    cursor.execute(f"GRANT SELECT ON TABLE {table_name} TO public;")
+    conn.commit()
+    cursor.close()
+    conn.close()
+
+# For loop end message
+print('All tables have been successfully imported into the database.')
 
 Moved Customers.csv to datasets
 Moved Orders.csv to datasets
@@ -220,9 +275,6 @@ File Returns.csv opened in memory
 File Returns.csv copied to database
 All tables have been successfully imported into the database.
 
-
-   # This section of the code is just a snippet. If you need the entire code, please get in touch with me at beshungh@gmail.com.
-
 ```
 
 ### Exploratory Data Analysis in PostgreSQL
@@ -234,7 +286,6 @@ The EDA involved exploring the Global Superstore dataset to answer Key questions
   - Which product categories and sub-categories are driving the majority of our profits, and how can we optimise our product mix or marketing efforts to enhance profitability in underperforming categories?
   - Which products have the highest return rates, and what impact do returns have on overall sales and profit?
 
-
 ### Data Cleaning
 
 After my Exploratory data analysis in PostgreSQL,I saved the results in .xlsx and performed the following tasks in Excel:
@@ -242,11 +293,14 @@ After my Exploratory data analysis in PostgreSQL,I saved the results in .xlsx an
 2. Removing Incomplete Values.
 3. Coverting data to different datatypes.
 
-
 ### Data Analysis Queries in PostgreSQL
 ```sql
-1. -- Region that incurs the highest shipping costs
 
+-- THE QUERY AIMS TO IDENTIFY THE REGION THAT INCURS THE HIGHEST SHIPPING COSTS
+/* This SQL query retrieves the total shipping costs for each region by combining information from the 'customers' and 'orders' tables. 
+   The results are then grouped by region and ordered in descending order based on the total shipping cost. 
+   If the optional --LIMIT 1; line is uncommented and executed, 
+   it will return only the top result, indicating the region with the highest shipping cost.*/
 SELECT region,ROUND(SUM(shipping_cost)::numeric,2) AS total_shipping_cost
 FROM customers
 INNER JOIN orders
@@ -255,9 +309,12 @@ GROUP BY region
 ORDER BY total_shipping_cost DESC
 --LIMIT 1;
 
-2. -- Average shipping cost for different product categories, and significant variations
-
-SELECT category,ROUND(AVG(shipping_cost)::INT,2) AS Avg_shipping_cost,ROUND(STDDEV(shipping_cost)::INT,2) AS Shipping_cost_STDDEV
+--AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND SIGNIFICANT VARIATIONS
+/*This SQL query calculates and presents the average shipping cost and standard deviation for different product categories.
+  By joining the 'orders' and 'products' tables, the query groups the results by product category.
+  The output is then sorted in descending order based on the average shipping cost and standard deviation,
+  allowing for the identification of product categories with higher average shipping costs and significant variations in shipping costs.*/
+SELECT category,ROUND(AVG(shipping_cost)::INT,2) AS Avg_shipping_cost,ROUND(STDDEV(shipping_cost)::INT,2) AS shipping_cost_STDDEV
 FROM(
 SELECT order_id,products.product_id,category,shipping_cost
 FROM orders
@@ -266,30 +323,27 @@ ON orders.product_id = products.product_id)
 GROUP BY category
 ORDER BY avg_shipping_cost DESC,shipping_cost_stddev DESC;
 
-3. -- Cleaning the profit column to remove non-numeric characters like '$' and ','
-
+--CLEANING THE PROFIT COLUMN TO REMOVE NON-NUMERIC CHARACTERS LIKE '$' AND ','
+/*This SQL update statement modifies the 'profit' column in the 'orders' table. 
+  It uses the REGEXP_REPLACE function to remove non-numeric characters (such as '$' and ',') from the 'profit' values. 
+  The regular expression '[^0-9-]' is applied to replace any characters that are not digits (0-9) or a minus sign with an empty string. 
+  The query effectively cleans the 'profit' column by leaving only numeric values.*/
 UPDATE orders
 SET profit = REGEXP_REPLACE(profit, '[^0-9-]', '','g');
 
-4. -- Converting Profit column datatype From Character varying to numeric
-
+--CONVERTING PROFIT COLUMN DATATYPE FROM CHARACTER VARYING TO NUMERIC
+/*This SQL statement alters the 'profit' column in the 'orders' table. 
+  It changes the data type of the 'profit' column from character varying to numeric. 
+  The USING profit::NUMERIC part ensures that the existing values in the 'profit' column are converted to the new numeric data type during the alteration process.*/
 ALTER TABLE orders
 ALTER COLUMN profit TYPE NUMERIC
 USING profit::NUMERIC;
 
-5. -- Cleaning the sales column to remove non-numeric characters like '$' and ','
-
-UPDATE sales
-SET sales = REGEXP_REPLACE(sales, '[^0-9-]', '','g');
-
-6. -- Converting sales column datatype From Character varying to numeric
-
-ALTER TABLE orders
-ALTER COLUMN sales TYPE NUMERIC
-USING sales::NUMERIC;
-
-7. -- Order priority and impact on profitability
-
+--ORDER PRIORITY AND IMPACT ON PROFITABILITY
+/*This query analyses the impact of order priority on profitability in the 'orders' table. 
+  It retrieves information such as the count of orders, total profit, average profit, 
+  and profit margin for each unique order priority. 
+  The results are grouped by order priority and ordered in ascending order.*/
 SELECT order_priority,
 COUNT(*) AS order_count,
 SUM(profit) AS total_profit,
@@ -299,8 +353,11 @@ FROM orders
 GROUP BY order_priority
 ORDER BY order_priority ASC;
 
-8. -- sub_categories driving the majority of our profits
-
+--SUB_CATEGORIES DRIVING THE MAJORITY OF OUR PROFITS
+/*This query identifies the sub-categories that contribute the most to overall profits.
+  It combines information from the 'products' and 'orders' tables, summing up the profits for each unique combination of category and sub-category. 
+  The results are then ordered in descending order based on the total profit,
+  providing insights into which sub-categories are driving the majority of profits in the dataset.*/
 SELECT category,sub_category,SUM(profit) AS total_profit
 FROM products
 INNER JOIN orders 
@@ -308,25 +365,42 @@ ON products.product_id = orders.product_id
 GROUP BY category,sub_category
 ORDER BY total_profit DESC;
 
+--PERCENTAGE OF ORDERS BEING RETURNED, AND THE A SPECIFIC PRODUCT CATEGORY
+/*This query analyses the return percentage for different product categories.
+  It calculates the percentage of orders with returns within each category, 
+  considering the count of distinct order IDs with returns against the total count of distinct order IDs. 
+  The results are grouped by product category and ordered in descending order based on the return percentage, 
+  providing insights into which categories have a higher proportion of returned orders.*/
+SELECT products.category,ROUND((COUNT(DISTINCT returns.order_id) * 100.0) / COUNT(DISTINCT orders.order_id),2) AS return_percentage
+FROM orders
+LEFT JOIN returns
+ON orders.order_id = returns.order_id
+JOIN products
+ON orders.product_id = products.product_id
+GROUP BY products.category
+ORDER BY return_percentage DESC;
 
+--PRODUCTS WITH THE HIGHEST RETURN RATES
+/*This query Joins the Returns table with the Products table using the common column Product_id to identify the products that have been returned,
+  it then gives a list of products with an indication of whether they were returned or not.*/
+SELECT products.product_id, products.Product_name, returns.returned 
+FROM products 
+JOIN returns
+ON products.product_id = returns.product_id; 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/*The query calculates the return rate for each product, displaying the total returns, total sales, and return rate percentage.
+  It includes information about total sales amount and total profit for each product.*/
+SELECT Products.Product_id, Products.Product_name,COUNT(Returns.Returned) AS TotalReturns,
+COUNT(*) AS TotalSales,ROUND((COUNT(Returns.Returned) * 100.0 / COUNT(*)),0) AS ReturnRate,
+SUM(orders.Sales) AS TotalSalesAmount,
+SUM(orders.Profit) AS TotalProfit
+FROM Products
+LEFT JOIN Returns
+ON Products.Product_id = Returns.Product_id
+LEFT JOIN Orders
+ON Products.Product_id = orders.Product_id
+GROUP BY Products.Product_id, Products.Product_name
+ORDER BY ReturnRate DESC
 
 ```
 
@@ -335,7 +409,6 @@ ORDER BY total_profit DESC;
 1. ![Highest shipping cost](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/88f76f83-5d16-48ed-a384-f05ea73891fa)
 
 - Western Europe had the highest total shipping costs, followed by Oceania and Central America.
-
 
 2. ![Average shipping cost for different product categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/2c73be25-2430-4b80-9caa-186486a4f066)
 
@@ -349,10 +422,8 @@ ORDER BY total_profit DESC;
  - The average shipping cost for Office Supplies were lower compared to Furniture, and there was a moderate level of variation as indicated by the standard deviation. 
    Office Supplies might have standard shipping requirements, resulting in lower overall costs.
 
-
 3. ![Priority orders](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/f4a4ad93-8cc0-41b4-b7a5-03efb62f86ab)
 
-  
  - While Critical priority orders have the lowest count, they contribute significantly to total profit with a higher average profit per order.
    
  - High priority orders have a substantial order count and contribute significantly to total profit. However, the average profit per order is slightly lower compared to Critical priority.
@@ -361,34 +432,16 @@ ORDER BY total_profit DESC;
 
  - Across all priority levels, the profit margins are consistent at around 5-6%.
 
-
 4. ![sub_categories driving the majority of our profits](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/ec326a4d-2d37-411a-bd52-d7af2a310a94)
 
   - "Technology" and specifically "Phones" are the top contributors to profits, followed by "Copiers." These products seem to be performing exceptionally well.
   - "Office Supplies" also contribute significantly, with "Storage," "Binders," and "Art" being the top performers.
   - "Furniture" as a category has mixed performance. While "Bookcases" and "Chairs" are profitable, "Tables" show a negative profit, indicating potential issues in this sub-category.
 
-
 5. ![products with the highest return rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/50cbe2b7-3bb0-4f41-bbf8-d631eb91bd67)
 
 - Products like "Chromcraft Conference Table, Fully Assembled" and "Chromcraft Computer Table, Rectangular" have a 100% return rate.
 - Some products with high return rates also exhibit significant negative profit values, such as "Chromcraft Conference Table, Fully Assembled" with a profit of 398564 but a return rate of 100%.
-- 
-
-
-
-   
-
-
-
-
-
-
-
-
-
-
-
 
 ### Recommendations
 
