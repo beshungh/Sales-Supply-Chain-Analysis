@@ -200,6 +200,7 @@ I stated with designing an Entity Relationship Diagram to aid in establishing re
 ![ERD](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/40c57e0f-778e-4b5e-9dd8-c823b130dbb4)
 
 ```sql
+
 CREATE TABLE "products" (
   "product_id" varchar(15) NOT NULL UNIQUE ,
   "category" varchar(15),
@@ -263,26 +264,6 @@ CREATE TABLE "returns" (
       REFERENCES "orders"("order_id")
 );
 CREATE INDEX "CK" ON  "returns" ("order_id", "region", "customer_id", "product_id");
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 ```
 
