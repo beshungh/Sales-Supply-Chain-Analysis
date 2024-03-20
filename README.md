@@ -23,92 +23,9 @@ The project utilises datasets, namely "customers.csv," "orders.csv," "products.c
 
 To minimize redundancy, dependency and optimize performance, I normalized the dataset.I started with the 1NF which involved making sure the dataset has no Multivalued Attributes in any cell. Achieving the First Normal Form (1NF) involved ensuring that each table's column contained single record and all rows were unique. 
 
-- Customers Table (1NF):
-   - Columns: 
-   - Customer ID
-   - Customer Name
-   - Segment
-   - Postal Code
-   - City
-   - State
-   - Country
-   - Region
-   - Market
-
-- Products Table (1NF):
-    - Columns:
-    - Product ID
-    - Product Name
-    - Category
-    - Sub-Category
-
-- Orders Table (1NF):
-    - Columns:
-    - Order ID
-    - Order Date
-    - Ship Date
-    - Ship Mode
-    - Customer ID
-    - Product ID
-    - Sales
-    - Quantity
-    - Discount
-    - Profit
-    - Shipping Cost
-    - Order Priority
-
-- Returns Table (1NF):
-    - Columns:
-  	- Returned
-    - Order ID
-    - Region
-    - Customer ID
-    - Product ID
-#### All columns/attribute had single records and all the rows were Unique.
-
-- Customers Table (2NF):
-  - Columns:
-  - Customer ID (Primary Key)
-  - Customer Name
-  - Segment
-  - Postal Code
-  - City
-  - State
-  - Country
-  - Region
-  - Market
-
-- Products Table (2NF):
-  - Columns:
-  - Product ID (Primary Key)
-  - Product Name
-  - Category
-  - Sub-Category
-
-- Orders Table (2NF):
-  - Columns:
-  - Order ID (Primary Key)
-  - Order Date
-  - Ship Date
-  - Ship Mode
-  - Customer ID (Foreign Key)
-  - Product ID (Foreign Key)
-  - Sales
-  - Quantity
-  - Discount
-  - Profit
-  - Shipping Cost
-  - Order Priority
-
-- Returns Table (2NF):
-  - Columns:
-  - Returned
-  - Order ID (Composite Key)
-  - Region
-  - Customer ID (Composite Key)
-  - Product ID (Composite Key)
-
 In 2NF, I ensured each non-prime attribute is fully functionally dependent on the entire primary key. In the Customers, Products, and Orders tables, there were no partial dependency, and all columns were fully functionally dependent on the primary key. In the Returns table, the composite key (Order ID, Customer ID, Product ID) ensures that each column is fully functionally dependent on this key, avoiding partial dependencies. The rationale for using a composite key in the Returns table was to Identify the specific order associated with each return, Identify the customer who made the order and subsequently returned a product and the specific product that was returned. Together, these three columns create a composite key that ensures each return record is uniquely identified. This is important because a single order ID or customer ID alone may not be sufficient to uniquely identify a return, especially if a customer has placed multiple orders, and some products may be part of multiple orders.The 2NF already satisfies the 3NF requirement which ensures that there are no transitive dependencies in each table, and each non-prime attribute is directly dependent on the primary key.The overall restructuring process involved transitioning the database from a Denormalized form to a Normalized form, and the finalised structure was saved as a .csv file for further use.
+
+![Normalization](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/fab4c420-6cc1-473d-831e-5747dc5ba1d0)
 
 #### Importing the .csv Files into PostgreSQL 
 
@@ -276,6 +193,99 @@ File Returns.csv copied to database
 All tables have been successfully imported into the database.
 
 ```
+#### Setbacks of the script
+The script lacks the assignment of primary and foreign keys to tables, complicating referencing of primary keys by foreign keys in other tables and resulting in slow execution of queries with JOIN statments. Additionally, it neglects to create indexes for the tables, causing queries with WHERE and JOIN statements to execute slowly. Constraints are also not added to tables making the database lose its integrity. Although I plan to address these issues given more time, for now, I created the database manually.
+I stated with designing an Entity Relationship Diagram to aid in establishing relationships between the different tables before i proceeded in the creation of the actual tables.
+
+![ERD](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/40c57e0f-778e-4b5e-9dd8-c823b130dbb4)
+
+```sql
+CREATE TABLE "products" (
+  "product_id" varchar(15) NOT NULL UNIQUE ,
+  "category" varchar(15),
+  "sub_category" varchar(15),
+  "product_name" varchar(200),
+  PRIMARY KEY ("product_id")
+);
+CREATE INDEX ON products(product_id)
+
+CREATE TABLE "customers" (
+  "customer_id" varchar(20) NOT NULL UNIQUE,
+  "customer_name" varchar(60),
+  "segment" varchar(15),
+  "postal_code" varchar(10),
+  "city" varchar(50),
+  "state" varchar(50),
+  "country" varchar(50),
+  "region" varchar(50),
+  "market" varchar(20),
+  PRIMARY KEY ("customer_id")
+);
+CREATE INDEX ON customers(customer_id)
+
+CREATE TABLE "orders" (
+  "order_id" varchar(30) NOT NULL UNIQUE,
+  "order_date" date,
+  "ship_date" date,
+  "ship_mode" varchar(15),
+  "customer_id" varchar(20),
+  "product_id" varchar(15),
+  "sales" numeric,
+  "quantity" smallint,
+  "discount" double precision,
+  "profit" numeric,
+  "shipping_cost" double precision,
+  "order_priority" varchar(10),
+  PRIMARY KEY ("order_id"),
+  CONSTRAINT "FK_orders.product_id"
+    FOREIGN KEY ("product_id")
+      REFERENCES "products"("product_id"),
+  CONSTRAINT "FK_orders.customer_id"
+    FOREIGN KEY ("customer_id")
+      REFERENCES "customers"("customer_id")
+);
+CREATE INDEX ON orders(order_id)
+
+CREATE TABLE "returns" (
+  "returned" varchar(10),
+  "order_id" varchar(30),
+  "region" varchar(50),
+  "customer_id" varchar(20),
+  "product_id" varchar(15),
+  CONSTRAINT "FK_returns.product_id"
+    FOREIGN KEY ("product_id")
+      REFERENCES "products"("product_id"),
+  CONSTRAINT "FK_returns.customer_id"
+    FOREIGN KEY ("customer_id")
+      REFERENCES "customers"("customer_id"),
+  CONSTRAINT "FK_returns.order_id"
+    FOREIGN KEY ("order_id")
+      REFERENCES "orders"("order_id")
+);
+CREATE INDEX "CK" ON  "returns" ("order_id", "region", "customer_id", "product_id");
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+
 
 ### Exploratory Data Analysis in PostgreSQL
 The EDA involved exploring the Global Superstore dataset to answer Key questions.These key questions are:
