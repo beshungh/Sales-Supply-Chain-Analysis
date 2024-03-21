@@ -1,4 +1,4 @@
-# Global Superstore Sales Analysis
+# Sales Analysis
 
 ### PROJECT SUMMARY
 
@@ -11,9 +11,9 @@ The project utilises datasets, namely "customers.csv," "orders.csv," "products.c
 ### Tools Used 
 
 - Excel - Database Normalization,Data Cleaning 
-- PostgreSQL - Exploratory Data Analysis and Data Cleaning
+- PostgreSQL - Exploratory Data Analysis
 - Tableau - Creating reports
-- Python - Developed a Jupyter Notebook to Automatically import .csv files to PostgreSQL
+- Python - Developing a Jupyter Notebook to Automatically import .csv files to PostgreSQL database
 
 ### Preparation of Data
 
@@ -23,14 +23,15 @@ The project utilises datasets, namely "customers.csv," "orders.csv," "products.c
 
 To minimize redundancy, dependency and optimize performance, I normalized the dataset.I started with the 1NF which involved making sure the dataset has no Multivalued Attributes in any cell. Achieving the First Normal Form (1NF) involved ensuring that each table's column contained single record and all rows were unique. 
 
-In 2NF, I ensured each non-prime attribute is fully functionally dependent on the entire primary key. In the Customers, Products, and Orders tables, there were no partial dependency, and all columns were fully functionally dependent on the primary key. In the Returns table, the composite key (Order ID, Customer ID, Product ID) ensures that each column is fully functionally dependent on this key, avoiding partial dependencies. The rationale for using a composite key in the Returns table was to Identify the specific order associated with each return, Identify the customer who made the order and subsequently returned a product and the specific product that was returned. Together, these three columns create a composite key that ensures each return record is uniquely identified. This is important because a single order ID or customer ID alone may not be sufficient to uniquely identify a return, especially if a customer has placed multiple orders, and some products may be part of multiple orders.The 2NF already satisfies the 3NF requirement which ensures that there are no transitive dependencies in each table, and each non-prime attribute is directly dependent on the primary key.The overall restructuring process involved transitioning the database from a Denormalized form to a Normalized form, and the finalised structure was saved as a .csv file for further use.
+In 2NF, I ensured each non-prime attribute is fully functionally dependent on the entire primary key. In the Customers, Products, and Orders tables, there were no partial dependency, and all columns were fully functionally dependent on the primary key. In the Returns table, the composite key (Order ID, Customer ID, Product ID) ensures that each column is fully functionally dependent on this key, avoiding partial dependencies. The rationale for using a composite key in the Returns table was to Identify the specific order associated with each return, Identify the customer who made the order and subsequently returned a product and the specific product that was returned. Together, these three columns create a composite key that ensures each return record is uniquely identified. This is important because a single order ID or customer ID alone may not be sufficient to uniquely identify a return, especially if a customer has placed multiple orders, and some products may be part of multiple orders.The 2NF already satisfies the 3NF requirement which ensures that there are no transitive dependencies in each table, and each non-prime attribute is directly dependent on the primary key.The overall restructuring process involved transitioning the database from a Denormalized form to a Normalized form, and the finalized structure was saved as a .csv file for further use.
 
-![Normalization](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/fab4c420-6cc1-473d-831e-5747dc5ba1d0)
+![Normalization](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/1e23b4f9-d49e-438d-b840-cdfc05a1f023)
+
 
 #### Importing the .csv Files into PostgreSQL 
 
-Being a data analyst involves more than just creating dashboards; efficiency in task implementation is crucial. As a PostgreSQL user I face a lot challenges when importing large datasets into my database due to the manual creation of schemas and datatype conversions before the data can be imported. In difference to some other Relational Database Management System (RDBMS), where importing data is relatively straightforward, PostgreSQL present hurdles. One notable challenge is the manual creation of schemas, especially when dealing with extensive CSV files that encompass numerous columns. In PostgreSQL, each schema needs to be accurately created, and the conversion of data types to PostgreSQL-compatible formats adds an additional layer of complexity.
-To overcome this, I utilised Jupyter Notebook to develop a python script using (os, shutil, NumPy, pandas and psycopg2) to automate schema creation and data import tasks, streamlining the workflow. This approach not only saved me time but also ensured accuracy, reducing errors associated with manual processes.
+Being a data analyst involves more than just creating dashboards; efficiency in task implementation is crucial. As a PostgreSQL user I face a lot challenges when importing large datasets into my database. In difference to some other Relational Database Management System (RDBMS), where importing data is relatively straightforward, PostgreSQL present hurdles. One notable challenge is the manual creation of schemas, especially when dealing with extensive CSV files that encompass numerous columns. In PostgreSQL, each schema needs to be accurately created, and the conversion of data types to PostgreSQL-compatible formats adds an additional layer of complexity.
+To overcome this, I utilised Jupyter Notebook to develop a python script using Python libraries (os, shutil, NumPy, pandas and psycopg2) to automate schema creation and data import tasks, streamlining the workflow. This approach not only saved me time but also ensured accuracy, reducing errors associated with manual processes.
 
 Features and Workflow:
 1. File Organisation:
@@ -199,19 +200,25 @@ I stated with designing an Entity Relationship Diagram to aid in establishing re
 
 ![ERD](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/40c57e0f-778e-4b5e-9dd8-c823b130dbb4)
 
+### Data Cleaning
+
+ performed the following tasks in Excel:
+1. Removing duplicates.
+2. Removing Incomplete Values.
+3. Coverting data to different datatypes.
+
 ```sql
 
 CREATE TABLE "products" (
-  "product_id" varchar(15) NOT NULL UNIQUE ,
-  "category" varchar(15),
-  "sub_category" varchar(15),
-  "product_name" varchar(200),
-  PRIMARY KEY ("product_id")
+  product_id varchar(30) PRIMARY KEY NOT NULL,
+  category varchar(15),
+  sub_category varchar(15),
+  product_name varchar(200),
 );
 CREATE INDEX ON products(product_id)
 
 CREATE TABLE customers (
-  customer_id varchar(250) PRIMARY KEY NOT NULL,
+  customer_id varchar(30) PRIMARY KEY NOT NULL,
   first_name varchar(15),
   last_name varchar(15),
   segment varchar(15),
@@ -224,44 +231,43 @@ CREATE TABLE customers (
 );
 CREATE INDEX ON customers(customer_id)
 
-CREATE TABLE "orders" (
-  "order_id" varchar(30) NOT NULL UNIQUE,
-  "order_date" date,
-  "ship_date" date,
-  "ship_mode" varchar(15),
-  "customer_id" varchar(20),
-  "product_id" varchar(15),
-  "sales" numeric,
-  "quantity" smallint,
-  "discount" double precision,
-  "profit" numeric,
-  "shipping_cost" double precision,
-  "order_priority" varchar(10),
-  PRIMARY KEY ("order_id"),
+CREATE TABLE orders (
+  order_id varchar(30) PRIMARY KEY NOT NULL,
+  order_date date,
+  ship_date date,
+  ship_mode varchar(15),
+  customer_id varchar(30),
+  product_id varchar(30),
+  sales numeric,
+  quantity smallint,
+  discount double precision,
+  profit numeric,
+  shipping_cost double precision,
+  order_priority varchar(10),
   CONSTRAINT "FK_orders.product_id"
-    FOREIGN KEY ("product_id")
-      REFERENCES "products"("product_id"),
+  FOREIGN KEY ("product_id")
+  REFERENCES "products"("product_id"),
   CONSTRAINT "FK_orders.customer_id"
-    FOREIGN KEY ("customer_id")
-      REFERENCES "customers"("customer_id")
+  FOREIGN KEY ("customer_id")
+  REFERENCES "customers"("customer_id")
 );
 CREATE INDEX ON orders(order_id)
 
-CREATE TABLE "returns" (
-  "returned" varchar(10),
-  "order_id" varchar(30),
-  "region" varchar(50),
-  "customer_id" varchar(20),
-  "product_id" varchar(15),
+CREATE TABLE returns (
+  returned varchar(10),
+  order_id varchar(30),
+  region varchar(50),
+  customer_id varchar(30),
+  product_id varchar(30),
   CONSTRAINT "FK_returns.product_id"
-    FOREIGN KEY ("product_id")
-      REFERENCES "products"("product_id"),
+  FOREIGN KEY ("product_id")
+  REFERENCES "products"("product_id"),
   CONSTRAINT "FK_returns.customer_id"
-    FOREIGN KEY ("customer_id")
-      REFERENCES "customers"("customer_id"),
+  FOREIGN KEY ("customer_id")
+  REFERENCES "customers"("customer_id"),
   CONSTRAINT "FK_returns.order_id"
-    FOREIGN KEY ("order_id")
-      REFERENCES "orders"("order_id")
+  FOREIGN KEY ("order_id")
+  REFERENCES "orders"("order_id")
 );
 CREATE INDEX "CK" ON  "returns" ("order_id", "region", "customer_id", "product_id");
 
@@ -277,12 +283,6 @@ The EDA involved exploring the Global Superstore dataset to answer Key questions
   - Which product categories and sub-categories are driving the majority of our profits, and how can we optimise our product mix or marketing efforts to enhance profitability in underperforming categories?
   - Which products have the highest return rates, and what impact do returns have on overall sales and profit?
 
-### Data Cleaning
-
-After my Exploratory data analysis in PostgreSQL,I saved the results in .xlsx and performed the following tasks in Excel:
-1. Removing duplicates.
-2. Removing Incomplete Values.
-3. Coverting data to different datatypes.
 
 ### Data Analysis Queries in PostgreSQL
 ```sql
