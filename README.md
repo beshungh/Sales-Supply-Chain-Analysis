@@ -198,7 +198,8 @@ All tables have been successfully imported into the database.
 The script lacks the assignment of primary and foreign keys to tables, complicating referencing of primary keys by foreign keys in other tables and resulting in slow execution of queries with JOIN statments. Additionally, it neglects to create indexes for the tables, causing queries with WHERE and JOIN statements to execute slowly. Constraints are also not added to tables making the database lose its integrity. Although I plan to address these issues given more time, for now, I created the database manually.
 I stated with designing an Entity Relationship Diagram to aid in establishing relationships between the different tables before i proceeded in the creation of the actual tables.
 
-![ERD](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/40c57e0f-778e-4b5e-9dd8-c823b130dbb4)
+![ERD](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/956e6b6f-80dd-4fa4-ad10-a13f15d038ef)
+
 
 ### Data Cleaning
 
@@ -209,8 +210,8 @@ I stated with designing an Entity Relationship Diagram to aid in establishing re
 
 ```sql
 
-CREATE TABLE "products" (
-  product_id varchar(30) PRIMARY KEY NOT NULL,
+CREATE TABLE products (
+  product_id varchar(30) PRIMARY KEY NOT NULL UNIQUE,
   category varchar(15),
   sub_category varchar(15),
   product_name varchar(200),
