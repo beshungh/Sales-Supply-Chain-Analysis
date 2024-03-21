@@ -210,17 +210,17 @@ CREATE TABLE "products" (
 );
 CREATE INDEX ON products(product_id)
 
-CREATE TABLE "customers" (
-  "customer_id" varchar(20) NOT NULL UNIQUE,
-  "customer_name" varchar(60),
-  "segment" varchar(15),
-  "postal_code" varchar(10),
-  "city" varchar(50),
-  "state" varchar(50),
-  "country" varchar(50),
-  "region" varchar(50),
-  "market" varchar(20),
-  PRIMARY KEY ("customer_id")
+CREATE TABLE customers (
+  customer_id varchar(250) PRIMARY KEY NOT NULL,
+  first_name varchar(15),
+  last_name varchar(15),
+  segment varchar(15),
+  postal_code varchar(10),
+  city varchar(50),
+  state varchar(50),
+  country varchar(50),
+  region varchar(50),
+  market varchar(20)
 );
 CREATE INDEX ON customers(customer_id)
 
@@ -280,7 +280,7 @@ The EDA involved exploring the Global Superstore dataset to answer Key questions
 ### Data Cleaning
 
 After my Exploratory data analysis in PostgreSQL,I saved the results in .xlsx and performed the following tasks in Excel:
-1. Removig duplicates.
+1. Removing duplicates.
 2. Removing Incomplete Values.
 3. Coverting data to different datatypes.
 
