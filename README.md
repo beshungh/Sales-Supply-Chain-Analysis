@@ -195,18 +195,22 @@ All tables have been successfully imported into the database.
 
 ```
 #### Setbacks of the script
-The script lacks the assignment of primary and foreign keys to tables, complicating referencing of primary keys by foreign keys in other tables and resulting in slow execution of queries with JOIN statments. Additionally, it neglects to create indexes for the tables, causing queries with WHERE and JOIN statements to execute slowly. Constraints are also not added to tables making the database lose its integrity. Although I plan to address these issues given more time, for now, I created the database manually.
-I stated with designing an Entity Relationship Diagram to aid in establishing relationships between the different tables before i proceeded in the creation of the actual tables.
+After successfully importing the datasets into the database, i noticed the script lacked ability to assign primary and foreign keys to tables, complicating referencing of primary keys by foreign keys in other tables and resulting in slow execution of queries with JOIN statments. Additionally, it neglects to create indexes for the tables, causing queries with WHERE and JOIN statements to execute slowly. Constraints were also not added to tables making the database lose its integrity and reliability. Although I plan to address these issues given more time, for now, I created the database manually.
+I started with designing an Entity Relationship Diagram to aid in establishing relationships between the different tables before i proceeded in the creation of the actual tables.
 
 ![ERD](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/956e6b6f-80dd-4fa4-ad10-a13f15d038ef)
 
 
 ### Data Cleaning
 
- performed the following tasks in Excel:
-1. Removing duplicates.
-2. Removing Incomplete Values.
-3. Coverting data to different datatypes.
+ Performed the following tasks in Excel:
+1. Removing duplicates; During the creation of the ERD,i came across duplication in the customer_id column,product_id column, and order_id column,these duplication made me encounter alot of errors while importing  the dataset into the database.
+   These were the IDs i planned on making the primary key, so i deleted these IDs and regenerated new unique IDs for all the tables using the CONCATENATE,LEFT,UPPER AND RAND() function.I also utilized the Text to Column option to split the customer_name into first_name
+   and last_name,this helped me concatenate the first letter of both the first and last name of each customer and merged it with the random numbers i generated.I then used the COUNTIF function to check if these newly generated IDs had no duplicates and were 
+   unique.
+3. I then removed the currency symbols from all the columns that had currencies already 
+4. Removing Incomplete Values.
+5. Coverting data to different datatypes.
 
 ```sql
 
