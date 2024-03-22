@@ -195,7 +195,7 @@ All tables have been successfully imported into the database.
 
 ```
 #### Setbacks of the script
-After successfully importing the datasets into the database, i noticed the script lacked ability to assign primary and foreign keys to tables, complicating referencing of primary keys by foreign keys in other tables and resulting in slow execution of queries with JOIN statments. Additionally, it neglects to create indexes for the tables, causing queries with WHERE and JOIN statements to execute slowly. Constraints were also not added to tables making the database lose its integrity and reliability. Although I plan to address these issues given more time, for now, I created the database manually.
+After successfully importing the datasets into the database, i noticed the script lacked ability to assign primary and foreign keys to tables, complicating referencing of primary keys by foreign keys in other tables and resulting in slow execution of queries with JOIN statments. Additionally, it neglected the creation of indexes for the tables, causing queries with WHERE and JOIN statements to execute slowly. Constraints were also not added to tables making the database lose its integrity and reliability. Although I plan to address these issues given more time, for now, I created the database manually.
 I started with designing an Entity Relationship Diagram to aid in establishing relationships between the different tables before i proceeded in the creation of the actual tables.
 
 ![ERD](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/956e6b6f-80dd-4fa4-ad10-a13f15d038ef)
@@ -204,21 +204,19 @@ I started with designing an Entity Relationship Diagram to aid in establishing r
 ### Data Cleaning
 
  Performed the following tasks in Excel:
-1. Removing duplicates; During the creation of the ERD,i came across duplication in the customer_id column,product_id column, and order_id column,these duplication made me encounter alot of errors while importing  the dataset into the database.
-   These were the IDs i planned on making the primary key, so i deleted these IDs and regenerated new unique IDs for all the tables using the CONCATENATE,LEFT,UPPER AND RAND() function.I also utilized the Text to Column option to split the customer_name into first_name
-   and last_name,this helped me concatenate the first letter of both the first and last name of each customer and merged it with the random numbers i generated.I then used the COUNTIF function to check if these newly generated IDs had no duplicates and were 
+1. Removing duplicates: During the creation of the ERD,i came across duplication in the customer_id column,product_id column, and the order_id column,these duplication made me encounter alot of errors while importing the dataset into the database.
+   These were the IDs i planned on using as my primary keys, so i deleted these IDs and regenerated new unique IDs for all the tables using the CONCATENATE,LEFT,UPPER AND RAND() function.I also utilized the Text to Column option to split the customer_name into 
+   first_name and last_name,this helped me concatenate the first letters of both the first and last name of each customer and merged it with the random numbers i generated.I then used the COUNTIF function to check if these newly generated IDs had no duplicates and were 
    unique.
-3. I then removed the currency symbols from all the columns that had currencies already 
-4. Removing Incomplete Values.
-5. Coverting data to different datatypes.
-
+2. I removed the currency symbols from all the columns that had currencies attached to them,i did this to avoid any future errors when quering the database which will require me to use the REGEXP_REPLACE function to remove non-numeric characters and CAST datatype.
+   
 ```sql
 
 CREATE TABLE products (
-  product_id varchar(30) PRIMARY KEY NOT NULL UNIQUE,
+  product_id varchar(30) PRIMARY KEY NOT NULL ,
   category varchar(15),
   sub_category varchar(15),
-  product_name varchar(200),
+  product_name varchar(200)
 );
 CREATE INDEX ON products(product_id)
 
@@ -280,7 +278,7 @@ CREATE INDEX "CK" ON  "returns" ("order_id", "region", "customer_id", "product_i
 
 
 ### Exploratory Data Analysis in PostgreSQL
-The EDA involved exploring the Global Superstore dataset to answer Key questions.These key questions are:
+The EDA involved exploring the Global Superstore dataset to answer Key questions.These key questions were:
 
   - Which region incur the highest shipping costs, and how does it compare to other regions?
   - What is the average shipping cost for different product categories, and are there any significant variations?
@@ -318,22 +316,6 @@ INNER JOIN products
 ON orders.product_id = products.product_id)
 GROUP BY category
 ORDER BY avg_shipping_cost DESC,shipping_cost_stddev DESC;
-
---CLEANING THE PROFIT COLUMN TO REMOVE NON-NUMERIC CHARACTERS LIKE '$' AND ','
-/*This SQL update statement modifies the 'profit' column in the 'orders' table. 
-  It uses the REGEXP_REPLACE function to remove non-numeric characters (such as '$' and ',') from the 'profit' values. 
-  The regular expression '[^0-9-]' is applied to replace any characters that are not digits (0-9) or a minus sign with an empty string. 
-  The query effectively cleans the 'profit' column by leaving only numeric values.*/
-UPDATE orders
-SET profit = REGEXP_REPLACE(profit, '[^0-9-]', '','g');
-
---CONVERTING PROFIT COLUMN DATATYPE FROM CHARACTER VARYING TO NUMERIC
-/*This SQL statement alters the 'profit' column in the 'orders' table. 
-  It changes the data type of the 'profit' column from character varying to numeric. 
-  The USING profit::NUMERIC part ensures that the existing values in the 'profit' column are converted to the new numeric data type during the alteration process.*/
-ALTER TABLE orders
-ALTER COLUMN profit TYPE NUMERIC
-USING profit::NUMERIC;
 
 --ORDER PRIORITY AND IMPACT ON PROFITABILITY
 /*This query analyses the impact of order priority on profitability in the 'orders' table. 
@@ -402,11 +384,11 @@ ORDER BY ReturnRate DESC
 
 ### Results/Findings
 
-1. ![Highest shipping cost](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/88f76f83-5d16-48ed-a384-f05ea73891fa)
+1. ![Region incur the highest shipping costs](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/aa573efe-06a3-4216-ac0a-64f683b3a115)
 
-- Western Europe had the highest total shipping costs, followed by Oceania and Central America.
+- Western Europe had the highest total shipping costs, followed by Central America and Oceania.
 
-2. ![Average shipping cost for different product categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/2c73be25-2430-4b80-9caa-186486a4f066)
+2. ![What is the average shipping cost for different product categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/be236b96-e65b-4220-a8c0-8c72c4b6c76f)
 
  - Technology products have the highest average shipping cost among the categories, and there is a significant variation reflected by the high standard deviation. This may 
    be due to factors like the fragility or higher value of technology items, leading 
@@ -418,7 +400,7 @@ ORDER BY ReturnRate DESC
  - The average shipping cost for Office Supplies were lower compared to Furniture, and there was a moderate level of variation as indicated by the standard deviation. 
    Office Supplies might have standard shipping requirements, resulting in lower overall costs.
 
-3. ![Priority orders](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/f4a4ad93-8cc0-41b4-b7a5-03efb62f86ab)
+3. ![How are our orders distributed among different priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/cac496c6-3da0-4220-8548-b04c28be7920)
 
  - While Critical priority orders have the lowest count, they contribute significantly to total profit with a higher average profit per order.
    
@@ -426,18 +408,18 @@ ORDER BY ReturnRate DESC
 
  - Although Low and Medium priority orders have higher order counts, their individual contribution to profit is lower.
 
- - Across all priority levels, the profit margins are consistent at around 5-6%.
+ - Across all priority levels, the profit margins are consistent at around 0.05-0.06%.
 
-4. ![sub_categories driving the majority of our profits](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/ec326a4d-2d37-411a-bd52-d7af2a310a94)
+4. ![Which product categories and sub-categories are driving the majority of our profits](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/7bb1bdff-c774-4ca7-8059-5640ca756e49)
 
-  - "Technology" and specifically "Phones" are the top contributors to profits, followed by "Copiers." These products seem to be performing exceptionally well.
-  - "Office Supplies" also contribute significantly, with "Storage," "Binders," and "Art" being the top performers.
+  - "Technology" and specifically "Copiers" are the top contributors to profits, followed by "Phones". These products seem to be performing exceptionally well.
   - "Furniture" as a category has mixed performance. While "Bookcases" and "Chairs" are profitable, "Tables" show a negative profit, indicating potential issues in this sub-category.
+  - "Office Supplies" also contribute significantly, with "Appliances","Storage", and "Binders" being the top performers.
 
-5. ![products with the highest return rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/50cbe2b7-3bb0-4f41-bbf8-d631eb91bd67)
+5. ![Which products have the highest return rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/a5249736-9788-4fd3-9708-c69b36ecc443)
 
-- Products like "Chromcraft Conference Table, Fully Assembled" and "Chromcraft Computer Table, Rectangular" have a 100% return rate.
-- Some products with high return rates also exhibit significant negative profit values, such as "Chromcraft Conference Table, Fully Assembled" with a profit of 398564 but a return rate of 100%.
+- Products like "Harbour Creations Executive Leather Armchair, Black" and "Novimex Executive Leather Armchair, Adjustable" have a 100% return rate.
+-  Products with high return rates also exhibit significant negative profit values, such as "Harbour Creations Executive Leather Armchair, Black" with a profit of -189.46 but a return rate of 100%.
 
 ### Recommendations
 
@@ -453,7 +435,7 @@ Based on the insights derived from this analysis, The company should:
 8. Keep a close eye on profit margins and implement measures to maintain or improve them. This might involve monitoring costs, revising pricing strategies, or negotiating better terms with suppliers.
 9. Consider expanding product offerings or enhancing marketing efforts in the "Technology" category since it has a high profitability .
 10. Analyse factors contributing to the negative profit in the "Tables" sub-category. It should identify whether it's due to pricing, demand, or other issues and develop strategies to address these.
-11. Focus marketing efforts on high-profit products like "Phones" and "Copiers" to maximize returns.
+11. Focus marketing efforts on high-profit products like "Copiers" and "Phones" to maximize returns.
 12. Implement stringent quality control measures for products with high return rates. Ensure that product descriptions are accurate and provide comprehensive information to set realistic customer expectations.
 13. Implement a system to continuously monitor return rates and customer feedback. Regularly analyze the data to identify trends and make informed decisions about product offerings and improvements
 
