@@ -1,6 +1,17 @@
 # Sales Analysis
 
-### PROJECT SUMMARY
+## TABLE OF CONTENTS
+
+- [Project Summary](#project-summary)
+- [Data Source](#data-source)
+- [Limitations](#limitations)
+
+
+
+
+
+
+### Project Summary
 
 This project aims to extract actionable insights from this [Global Superstore dataset](https://www.kaggle.com/datasets/endofnight17j03/global-superstore) and generate reports for shareholders. This process will assist decision-makers in optimizing supply chain processes and gaining a more profound understanding of the company's performance.
 
@@ -276,8 +287,8 @@ CREATE INDEX "CK" ON  "returns" ("order_id", "region", "customer_id", "product_i
 
 ```
 
-
 ### Exploratory Data Analysis in PostgreSQL
+I chose to use an SQL database for exploring the data because the dataset was really big. When I tried to delete duplicate values in Excel, it froze because of the dataset's size. That's why I decided to use an SQL database, as it can handle large amounts of data easily.
 The EDA involved exploring the Global Superstore dataset to answer Key questions.These key questions were:
 
   - Which region incur the highest shipping costs, and how does it compare to other regions?
@@ -285,7 +296,6 @@ The EDA involved exploring the Global Superstore dataset to answer Key questions
   - How are our orders distributed among different priorities, and is there any impact on profitability?
   - Which product categories and sub-categories are driving the majority of our profits, and how can we optimise our product mix or marketing efforts to enhance profitability in underperforming categories?
   - Which products have the highest return rates, and what impact do returns have on overall sales and profit?
-
 
 ### Data Analysis Queries in PostgreSQL
 ```sql
@@ -380,6 +390,7 @@ ON Products.Product_id = orders.Product_id
 GROUP BY Products.Product_id, Products.Product_name
 ORDER BY ReturnRate DESC
 
+-- Most of the queries took longer to be excuted,so i created indexes for those columns to make execution of the queries faster.
 ```
 
 ### Results/Findings
@@ -390,7 +401,7 @@ ORDER BY ReturnRate DESC
 
 2. ![What is the average shipping cost for different product categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/be236b96-e65b-4220-a8c0-8c72c4b6c76f)
 
- - Technology products have the highest average shipping cost among the categories, and there is a significant variation reflected by the high standard deviation. This may 
+ - Technology products had the highest average shipping cost among the categories, and there is a significant variation reflected by the high standard deviation. This may 
    be due to factors like the fragility or higher value of technology items, leading 
    to specialized packaging and shipping requirements.
 
@@ -402,31 +413,32 @@ ORDER BY ReturnRate DESC
 
 3. ![How are our orders distributed among different priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/cac496c6-3da0-4220-8548-b04c28be7920)
 
- - While Critical priority orders have the lowest count, they contribute significantly to total profit with a higher average profit per order.
+ - While Critical priority orders had the lowest count, they contribute significantly to total profit with a higher average profit per order.
    
- - High priority orders have a substantial order count and contribute significantly to total profit. However, the average profit per order is slightly lower compared to Critical priority.
+ - High priority orders had a substantial order count and contribute significantly to total profit. However, the average profit per order is slightly lower compared to Critical priority.
 
  - Although Low and Medium priority orders have higher order counts, their individual contribution to profit is lower.
 
- - Across all priority levels, the profit margins are consistent at around 0.05-0.06%.
+ - Across all priority levels, the profit margins were consistent at around 0.05-0.06%.
 
 4. ![Which product categories and sub-categories are driving the majority of our profits](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/7bb1bdff-c774-4ca7-8059-5640ca756e49)
 
-  - "Technology" and specifically "Copiers" are the top contributors to profits, followed by "Phones". These products seem to be performing exceptionally well.
-  - "Furniture" as a category has mixed performance. While "Bookcases" and "Chairs" are profitable, "Tables" show a negative profit, indicating potential issues in this sub-category.
+  - "Technology" and specifically "Copiers" were the top contributors to profits, followed by "Phones". These products seem to be performing exceptionally well.
+  - "Furniture" as a category had mixed performance. While "Bookcases" and "Chairs" are profitable, "Tables" show a negative profit, indicating potential issues in this sub-category.
   - "Office Supplies" also contribute significantly, with "Appliances","Storage", and "Binders" being the top performers.
 
 5. ![Which products have the highest return rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/a5249736-9788-4fd3-9708-c69b36ecc443)
 
-- Products like "Harbour Creations Executive Leather Armchair, Black" and "Novimex Executive Leather Armchair, Adjustable" have a 100% return rate.
--  Products with high return rates also exhibit significant negative profit values, such as "Harbour Creations Executive Leather Armchair, Black" with a profit of -189.46 but a return rate of 100%.
+- Products like "Harbour Creations Executive Leather Armchair, Black" and "Novimex Executive Leather Armchair, Adjustable" had a 100% return rate.
+- Products with high return rates also exhibited significant negative profit values, such as "Harbour Creations Executive Leather Armchair, Black" with a profit of -189.46 but a return rate of 100%.
 
 ### Recommendations
 
 Based on the insights derived from this analysis, The company should:
 
 1. Consider establishing partnerships with local distributors or logistics firms in Western Europe. This collaborative approach will aim to harness their regional expertise, potentially leading to a reduction in shipping costs.
-2. Investigate the factors contributing to the high variation in shipping costs for Technology products. it should explore potential partnerships or negotiated rates with carriers to reduce shipping costs without compromising on the safety of the products.
+2. Investigate the factors contributing to the high variation in shipping costs for Technology products. it should explore potential partnerships or negotiated rates with carriers to reduce shipping costs without compromising on the safety of 
+   the products.
 3. Consider optimizing the shipping process for Furniture items. Exploring potential partnerships with logistics companies for bulk shipping discounts or negotiating better rates based on shipping volume.
 4. Continue monitoring shipping costs for Office Supplies and explore opportunities for further cost reduction. it should also consider negotiating better rates with shipping carriers based on the consistent shipping patterns of these items.
 5. Consider strategies to increase Critical priority orders as they have a higher average profit. This may involve targeted marketing, promotions, or improved service for critical items.
@@ -441,19 +453,6 @@ Based on the insights derived from this analysis, The company should:
 
 ### Limitations 
 
-  The dataset were not normalized,i had to manauelly normalize it to make my analysis accurate.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-  The datasets were not normalized,i had to manauelly normalize it to make my analysis accurate.
+-  I had to remove all non-numeric characters from the sales,profit and discount columns because they woukd have affected my queries which will require me to clean and convert these columns before i would have gotten my results.
+-  The Python script i wrote had its own setbacks which required me to manually create each table,create relationships with each table and add constraints. 
