@@ -6,7 +6,7 @@
 - [Data Source](#data-source)
 - [Tools Used](#tools-used)
 - [Database Normalization](#database-normalization)
-- [Importing the .csv Files into PostgreSQL](#importing-the-.csv-files-into-postgresql)
+- [Importing the csv Files into PostgreSQL](#importing-the-csv-files-into-postgresql)
 - 
 
 
@@ -50,7 +50,7 @@ In 2NF, I ensured each non-prime attribute is fully functionally dependent on th
 ![Normalization](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/1e23b4f9-d49e-438d-b840-cdfc05a1f023)
 
 
-#### Importing the .csv Files into PostgreSQL 
+#### Importing the csv Files into PostgreSQL 
 
 Being a data analyst involves more than just creating dashboards; efficiency in task implementation is crucial. As a PostgreSQL user I face a lot challenges when importing large datasets into my database. In difference to some other Relational Database Management System (RDBMS), where importing data is relatively straightforward, PostgreSQL present hurdles. One notable challenge is the manual creation of schemas, especially when dealing with extensive CSV files that encompass numerous columns. In PostgreSQL, each schema needs to be accurately created, and the conversion of data types to PostgreSQL-compatible formats adds an additional layer of complexity.
 To overcome this, I utilised Jupyter Notebook to develop a python script using Python libraries (os, shutil, NumPy, pandas and psycopg2) to automate schema creation and data import tasks, streamlining the workflow. This approach not only saved me time but also ensured accuracy, reducing errors associated with manual processes.
