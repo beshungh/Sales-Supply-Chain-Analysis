@@ -11,7 +11,7 @@
 - [Data Cleaning](#data-cleaning)
 - [Exploratory Data Analysis in PostgreSQL](#exploratory-data-analysis-in-postgresql)
 - [Data Analysis Queries in PostgreSQL](#data-analysis-queries-in-postgresql)
-- [Results/Findings](#results-findings)
+- [Findings](#findings)
 - [Recommendations](#recommendations)
 - [Limitations](#limitations)
 
@@ -408,7 +408,7 @@ ORDER BY ReturnRate DESC
 -- Most of the queries took longer to be excuted,so i created indexes for those columns to make execution of the queries faster.
 ```
 
-### Results/Findings
+### Findings
 
 1. ![Region incur the highest shipping costs](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/aa573efe-06a3-4216-ac0a-64f683b3a115)
 
