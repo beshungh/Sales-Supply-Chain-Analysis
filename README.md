@@ -472,4 +472,4 @@ Based on the insights derived from this analysis, The company should:
 -  I had to remove all non-numeric characters from the sales,profit and discount columns because they woukd have affected my queries which will require me to clean and convert these columns before i would have gotten my results.
 -  The Python script i wrote had its own setbacks which required me to manually create each table,create relationships with each table and add constraints.
 
-[TABLE OF CONTENTS](table-of-contents)
+[TABLE OF CONTENTS](#table-of-contents)
