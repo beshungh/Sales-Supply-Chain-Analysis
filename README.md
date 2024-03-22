@@ -1,42 +1,42 @@
-# Sales Analysis
+   # **SUPPLY CHAIN ANALYSIS**
 
-## TABLE OF CONTENTS
+## *TABLE OF CONTENTS*
 
-- [Project Summary](#project-summary)
-- [Data Source](#data-source)
-- [Tools Used](#tools-used)
-- [Database Normalization](#database-normalization)
-- [Importing csv Files into PostgreSQL Using Python Script ](#importing-csv-files-into-postgresql-using-python-script)
-- [Setbacks of the Python Script](#setbacks-of-the-python-script)
-- [Data Cleaning](#data-cleaning)
-- [Exploratory Data Analysis in PostgreSQL](#exploratory-data-analysis-in-postgresql)
-- [Data Analysis Queries in PostgreSQL](#data-analysis-queries-in-postgresql)
-- [Findings](#findings)
-- [Recommendations](#recommendations)
-- [Limitations](#limitations)
+- *[Project Summary](#project-summary)*
+- *[Data Source](#data-source)*
+- *[Tools Used](#tools-used)*
+- *[Database Normalization](#database-normalization)*
+- *[Importing csv Files into PostgreSQL Using Python Script ](#importing-csv-files-into-postgresql-using-python-script)*
+- *[Setbacks of the Python Script](#setbacks-of-the-python-script)*
+- *[Data Cleaning](#data-cleaning)*
+- *[Exploratory Data Analysis in PostgreSQL](#exploratory-data-analysis-in-postgresql)*
+- *[Data Analysis Queries in PostgreSQL](#data-analysis-queries-in-postgresql)*
+- *[Findings](#findings)*
+- *[Recommendations](#recommendations)*
+- *[Limitations](#limitations)*
 
-### Project Summary
+### **Project Summary**
 ---
 
  This project aims to extract actionable insights from this [Global Superstore dataset](https://www.kaggle.com/datasets/endofnight17j03/global-superstore) and generate reports for shareholders. This process will assist decision-makers in 
  optimizing supply chain processes and gaining a more profound understanding of the company's performance.
 
-### Data Source
+### **Data Source**
 
  The project utilises datasets, namely "customers.csv," "orders.csv," "products.csv," and "returns.csv," to present a thorough analysis of sales transactions across different markets, covering a wide range of product categories and sub- 
  categories. These datasets contain essential information, including product details (Product ID, Category, Sub-Category, and Product Name), sales metrics (Sales, Quantity, Discount, Profit), logistical details (Shipping Cost, Order Priority), 
  order specifics (Order ID, Region), and return information (Returned, Order ID, Customer ID, Product ID).
 
-### Tools Used 
+### **Tools Used** 
 
 - Excel - Database Normalization,Data Cleaning 
 - PostgreSQL - Exploratory Data Analysis
 - Tableau - Creating reports
 - Python - Developing a Jupyter Notebook to Automatically import .csv files to PostgreSQL database
 
-#### Database Normalization
+### **Database Normalization**
 
-- Converting the dataset to 1NF,2NF,3NF
+ *Converting the dataset to 1NF,2NF,3NF*
 
  To minimize redundancy, dependency and optimize performance, I normalized the dataset.I started with the 1NF which involved making sure the dataset has no Multivalued Attributes in any cell. Achieving the First Normal Form (1NF) involved 
  ensuring that each table's column contained single record and all rows were unique. 
@@ -50,7 +50,7 @@
 
 ![Normalization](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/1e23b4f9-d49e-438d-b840-cdfc05a1f023)
 
-#### Importing csv Files into PostgreSQL Using Python Script 
+### **Importing csv Files into PostgreSQL Using Python Script** 
 
  Being a data analyst involves more than just creating dashboards; efficiency in task implementation is crucial. As a PostgreSQL user I face a lot challenges when importing large datasets into my database. In difference to some other 
  Relational Database Management System (RDBMS), where importing data is relatively straightforward, PostgreSQL present hurdles. One notable challenge is the manual creation of schemas, especially when dealing with extensive CSV files that 
@@ -58,7 +58,7 @@
  To overcome this, I utilised Jupyter Notebook to develop a python script using Python libraries (os, shutil, NumPy, pandas and psycopg2) to automate schema creation and data import tasks, streamlining the workflow. This approach not only 
  saved me time but also ensured accuracy, reducing errors associated with manual processes.
 
-Features and Workflow:
+*Features and Workflow:*
 1. File Organisation:
 The script begins by identifying all CSV files in the current directory. It then creates a new directory named 'datasets' (or uses an existing one) and moves the CSV files into this directory.
 This step ensures a well-organised and centralised location for dataset management.
@@ -218,7 +218,7 @@ File Returns.csv opened in memory
 File Returns.csv copied to database
 All tables have been successfully imported into the database.
 ```
-#### Setbacks of the Python Script
+### **Setbacks of the Python Script**
  After successfully importing the datasets into the database, i noticed the script lacked ability to assign primary and foreign keys to tables, complicating referencing of primary keys by foreign keys in other tables and resulting in slow 
  execution of queries with JOIN statments. Additionally, it neglected the creation of indexes for the tables, causing queries with WHERE and JOIN statements to execute slowly. Constraints were also not added to tables making the database lose 
  its integrity and reliability. Although I plan to address these issues given more time, for now, I created the database manually.
@@ -226,9 +226,9 @@ All tables have been successfully imported into the database.
 
 ![ERD](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/956e6b6f-80dd-4fa4-ad10-a13f15d038ef)
 
-### Data Cleaning
+### **Data Cleaning**
 
- Performed the following tasks in Excel:
+ *Performed the following tasks in Excel:*
 1. While creating the Entity-Relationship Diagram (ERD), I encountered duplicate entries in the customer_id, product_id, and order_id columns. These duplications caused numerous errors when attempting to import the dataset into the database. 
    Since these IDs were intended as primary keys, I opted to remove them and generate new unique IDs for all tables. To do this, I employed functions such as CONCATENATE, LEFT, UPPER, and RAND(). Additionally, I utilized the Text to Columns 
    feature to separate the customer_name into first_name and last_name. This facilitated the concatenation of the initial letters of both names with the random numbers I generated. Subsequently, I employed the COUNTIF function to ensure that 
@@ -302,10 +302,10 @@ CREATE TABLE returns (
 CREATE INDEX CK ON  returns (order_id, region, customer_id, product_id);
 ```
 
-### Exploratory Data Analysis in PostgreSQL
+### **Exploratory Data Analysis in PostgreSQL**
  I chose to use an SQL database for exploring the data because the dataset was really big. When I tried to delete duplicate values in Excel, it froze because of the dataset's size. That's why I decided to use an SQL database, as it can handle 
  large amounts of data easily.
- The EDA involved exploring the Global Superstore dataset to answer Key questions.These key questions were:
+ *The EDA involved exploring the Global Superstore dataset to answer Key questions.These key questions were:*
 
   - Which region incur the highest shipping costs, and how does it compare to other regions?
   - What is the average shipping cost for different product categories, and are there any significant variations?
@@ -313,7 +313,7 @@ CREATE INDEX CK ON  returns (order_id, region, customer_id, product_id);
   - Which product categories and sub-categories are driving the majority of our profits, and how can we optimise our product mix or marketing efforts to enhance profitability in underperforming categories?
   - Which products have the highest return rates, and what impact do returns have on overall sales and profit?
 
-### Data Analysis Queries in PostgreSQL
+### **Data Analysis Queries in PostgreSQL**
 ```sql
 
 -- THE QUERY AIMS TO IDENTIFY THE REGION THAT INCURS THE HIGHEST SHIPPING COSTS
@@ -409,7 +409,7 @@ ORDER BY ReturnRate DESC
 -- Most of the queries took longer to be excuted,so i created indexes for those columns to make execution of the queries faster.
 ```
 
-### Findings
+### **Findings**
 
 1. ![Region incur the highest shipping costs](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/aa573efe-06a3-4216-ac0a-64f683b3a115)
 
@@ -448,7 +448,7 @@ ORDER BY ReturnRate DESC
 - Products like "Harbour Creations Executive Leather Armchair, Black" and "Novimex Executive Leather Armchair, Adjustable" had a 100% return rate.
 - Products with high return rates also exhibited significant negative profit values, such as "Harbour Creations Executive Leather Armchair, Black" with a profit of -189.46 but a return rate of 100%.
 
-### Recommendations
+### **Recommendations**
 
 Based on the insights derived from this analysis, The company should:
 
@@ -467,7 +467,7 @@ Based on the insights derived from this analysis, The company should:
 12. Implement stringent quality control measures for products with high return rates. Ensure that product descriptions are accurate and provide comprehensive information to set realistic customer expectations.
 13. Implement a system to continuously monitor return rates and customer feedback. Regularly analyze the data to identify trends and make informed decisions about product offerings and improvements
 
-### Limitations 
+### **Limitations** 
 
 -  The datasets were not normalized,i had to manauelly normalize it to make my analysis accurate.
 -  I had to remove all non-numeric characters from the sales,profit and discount columns because they woukd have affected my queries which will require me to clean and convert these columns before i would have gotten my results.
