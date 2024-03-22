@@ -6,7 +6,7 @@
 - [Data Source](#data-source)
 - [Tools Used](#tools-used)
 - [Database Normalization](#database-normalization)
-- [Importing the .csv Files into PostgreSQL](#importingthe.csvfilesintopostgreSQL)
+- [Importing the .csv Files into PostgreSQL](#importing-the-.csv-files-into-postgresql)
 - 
 
 
