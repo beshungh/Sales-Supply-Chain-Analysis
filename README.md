@@ -11,7 +11,7 @@
 - [Data Cleaning](#data-cleaning)
 - [Exploratory Data Analysis in PostgreSQL](#exploratory-data-analysis-in-postgresql)
 - [Data Analysis Queries in PostgreSQL](#data-analysis-queries-in-postgresql)
-- [Results/Findings](#results/findings)
+- [Results/Findings](#results-findings)
 - [Recommendations](#recommendations)
 - [Limitations](#limitations)
 
