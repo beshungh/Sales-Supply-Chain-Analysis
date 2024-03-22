@@ -10,9 +10,9 @@
 - [Setbacks of the Python Script](#setbacks-of-the-python-script)
 - [Data Cleaning](#data-cleaning)
 - [Exploratory Data Analysis in PostgreSQL](#exploratory-data-analysis-in-postgresql)
-- [Data Analysis Queries in PostgreSQL](data-analysis-queries-in-postgresql)
-- [Results/Findings](results/findings)
-- [Recommendations](recommendations)
+- [Data Analysis Queries in PostgreSQL](#data-analysis-queries-in-postgresql)
+- [Results/Findings](#results/findings)
+- [Recommendations](#recommendations)
 - [Limitations](#limitations)
 
 ### Project Summary
