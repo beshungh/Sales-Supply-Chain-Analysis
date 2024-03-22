@@ -4,6 +4,17 @@
 
 - [Project Summary](#project-summary)
 - [Data Source](#data-source)
+- [Tools Used](#tools-used)
+- [Database Normalization](#database-normalization)
+- [Importing the .csv Files into PostgreSQL ](#Importing-the-.csv-Files-into-PostgreSQL)
+- 
+
+
+
+
+
+
+
 - [Limitations](#limitations)
 
 
