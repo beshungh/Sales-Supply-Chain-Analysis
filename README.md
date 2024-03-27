@@ -330,10 +330,10 @@ ORDER BY total_shipping_cost DESC
   2. WHAT IS THE AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND ARE THERE ANY SIGNIFICANT VARIATIONS?
 ```sql
 --AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND SIGNIFICANT VARIATIONS
-/*This SQL query calculates and presents the average shipping cost and standard deviation for different product categories.
-  By joining the 'orders' and 'products' tables, the query groups the results by product category.
-  The output is then sorted in descending order based on the average shipping cost and standard deviation,
-  allowing for the identification of product categories with higher average shipping costs and significant variations in shipping costs.*/
+/* This SQL query calculates and presents the average shipping cost and standard deviation for different product categories.
+   By joining the 'orders' and 'products' tables, the query groups the results by product category.
+   The output is then sorted in descending order based on the average shipping cost and standard deviation,
+   allowing for the identification of product categories with higher average shipping costs and significant variations in shipping costs.*/
 SELECT category,ROUND(AVG(shipping_cost)::INT,2) AS Avg_shipping_cost,ROUND(STDDEV(shipping_cost)::INT,2) AS shipping_cost_STDDEV
 FROM(
 SELECT order_id,products.product_id,category,shipping_cost
@@ -348,10 +348,10 @@ ORDER BY avg_shipping_cost DESC,shipping_cost_stddev DESC;
   3. HOW ARE OUR ORDERS DISTRIBUTED AMONG DIFFERENT PRIORITIES, AND IS THERE ANY IMPACT ON PROFITABILITY?
   ```sql
   --ORDER PRIORITY AND IMPACT ON PROFITABILITY
-/*This query analyse the impact of order priority on profitability in the 'orders' table. 
-  It retrieves information such as the count of orders, total profit, average profit, 
-  and profit margin for each unique order priority. 
-  The results are grouped by order priority and ordered in ascending order.*/
+/* This query analyse the impact of order priority on profitability in the 'orders' table. 
+   It retrieves information such as the count of orders, total profit, average profit, 
+   and profit margin for each unique order priority. 
+   The results are grouped by order priority and ordered in ascending order.*/
 SELECT order_priority,
 COUNT(*) AS order_count,
 SUM(profit) AS total_profit,
@@ -366,10 +366,10 @@ ORDER BY order_priority ASC;
   4. WHICH PRODUCT CATEGORIES AND SUB-CATEGORIES ARE DRIVING THE MAJORITY OF OUR PROFITS, AND HOW CAN WE OPTIMISE OUR PRODUCT MIX OR MARKETING EFFORTS TO ENHANCE PROFITABILITY IN UNDERPERFORMING CATEGORIES?
  ```sql
 --SUB_CATEGORIES DRIVING THE MAJORITY OF PROFITS
-/*This query identifies the sub-categories that contribute the most to overall profits.
-  It combines information from the 'products' and 'orders' tables, summing up the profits for each unique combination of category and sub-category. 
-  The results are then ordered in descending order based on the total profit,
-  providing insights into which sub-categories are driving the majority of profits in the dataset.*/
+/* This query identifies the sub-categories that contribute the most to overall profits.
+   It combines information from the 'products' and 'orders' tables, summing up the profits for each unique combination of category and sub-category. 
+   The results are then ordered in descending order based on the total profit,
+   providing insights into which sub-categories are driving the majority of profits in the dataset.*/
 SELECT category,sub_category,SUM(profit) AS total_profit
 FROM products
 INNER JOIN orders 
@@ -382,15 +382,15 @@ ORDER BY total_profit DESC;
   5. WHICH PRODUCTS HAVE THE HIGHEST RETURN RATES, AND WHAT IMPACT DO RETURNS HAVE ON OVERALL SALES AND PROFIT?
 ```sql
 --PRODUCTS WITH THE HIGHEST RETURN RATES
-/*This query Joins the Returns table with the Products table using the common column Product_id to identify the products that have been returned,
-  it then gives a list of products with an indication of whether they were returned or not.*/
+/* This query Joins the Returns table with the Products table using the common column Product_id to identify the products that have been returned,
+   it then gives a list of products with an indication of whether they were returned or not.*/
 SELECT products.product_id, products.Product_name, returns.returned 
 FROM products 
 JOIN returns
 ON products.product_id = returns.product_id; 
 
-/*The query calculates the return rate for each product, displaying the total returns, total sales, and return rate percentage.
-  It includes information about total sales amount and total profit for each product.*/
+/* The query calculates the return rate for each product, displaying the total returns, total sales, and return rate percentage.
+   It includes information about total sales amount and total profit for each product.*/
 SELECT Products.Product_id, Products.Product_name,COUNT(Returns.Returned) AS TotalReturns,
 COUNT(*) AS TotalSales,ROUND((COUNT(Returns.Returned) * 100.0 / COUNT(*)),0) AS ReturnRate,
 SUM(orders.Sales) AS TotalSalesAmount,
