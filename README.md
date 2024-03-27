@@ -240,7 +240,7 @@ All tables have been successfully imported into the database.
 ```sql
 
 CREATE TABLE products (
-  product_id varchar(30) PRIMARY KEY NOT NULL ,
+  product_id varchar(30) PRIMARY KEY,
   category varchar(15),
   sub_category varchar(15),
   product_name varchar(200)
@@ -248,7 +248,7 @@ CREATE TABLE products (
 CREATE INDEX ON products(product_id)
 
 CREATE TABLE customers (
-  customer_id varchar(30) PRIMARY KEY NOT NULL,
+  customer_id varchar(30) PRIMARY KEY,
   first_name varchar(15),
   last_name varchar(15),
   segment varchar(15),
@@ -262,7 +262,7 @@ CREATE TABLE customers (
 CREATE INDEX ON customers(customer_id)
 
 CREATE TABLE orders (
-  order_id varchar(30) PRIMARY KEY NOT NULL,
+  order_id varchar(30) PRIMARY KEY,
   order_date date,
   ship_date date,
   ship_mode varchar(15),
