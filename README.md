@@ -429,15 +429,10 @@ ORDER BY ReturnRate DESC
 
 3. ![How are our orders distributed among different priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/cac496c6-3da0-4220-8548-b04c28be7920)
 
- - While Critical priority orders had the second lowest order count, they contributed significantly to total profit.
- - They had the highest average profit per order at $31.59, indicating that each order of Critical priority tends to bring in a high profit.
- - The profit margin for Critical priority orders is the highest among all priority levels at 6%, suggesting that a significant portion of the revenue from these orders translates into profit.
- - High priority orders had a relatively high order count, but their individual contribution to profit is lower compared to Critical priority.
- - The average profit per order for High priority is lower than Critical at $27.12.
- - Low priority orders also had a higher order count, but their individual contribution to profit is relatively lower.
- - The average profit per order for Low priority is the lowest among all priority levels at $24.20.
- - Medium priority orders had the highest order count among all priority levels, contributing significantly to total profit.
- - However, the average profit per order for Medium priority is slightly lower compared to Critical priority, at $29.36.
+ - While Critical priority orders had the second lowest order count, they contributed significantly to total profit.They had the highest average profit per order at $31.59, indicating that each order of Critical priority tends to bring in a high profit.The profit margin for Critical priority orders is the highest among all priority levels at 6%, suggesting that a significant portion of the revenue from these orders translates into profit.
+ - High priority orders had a relatively high order count, but their individual contribution to profit is lower compared to Critical priority.The average profit per order for High priority is lower than Critical at $27.12.
+ - Low priority orders also had a higher order count, but their individual contribution to profit is relatively lower.The average profit per order for Low priority is the lowest among all priority levels at $24.20.
+ - Medium priority orders had the highest order count among all priority levels, contributing significantly to total profit.However, the average profit per order for Medium priority is slightly lower compared to Critical priority, at $29.36.
  - Across all priority levels, the profit margins were consistent at around 5-6%, indicating a relatively stable profitability across different priority levels.
 
 4. ![Which product categories and sub-categories are driving the majority of our profits](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/7bb1bdff-c774-4ca7-8059-5640ca756e49)
