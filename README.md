@@ -312,11 +312,11 @@ CREATE INDEX CK ON  returns (order_id, region, customer_id, product_id);
 
 1. WHICH REGION INCURRED THE HIGHEST SHIPPING COSTS, AND HOW DOES IT COMPARE TO OTHER REGIONS?
  ```sql
-  -- THE QUERY AIMS TO IDENTIFY THE REGION THAT INCURRED THE HIGHEST SHIPPING COSTS
-/* The SQL query retrieves the total shipping costs for each region by combining information from the 'customers' and 'orders' tables. 
-   The results are then grouped by region and ordered in descending order based on the total shipping cost. 
-   If the optional --LIMIT 1; line is uncommented and executed, 
-   it will return only the top result, indicating the region with the highest shipping cost.*/
+ --THE QUERY AIMS TO IDENTIFY THE REGION THAT INCURRED THE HIGHEST SHIPPING COSTS
+ /* The SQL query retrieves the total shipping costs for each region by combining information from the 'customers' and 'orders' tables. 
+    The results are then grouped by region and ordered in descending order based on the total shipping cost. 
+    If the optional --LIMIT 1; line is uncommented and executed, 
+    it will return only the top result, indicating the region with the highest shipping cost.*/
 SELECT region,ROUND(SUM(shipping_cost)::numeric,2) AS total_shipping_cost
 FROM customers
 INNER JOIN orders
@@ -348,10 +348,10 @@ ORDER BY avg_shipping_cost DESC,shipping_cost_stddev DESC;
   3. HOW ARE OUR ORDERS DISTRIBUTED AMONG DIFFERENT PRIORITIES, AND IS THERE ANY IMPACT ON PROFITABILITY?
   ```sql
   --ORDER PRIORITY AND IMPACT ON PROFITABILITY
-/* This query analyse the impact of order priority on profitability in the 'orders' table. 
-   It retrieves information such as the count of orders, total profit, average profit, 
-   and profit margin for each unique order priority. 
-   The results are grouped by order priority and ordered in ascending order.*/
+  /* This query analyse the impact of order priority on profitability in the 'orders' table. 
+     It retrieves information such as the count of orders, total profit, average profit, 
+     and profit margin for each unique order priority. 
+     The results are grouped by order priority and ordered in ascending order.*/
 SELECT order_priority,
 COUNT(*) AS order_count,
 SUM(profit) AS total_profit,
@@ -365,11 +365,11 @@ ORDER BY order_priority ASC;
 
   4. WHICH PRODUCT CATEGORIES AND SUB-CATEGORIES ARE DRIVING THE MAJORITY OF OUR PROFITS, AND HOW CAN WE OPTIMISE OUR PRODUCT MIX OR MARKETING EFFORTS TO ENHANCE PROFITABILITY IN UNDERPERFORMING CATEGORIES?
  ```sql
---SUB_CATEGORIES DRIVING THE MAJORITY OF PROFITS
-/* This query identifies the sub-categories that contribute the most to overall profits.
-   It combines information from the 'products' and 'orders' tables, summing up the profits for each unique combination of category and sub-category. 
-   The results are then ordered in descending order based on the total profit,
-   providing insights into which sub-categories are driving the majority of profits in the dataset.*/
+ --SUB_CATEGORIES DRIVING THE MAJORITY OF PROFITS
+ /* This query identifies the sub-categories that contribute the most to overall profits.
+    It combines information from the 'products' and 'orders' tables, summing up the profits for each unique combination of category and sub-category. 
+    The results are then ordered in descending order based on the total profit,
+    providing insights into which sub-categories are driving the majority of profits in the dataset.*/
 SELECT category,sub_category,SUM(profit) AS total_profit
 FROM products
 INNER JOIN orders 
