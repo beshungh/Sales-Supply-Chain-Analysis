@@ -10,7 +10,6 @@
 - *[Setbacks of the Python Script](#setbacks-of-the-python-script)*
 - *[Data Cleaning](#data-cleaning)*
 - *[Exploratory Data Analysis in PostgreSQL](#exploratory-data-analysis-in-postgresql)*
-- *[Data Analysis Queries in PostgreSQL](#data-analysis-queries-in-postgresql)*
 - *[Findings](#findings)*
 - *[Recommendations](#recommendations)*
 - *[Limitations](#limitations)*
@@ -300,24 +299,21 @@ CREATE TABLE returns (
   REFERENCES orders(order_id)
 );
 CREATE INDEX CK ON  returns (order_id, region, customer_id, product_id);
+/* Due to extended query execution times, I implemented indexes on select columns to expedite query processing.
+   These indexes enable the database engine to swiftly pinpoint relevant rows based on the indexed columns, notably reducing query execution times, especially within tables housing substantial datasets.
+   However, I kept in mind that while indexes bolster read performance, they may modestly hinder write operations like INSERT, UPDATE, and DELETE due to index maintenance overhead.
+   Consequently, I carefully balanced index creation, ensuring they are selectively employed to enhance query performance where necessary.*/
 ```
 
 ### **Exploratory Data Analysis in PostgreSQL**
- I chose to use an SQL database for exploring the data because the dataset was really big. When I tried to delete duplicate values in Excel, it froze because of the dataset's size. That's why I decided to use an SQL database, as it can handle 
- large amounts of data easily.
- *The EDA involved exploring the Global Superstore dataset to answer Key questions.These key questions were:*
+ I chose to use an SQL database for exploring the data because the dataset was really big. When I tried to delete duplicate values in Excel, it froze because of the size of the dataset. That is why I decided to use an SQL database, as it can handle large amounts of data easily.
+ 
+ *The EDA involved exploring the Global Superstore dataset to answer these Key questions:*
 
-  - Which region incur the highest shipping costs, and how does it compare to other regions?
-  - What is the average shipping cost for different product categories, and are there any significant variations?
-  - How are our orders distributed among different priorities, and is there any impact on profitability?
-  - Which product categories and sub-categories are driving the majority of our profits, and how can we optimise our product mix or marketing efforts to enhance profitability in underperforming categories?
-  - Which products have the highest return rates, and what impact do returns have on overall sales and profit?
-
-### **Data Analysis Queries in PostgreSQL**
-```sql
-
--- THE QUERY AIMS TO IDENTIFY THE REGION THAT INCURS THE HIGHEST SHIPPING COSTS
-/* This SQL query retrieves the total shipping costs for each region by combining information from the 'customers' and 'orders' tables. 
+1. WHICH REGION INCURRED THE HIGHEST SHIPPING COSTS, AND HOW DOES IT COMPARE TO OTHER REGIONS?
+ ```sql
+  -- THE QUERY AIMS TO IDENTIFY THE REGION THAT INCURRED THE HIGHEST SHIPPING COSTS
+/* The SQL query retrieves the total shipping costs for each region by combining information from the 'customers' and 'orders' tables. 
    The results are then grouped by region and ordered in descending order based on the total shipping cost. 
    If the optional --LIMIT 1; line is uncommented and executed, 
    it will return only the top result, indicating the region with the highest shipping cost.*/
@@ -328,7 +324,11 @@ ON customers.customer_id = orders.customer_id
 GROUP BY region
 ORDER BY total_shipping_cost DESC
 --LIMIT 1;
+```
+ ![Region incur the highest shipping costs](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/aa573efe-06a3-4216-ac0a-64f683b3a115)
 
+  2. WHAT IS THE AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND ARE THERE ANY SIGNIFICANT VARIATIONS?
+```sql
 --AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND SIGNIFICANT VARIATIONS
 /*This SQL query calculates and presents the average shipping cost and standard deviation for different product categories.
   By joining the 'orders' and 'products' tables, the query groups the results by product category.
@@ -342,9 +342,13 @@ INNER JOIN products
 ON orders.product_id = products.product_id)
 GROUP BY category
 ORDER BY avg_shipping_cost DESC,shipping_cost_stddev DESC;
+```
+![What is the average shipping cost for different product categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/be236b96-e65b-4220-a8c0-8c72c4b6c76f)
 
---ORDER PRIORITY AND IMPACT ON PROFITABILITY
-/*This query analyses the impact of order priority on profitability in the 'orders' table. 
+  3. HOW ARE OUR ORDERS DISTRIBUTED AMONG DIFFERENT PRIORITIES, AND IS THERE ANY IMPACT ON PROFITABILITY?
+  ```sql
+  --ORDER PRIORITY AND IMPACT ON PROFITABILITY
+/*This query analyse the impact of order priority on profitability in the 'orders' table. 
   It retrieves information such as the count of orders, total profit, average profit, 
   and profit margin for each unique order priority. 
   The results are grouped by order priority and ordered in ascending order.*/
@@ -356,7 +360,27 @@ ROUND(AVG(profit / sales),2) AS profit_margin
 FROM orders
 GROUP BY order_priority
 ORDER BY order_priority ASC;
+```
+ ![How are our orders distributed among different priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/cac496c6-3da0-4220-8548-b04c28be7920) 
 
+  4. WHICH PRODUCT CATEGORIES AND SUB-CATEGORIES ARE DRIVING THE MAJORITY OF OUR PROFITS, AND HOW CAN WE OPTIMISE OUR PRODUCT MIX OR MARKETING EFFORTS TO ENHANCE PROFITABILITY IN UNDERPERFORMING CATEGORIES?
+ ```sql
+--SUB_CATEGORIES DRIVING THE MAJORITY OF PROFITS
+/*This query identifies the sub-categories that contribute the most to overall profits.
+  It combines information from the 'products' and 'orders' tables, summing up the profits for each unique combination of category and sub-category. 
+  The results are then ordered in descending order based on the total profit,
+  providing insights into which sub-categories are driving the majority of profits in the dataset.*/
+SELECT category,sub_category,SUM(profit) AS total_profit
+FROM products
+INNER JOIN orders 
+ON products.product_id = orders.product_id
+GROUP BY category,sub_category
+ORDER BY total_profit DESC;
+```
+![Which product categories and sub-categories are driving the majority of our profits](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/7bb1bdff-c774-4ca7-8059-5640ca756e49)
+  
+  5. WHICH PRODUCTS HAVE THE HIGHEST RETURN RATES, AND WHAT IMPACT DO RETURNS HAVE ON OVERALL SALES AND PROFIT?
+```sql
 --SUB_CATEGORIES DRIVING THE MAJORITY OF OUR PROFITS
 /*This query identifies the sub-categories that contribute the most to overall profits.
   It combines information from the 'products' and 'orders' tables, summing up the profits for each unique combination of category and sub-category. 
@@ -406,8 +430,20 @@ ON Products.Product_id = orders.Product_id
 GROUP BY Products.Product_id, Products.Product_name
 ORDER BY ReturnRate DESC
 
--- Most of the queries took longer to be excuted,so i created indexes for those columns to make execution of the queries faster.
 ```
+![Which products have the highest return rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/a5249736-9788-4fd3-9708-c69b36ecc443)
+
+
+
+
+
+
+
+
+  
+  
+  
+
 
 ### **Findings**
 
