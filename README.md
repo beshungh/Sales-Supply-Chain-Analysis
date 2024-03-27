@@ -381,33 +381,6 @@ ORDER BY total_profit DESC;
   
   5. WHICH PRODUCTS HAVE THE HIGHEST RETURN RATES, AND WHAT IMPACT DO RETURNS HAVE ON OVERALL SALES AND PROFIT?
 ```sql
---SUB_CATEGORIES DRIVING THE MAJORITY OF OUR PROFITS
-/*This query identifies the sub-categories that contribute the most to overall profits.
-  It combines information from the 'products' and 'orders' tables, summing up the profits for each unique combination of category and sub-category. 
-  The results are then ordered in descending order based on the total profit,
-  providing insights into which sub-categories are driving the majority of profits in the dataset.*/
-SELECT category,sub_category,SUM(profit) AS total_profit
-FROM products
-INNER JOIN orders 
-ON products.product_id = orders.product_id
-GROUP BY category,sub_category
-ORDER BY total_profit DESC;
-
---PERCENTAGE OF ORDERS BEING RETURNED, AND THE A SPECIFIC PRODUCT CATEGORY
-/*This query analyses the return percentage for different product categories.
-  It calculates the percentage of orders with returns within each category, 
-  considering the count of distinct order IDs with returns against the total count of distinct order IDs. 
-  The results are grouped by product category and ordered in descending order based on the return percentage, 
-  providing insights into which categories have a higher proportion of returned orders.*/
-SELECT products.category,ROUND((COUNT(DISTINCT returns.order_id) * 100.0) / COUNT(DISTINCT orders.order_id),2) AS return_percentage
-FROM orders
-LEFT JOIN returns
-ON orders.order_id = returns.order_id
-JOIN products
-ON orders.product_id = products.product_id
-GROUP BY products.category
-ORDER BY return_percentage DESC;
-
 --PRODUCTS WITH THE HIGHEST RETURN RATES
 /*This query Joins the Returns table with the Products table using the common column Product_id to identify the products that have been returned,
   it then gives a list of products with an indication of whether they were returned or not.*/
@@ -428,22 +401,9 @@ ON Products.Product_id = Returns.Product_id
 LEFT JOIN Orders
 ON Products.Product_id = orders.Product_id
 GROUP BY Products.Product_id, Products.Product_name
-ORDER BY ReturnRate DESC
-
+ORDER BY ReturnRate DESC;
 ```
 ![Which products have the highest return rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/a5249736-9788-4fd3-9708-c69b36ecc443)
-
-
-
-
-
-
-
-
-  
-  
-  
-
 
 ### **Findings**
 
