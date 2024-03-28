@@ -442,7 +442,8 @@ ORDER BY ReturnRate DESC;
   - "Furniture" as a category had mixed performance. While "Bookcases" and "Chairs" are profitable, "Tables" show a negative profit, indicating potential issues in this sub-category.
   - "Office Supplies" also contribute significantly, with "Appliances","Storage", and "Binders" being the top performers.
 
-5. 
+5. ![Products with the Highest Return Rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/4b113f63-b0c4-4f76-b79f-0c65a347d48b)
+
 
 - Products like "Harbour Creations Executive Leather Armchair, Black" and "Novimex Executive Leather Armchair, Adjustable" had a 100% return rate.
 - Products with high return rates also exhibited significant negative profit values, such as "Harbour Creations Executive Leather Armchair, Black" with a profit of -189.46 but a return rate of 100%.
