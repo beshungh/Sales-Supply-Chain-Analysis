@@ -435,7 +435,8 @@ ORDER BY ReturnRate DESC;
  - Medium priority orders had the highest order count among all priority levels, contributing significantly to total profit.However, the average profit per order for Medium priority is slightly lower compared to Critical priority, at $29.36.
  - Across all priority levels, the profit margins were consistent at around 0.05-0.06%, indicating a relatively stable profitability across different priority levels.
 
-4. 
+4. ![Product Categories Driving profit](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/7f69c182-c223-4e9a-842f-fc886ed2291b)
+
 
   - "Technology" and specifically "Copiers" were the top contributors to profits, followed by "Phones". These products seem to be performing exceptionally well.
   - "Furniture" as a category had mixed performance. While "Bookcases" and "Chairs" are profitable, "Tables" show a negative profit, indicating potential issues in this sub-category.
