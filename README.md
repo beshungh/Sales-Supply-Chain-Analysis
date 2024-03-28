@@ -447,6 +447,7 @@ ORDER BY ReturnRate DESC;
 
 - Products like "Harbour Creations Executive Leather Armchair, Black" and "Novimex Executive Leather Armchair, Adjustable" had a 100% return rate.
 - Products with high return rates also exhibited significant negative profit values, such as "Harbour Creations Executive Leather Armchair, Black" with a profit of -189.46 but a return rate of 100%.
+  NOTE:
 
 ### **Recommendations**
 
