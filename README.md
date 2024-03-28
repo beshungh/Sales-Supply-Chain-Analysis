@@ -426,7 +426,8 @@ ORDER BY ReturnRate DESC;
  - The average shipping cost for Office Supplies were lower compared to Furniture, and there was a moderate level of variation as indicated by the standard deviation. 
    Office Supplies might have standard shipping requirements, resulting in lower overall costs.
 
-3. ![How are our orders distributed among different priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/cac496c6-3da0-4220-8548-b04c28be7920)
+3. ![Different Priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/f83e1fd9-d325-4c53-9740-0961396601b5)
+
 
  - While Critical priority orders had the second lowest order count, they contributed significantly to total profit.They had the highest average profit per order at $31.59, indicating that each order of Critical priority tends to bring in a high profit.The profit margin for Critical priority orders is the highest among all priority levels at 0.06%, suggesting that a significant portion of the revenue from these orders translates into profit.
  - High priority orders had a relatively high order count, but their individual contribution to profit is lower compared to Critical priority.The average profit per order for High priority is lower than Critical at $27.12.
