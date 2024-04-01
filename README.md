@@ -299,7 +299,7 @@ CREATE TABLE returns (
   REFERENCES orders(order_id)
 );
 CREATE INDEX CK ON  returns (order_id, region, customer_id, product_id);
-/* Due to extended query execution times, I implemented indexes on select columns to expedite query processing.
+/* Due to extended query execution times, I implemented indexes on selected columns to expedite query processing.
    These indexes enable the database engine to swiftly pinpoint relevant rows based on the indexed columns, notably reducing query execution times, especially within tables housing substantial datasets.
    However, I kept in mind that while indexes bolster read performance, they may modestly hinder write operations like INSERT, UPDATE, and DELETE due to index maintenance overhead.
    Consequently, I carefully balanced index creation, ensuring they are selectively employed to enhance query performance where necessary.*/
