@@ -408,7 +408,7 @@ ORDER BY ReturnRate DESC;
 ### **Findings**
 
 
-1. ![Highest Shipping Costs](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/939cb413-7052-4fe4-bfec-f0530981d92c)
+1. ![Highest Shipping Costs](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/dcdb6473-2e92-4b8d-9039-6b96630cdb51)
 
 
 - Western Europe had the highest total shipping costs, followed by Central America and Oceania.
