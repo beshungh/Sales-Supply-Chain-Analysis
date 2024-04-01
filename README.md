@@ -446,7 +446,7 @@ ORDER BY ReturnRate DESC;
   - "Office Supplies" also contribute significantly, with "Appliances","Storage", and "Binders" being the top performers.
     [Please click here for a full understanding of this report](https://public.tableau.com/views/SupplyChainAnalysisReport/ProductCategoriesDrivingprofit?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
 
-5. ![Products with the Highest Return Rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/4b113f63-b0c4-4f76-b79f-0c65a347d48b)
+5. ![Products with the Highest Return Rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/31f8a078-bc98-432c-9ecf-3ff227e0bb85)
 
 
 - Products like "Harbour Creations Executive Leather Armchair, Black" and "Novimex Executive Leather Armchair, Adjustable" had a 100% return rate.
