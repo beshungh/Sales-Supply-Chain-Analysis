@@ -412,6 +412,7 @@ ORDER BY ReturnRate DESC;
 
 
 - Western Europe had the highest total shipping costs, followed by Central America and Oceania.
+  [Please click here for a full understanding of this report](https://public.tableau.com/views/SupplyChainAnalysisReport/HighestShippingCosts?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
 
 2. ![Different Product Categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/4fae29d3-bd1a-4144-a455-d32985c88eed)
 
@@ -419,12 +420,13 @@ ORDER BY ReturnRate DESC;
  - Technology products had the highest average shipping cost among the categories, and there is a significant variation reflected by the high standard deviation. This may 
    be due to factors like the fragility or higher value of technology items, leading 
    to specialized packaging and shipping requirements.
-
+  
  - The average shipping cost for Furniture was relatively high, and there was a significant variation as indicated by the high standard deviation.This suggests that 
    shipping costs for Furniture items varies widely.
 
  - The average shipping cost for Office Supplies were lower compared to Furniture, and there was a moderate level of variation as indicated by the standard deviation. 
    Office Supplies might have standard shipping requirements, resulting in lower overall costs.
+ [Please click here for a full understanding of this report](https://public.tableau.com/views/SupplyChainAnalysisReport/DifferentProductCategories?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
 
 3. ![Different Priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/2aa3ae55-942e-4921-9371-ee6e306d4bd9)
 
@@ -434,6 +436,7 @@ ORDER BY ReturnRate DESC;
  - Low priority orders also had a higher order count, but their individual contribution to profit is relatively lower.The average profit per order for Low priority is the lowest among all priority levels at $24.20.
  - Medium priority orders had the highest order count among all priority levels, contributing significantly to total profit.However, the average profit per order for Medium priority is slightly lower compared to Critical priority, at $29.36.
  - Across all priority levels, the profit margins were consistent at around 0.05-0.06%, indicating a relatively stable profitability across different priority levels.
+   [Please click here for a full understanding of this report](https://public.tableau.com/views/SupplyChainAnalysisReport/DifferentPriorities?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
 
 4. ![Product Categories Driving profit](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/7f69c182-c223-4e9a-842f-fc886ed2291b)
 
@@ -441,6 +444,7 @@ ORDER BY ReturnRate DESC;
   - "Technology" and specifically "Copiers" were the top contributors to profits, followed by "Phones". These products seem to be performing exceptionally well.
   - "Furniture" as a category had mixed performance. While "Bookcases" and "Chairs" are profitable, "Tables" show a negative profit, indicating potential issues in this sub-category.
   - "Office Supplies" also contribute significantly, with "Appliances","Storage", and "Binders" being the top performers.
+    [Please click here for a full understanding of this report](https://public.tableau.com/views/SupplyChainAnalysisReport/ProductCategoriesDrivingprofit?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
 
 5. ![Products with the Highest Return Rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/4b113f63-b0c4-4f76-b79f-0c65a347d48b)
 
