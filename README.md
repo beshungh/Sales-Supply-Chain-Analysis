@@ -413,7 +413,7 @@ ORDER BY ReturnRate DESC;
 
 - Western Europe had the highest total shipping costs, followed by Central America and Oceania.
 
-2. ![Different Product Categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/90009492-4e2e-4a48-88bc-286f1aef5a85)
+2. ![Different Product Categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/4fae29d3-bd1a-4144-a455-d32985c88eed)
 
 
  - Technology products had the highest average shipping cost among the categories, and there is a significant variation reflected by the high standard deviation. This may 
