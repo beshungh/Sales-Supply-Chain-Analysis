@@ -274,7 +274,7 @@ CREATE INDEX returned ON returns(returned)
  
  *The EDA involved exploring the Global Superstore dataset to answer these Key questions:*
 
-1. WHICH REGION INCURRED THE HIGHEST SHIPPING COSTS, AND HOW DOES IT COMPARE TO OTHER REGIONS?
+1. *WHICH REGION INCURRED THE HIGHEST SHIPPING COSTS, AND HOW DOES IT COMPARE TO OTHER REGIONS?*
  ```sql
  /* This query calculates the total shipping cost and the shipment cost-profit ratio for each region, 
     providing insights into the shipping expenses and their relationship with profitability. 
@@ -305,14 +305,16 @@ ORDER BY total_shipping_cost DESC;
 
 #### *Recommendations*
 Based on the insights gleaned from the analysis of shipping costs and profitability by region, here are some recommendations for optimizing our shipping operations:
-1.	Review Shipping Strategies by Region: Evaluate the shipping strategies currently employed in each region to ensure they are aligned with profitability goals. For regions with high shipping costs relative to profits (e.g., Southeastern Asia), consider alternative shipping methods or renegotiating shipping contracts to reduce costs.
-2.	Optimize Supply Chain Efficiency: Streamline supply chain processes to reduce shipping costs and improve overall efficiency. This could involve optimizing inventory management, minimizing shipping distances, and consolidating shipments to reduce transportation expenses.
-3.	Implement Pricing Adjustments: Consider adjusting product pricing or introducing shipping surcharges for regions where shipping costs exceed profitability. This can help offset high shipping expenses and ensure that shipping operations remain financially sustainable.
-4.	Explore Regional Partnerships: Explore partnerships with local distributors or logistics providers in high-cost regions to leverage their expertise and infrastructure. Collaborating with local partners can help reduce shipping costs and improve delivery efficiency.
-5.	Invest in Technology: Invest in technology solutions such as route optimization software, inventory management systems, and real-time tracking tools to enhance visibility and control over shipping operations. These tools can help identify cost-saving opportunities and improve overall logistics performance.
+- Review Shipping Strategies by Region: Evaluate the shipping strategies currently employed in each region to ensure they are aligned with profitability goals. For regions with high shipping costs relative to profits (e.g., Southeastern Asia), consider alternative s 
+  shipping methods or renegotiating shipping contracts to reduce costs.
+- Optimize Supply Chain Efficiency: Streamline supply chain processes to reduce shipping costs and improve overall efficiency. This could involve optimizing inventory management, minimizing shipping distances, and consolidating shipments to reduce transportation 
+  expenses.
+- Implement Pricing Adjustments: Consider adjusting product pricing or introducing shipping surcharges for regions where shipping costs exceed profitability. This can help offset high shipping expenses and ensure that shipping operations remain financially sustainable.
+- Explore Regional Partnerships: Explore partnerships with local distributors or logistics providers in high-cost regions to leverage their expertise and infrastructure. Collaborating with local partners can help reduce shipping costs and improve delivery efficiency.
+- Invest in Technology: Invest in technology solutions such as route optimization software, inventory management systems, and real-time tracking tools to enhance visibility and control over shipping operations. These tools can help identify cost-saving opportunities 
+  and improve overall logistics performance.
 
-
-  2. WHAT IS THE AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND ARE THERE ANY SIGNIFICANT VARIATIONS?
+2. *WHAT IS THE AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND ARE THERE ANY SIGNIFICANT VARIATIONS?*
 ```sql
 /* The query starts with a CTE named shipping_costs.
    It joins the orders, customers, and products tables to gather information about the product category and corresponding 
@@ -339,7 +341,36 @@ MIN(shipping_cost) AS min_shipping_cost
 FROM shipping_costs
 GROUP BY category;
 ```
-![What is the average shipping cost for different product categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/be236b96-e65b-4220-a8c0-8c72c4b6c76f)
+ ![How are our orders distributed among different priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/cac496c6-3da0-4220-8548-b04c28be7920)
+
+  #### *Findings*
+ - For furniture items, the average shipping cost is approximately $44.68, but there's quite a bit of variability, with a standard deviation of $72.58. This means that 
+   shipping costs for furniture can vary significantly. The most expensive shipping cost observed was $923.63, while the lowest was $1.04.
+ - Moving on to office supplies, the average shipping cost is notably lower at $13.11. However, there's still some variability, with a standard deviation of $35.03. The 
+   highest shipping cost observed for office supplies was $867.69, while the lowest was $1.002.
+ - Lastly, for technology products, the average shipping cost is the highest among the categories at $50.01. Similar to furniture, there's a considerable amount of 
+   variability, with a standard deviation of $79.01. The highest shipping cost observed for technology items was $933.57, and the lowest was $1.04.
+
+   #### *Recommendations*
+Pricing Adjustments:
+- Furniture: Given the higher average shipping costs and significant variability, consider adjusting pricing strategies to incorporate shipping costs effectively. This may involve either absorbing some shipping costs into product prices or offering tiered pricing 
+  options based on shipping distances.
+- Office Supplies: With lower average shipping costs compared to other categories, there may be opportunities to offer competitive pricing to attract more customers. Consider leveraging this advantage in marketing campaigns to emphasize affordability.
+- Technology: Since technology products have the highest average shipping costs, explore strategies to optimize shipping logistics and negotiate better rates with carriers. Additionally, consider adjusting product pricing to reflect these higher shipping costs, 
+  ensuring profitability while remaining competitive in the market.
+
+Logistics Optimization:
+- Furniture and Technology: Given the significant variability in shipping costs within these categories, focus on optimizing logistics to minimize costs. This could involve consolidating shipments, optimizing shipping routes, and negotiating volume discounts with 
+  carriers. Implementing efficient inventory management practices can also help reduce shipping distances and associated costs.
+- Office Supplies: While shipping costs for office supplies are comparatively lower, there's still room for optimization. Consider implementing efficient packaging practices to reduce dimensional weight charges and exploring alternative shipping methods for cost 
+  savings.
+
+Customer Communication:
+- Clearly communicate shipping policies and costs to customers upfront to manage expectations and avoid surprises at checkout. Transparency regarding shipping costs can help build trust and loyalty among customers.
+- Consider offering incentives such as free shipping thresholds or discounted shipping rates for bulk orders to incentivize larger purchases and increase customer satisfaction.
+- Continuous Monitoring:
+- Regularly monitor shipping costs and analyse trends over time to identify opportunities for further optimization. Keep abreast of changes in carrier rates, fuel prices, and shipping regulations to adapt strategies accordingly and maintain competitiveness in the 
+  market.
 
   3. HOW ARE OUR ORDERS DISTRIBUTED AMONG DIFFERENT PRIORITIES, AND IS THERE ANY IMPACT ON PROFITABILITY?
   ```sql
@@ -348,6 +379,7 @@ GROUP BY category;
      It retrieves information such as the count of orders, total profit, average profit, 
      and profit margin for each unique order priority. 
      The results are grouped by order priority and ordered in ascending order.*/
+
 SELECT order_priority,
 COUNT(*) AS order_count,
 SUM(profit) AS total_profit,
@@ -357,7 +389,6 @@ FROM orders
 GROUP BY order_priority
 ORDER BY order_priority ASC;
 ```
- ![How are our orders distributed among different priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/cac496c6-3da0-4220-8548-b04c28be7920) 
 
   4. WHICH PRODUCT CATEGORIES AND SUB-CATEGORIES ARE DRIVING THE MAJORITY OF OUR PROFITS, AND HOW CAN WE OPTIMISE OUR PRODUCT MIX OR MARKETING EFFORTS TO ENHANCE PROFITABILITY IN UNDERPERFORMING CATEGORIES?
  ```sql
