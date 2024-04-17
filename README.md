@@ -210,7 +210,7 @@ All tables have been successfully imported into the database.
 
 ### **Entity Relationship Diagram**
 
-![ERD](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/956e6b6f-80dd-4fa4-ad10-a13f15d038ef)
+![ERD](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/219041bc-c4a3-40a5-8750-9a8ba6c7e099)
 
 ### **Creating Database Tables**
 
