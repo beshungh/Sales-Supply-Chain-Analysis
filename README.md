@@ -5,10 +5,9 @@
 - *[Project Summary](#project-summary)*
 - *[Data Source](#data-source)*
 - *[Tools Used](#tools-used)*
-- *[Database Normalization](#database-normalization)*
 - *[Importing csv Files into PostgreSQL Using Python Script ](#importing-csv-files-into-postgresql-using-python-script)*
 - *[Setbacks of the Python Script](#setbacks-of-the-python-script)*
-- *[Data Cleaning](#data-cleaning)*
+- [Creating Database Tables](#creating-database-tables)*
 - *[Exploratory Data Analysis in PostgreSQL](#exploratory-data-analysis-in-postgresql)*
 - *[Findings](#findings)*
 - *[Recommendations](#recommendations)*
@@ -24,45 +23,30 @@
 
  The project utilises datasets, namely "customers.csv," "orders.csv," "products.csv," and "returns.csv," to present a thorough analysis of sales transactions across different markets, covering a wide range of product categories and sub- 
  categories. These datasets contain essential information, including product details (Product ID, Category, Sub-Category, and Product Name), sales metrics (Sales, Quantity, Discount, Profit), logistical details (Shipping Cost, Order Priority), 
- order specifics (Order ID, Region), and return information (Returned, Order ID, Customer ID, Product ID).
+ order specifics (Order ID, Region), and return information (Returned, Order ID, region).
 
 ### **Tools Used** 
 
-- Excel - Database Normalization,Data Cleaning 
-- PostgreSQL - Exploratory Data Analysis
-- Tableau - Creating reports
-- Python - Developing a Jupyter Notebook to Automatically import .csv files to PostgreSQL database
-
-### **Database Normalization**
-
- *Converting the dataset to 1NF,2NF,3NF*
-
- To minimize redundancy, dependency and optimize performance, I normalized the dataset.I started with the 1NF which involved making sure the dataset has no Multivalued Attributes in any cell. Achieving the First Normal Form (1NF) involved 
- ensuring that each table's column contained single record and all rows were unique. 
-
- In 2NF, I ensured each non-prime attribute is fully functionally dependent on the entire primary key. In the Customers, Products, and Orders tables, there were no partial dependency, and all columns were fully functionally dependent on the 
- primary key. In the Returns table, the composite key (Order ID, Customer ID, Product ID) ensures that each column is fully functionally dependent on this key, avoiding partial dependencies. The rationale for using a composite key in the 
- Returns table was to Identify the specific order associated with each return, Identify the customer who made the order and subsequently returned a product and the specific product that was returned. Together, these three columns create a 
- composite key that ensures each return record is uniquely identified. This is important because a single order ID or customer ID alone may not be sufficient to uniquely identify a return, especially if a customer has placed multiple orders, 
- and some products may be part of multiple orders.The 2NF already satisfies the 3NF requirement which ensures that there are no transitive dependencies in each table, and each non-prime attribute is directly dependent on the primary key.The 
- overall restructuring process involved transitioning the database from a Denormalized form to a Normalized form, and the finalized structure was saved as a .csv file for further use.
-
-![Normalization](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/1e23b4f9-d49e-438d-b840-cdfc05a1f023)
+- Excel - I cleaned currency symbols from columns containing currency values to prevent potential errors in future database queries which will require me to use the REGEXP_REPLACE function in PostgreSQL to remove non-numeric characters and CAST datatype.
+  I did this to save time.
+- PostgreSQL - Exploratory Data Analysis.
+- Tableau - Creating reports.
+- Python - Developing a Jupyter Notebook to Automatically import .csv files to PostgreSQL database.
 
 ### **Importing csv Files into PostgreSQL Using Python Script** 
 
  Being a data analyst involves more than just creating dashboards; efficiency in task implementation is crucial. As a PostgreSQL user I face a lot challenges when importing large datasets into my database. In difference to some other 
  Relational Database Management System (RDBMS), where importing data is relatively straightforward, PostgreSQL present hurdles. One notable challenge is the manual creation of schemas, especially when dealing with extensive CSV files that 
  encompass numerous columns. In PostgreSQL, each schema needs to be accurately created, and the conversion of data types to PostgreSQL-compatible formats adds an additional layer of complexity.
- To overcome this, I utilised Jupyter Notebook to develop a python script using Python libraries (os, shutil, NumPy, pandas and psycopg2) to automate schema creation and data import tasks, streamlining the workflow. This approach not only 
+ To overcome this, I utilized Jupyter Notebook to develop a python script using Python libraries (os, shutil, NumPy, pandas and psycopg2) to automate schema creation and data import tasks, streamlining the workflow. This approach not only 
  saved me time but also ensured accuracy, reducing errors associated with manual processes.
 
 *Features and Workflow:*
 1. File Organisation:
 The script begins by identifying all CSV files in the current directory. It then creates a new directory named 'datasets' (or uses an existing one) and moves the CSV files into this directory.
-This step ensures a well-organised and centralised location for dataset management.
+This step ensures a well-organized and centralized location for dataset management.
 3. CSV to Pandas DataFrames:
-The script utilises the Pandas library to read each CSV file into a Pandas DataFrame. It handles potential encoding issues, using ISO-8859-1 encoding when necessary, showcasing attention to data integrity.
+The script utilizes the Pandas library to read each CSV file into a Pandas DataFrame. It handles potential encoding issues, using ISO-8859-1 encoding when necessary, showcasing attention to data integrity.
 4. Table Creation and Column Transformation:
 The script dynamically generates table names based on file names and cleanses column names to remove spaces, special characters, and ensure compatibility with PostgreSQL conventions.
 It then iterates over each DataFrame, determining column data types and creating corresponding tables in the PostgreSQL database.
@@ -149,7 +133,7 @@ for file, dataframe in df.items():
 
     # Open a database connection
     hostname = 'localhost'
-    database = 'globalsuperstore'
+    database = 'global_superstore'
     username = 'postgres'
     password = 'password'
     port_id = 5432
@@ -225,83 +209,60 @@ All tables have been successfully imported into the database.
 
 ![ERD](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/956e6b6f-80dd-4fa4-ad10-a13f15d038ef)
 
-### **Data Cleaning**
+### **Creating Database Tables
 
- *Performed the following tasks in Excel:*
-1. While creating the Entity-Relationship Diagram (ERD), I encountered duplicate entries in the customer_id, product_id, and order_id columns. These duplications caused numerous errors when attempting to import the dataset into the database. 
-   Since these IDs were intended as primary keys, I opted to remove them and generate new unique IDs for all tables. To do this, I employed functions such as CONCATENATE, LEFT, UPPER, and RAND(). Additionally, I utilized the Text to Columns 
-   feature to separate the customer_name into first_name and last_name. This facilitated the concatenation of the initial letters of both names with the random numbers I generated. Subsequently, I employed the COUNTIF function to ensure that 
-   these newly generated IDs were devoid of duplicates and remained unique
-
-2. I eliminated currency symbols from columns containing currency values to prevent potential errors in future database queries which will require me to use the REGEXP_REPLACE function to remove non-numeric characters and CAST datatype.I did 
-   this to save time.
-   
 ```sql
 
-CREATE TABLE products (
-  product_id varchar(30) PRIMARY KEY,
-  category varchar(15),
-  sub_category varchar(15),
-  product_name varchar(200)
-);
-CREATE INDEX ON products(product_id)
-
 CREATE TABLE customers (
-  customer_id varchar(30) PRIMARY KEY,
-  first_name varchar(15),
-  last_name varchar(15),
-  segment varchar(15),
-  postal_code varchar(10),
-  city varchar(50),
-  state varchar(50),
-  country varchar(50),
-  region varchar(50),
-  market varchar(20)
+row_id INTEGER PRIMARY KEY,
+customer_id VARCHAR(30),
+customer_name VARCHAR(30),
+city TEXT,
+state VARCHAR(50),
+country VARCHAR(50),
+region VARCHAR(50),
+market VARCHAR(20)
 );
-CREATE INDEX ON customers(customer_id)
+CREATE INDEX customer_id ON customers(customer_id);
 
-CREATE TABLE orders (
-  order_id varchar(30) PRIMARY KEY,
-  order_date date,
-  ship_date date,
-  ship_mode varchar(15),
-  customer_id varchar(30),
-  product_id varchar(30),
-  sales numeric,
-  quantity smallint,
-  discount double precision,
-  profit numeric,
-  shipping_cost double precision,
-  order_priority varchar(10),
-  CONSTRAINT FK_orders.product_id
-  FOREIGN KEY (product_id)
-  REFERENCES products(product_id),
-  CONSTRAINT FK_orders.customer_id
-  FOREIGN KEY (customer_id)
-  REFERENCES customers(customer_id)
-);
-CREATE INDEX ON orders(order_id)
 
-CREATE TABLE returns (
-  returned varchar(10),
-  order_id varchar(30),
-  region varchar(50),
-  customer_id varchar(30),
-  product_id varchar(30),
-  CONSTRAINT FK_returns.product_id
-  FOREIGN KEY (product_id)
-  REFERENCES products(product_id),
-  CONSTRAINT FK_returns.customer_id
-  FOREIGN KEY (customer_id)
-  REFERENCES customers(customer_id),
-  CONSTRAINT FK_returns.order_id
-  FOREIGN KEY (order_id)
-  REFERENCES orders(order_id)
+CREATE TABLE products(
+row_id INTEGER REFERENCES customers(row_id),
+category VARCHAR(30),
+sub_category VARCHAR(30),
+product_id VARCHAR(30),
+product_name VARCHAR(200),
+sales NUMERIC,
+quantity INTEGER,
+discount DECIMAL,
+profit NUMERIC
 );
-CREATE INDEX CK ON  returns (order_id, region, customer_id, product_id);
+CREATE INDEX product_id ON products(product_id)
+
+
+CREATE TABLE orders(
+row_id INTEGER REFERENCES customers(row_id),
+order_id VARCHAR(30),
+order_date DATE,
+shipping_date DATE,
+shipping_mode VARCHAR(15),
+shipping_cost NUMERIC,
+order_priority TEXT
+);
+CREATE INDEX order_id ON orders(order_id)
+
+
+CREATE TABLE returns(
+row_id INTEGER REFERENCES customers(row_id),
+returned TEXT,
+order_id VARCHAR(30),
+region VARCHAR(50)	
+);
+CREATE INDEX returned ON returns(returned)
+
 /* Due to extended query execution times, I implemented indexes on selected columns to expedite query processing.
-   These indexes enable the database engine to swiftly pinpoint relevant rows based on the indexed columns, notably reducing query execution times, especially within tables housing substantial datasets.
-   However, I kept in mind that while indexes bolster read performance, they may modestly hinder write operations like INSERT, UPDATE, and DELETE due to index maintenance overhead.
+   These indexes enabled the database engine to swiftly pinpoint relevant rows based on the indexed columns, notably reducing query execution times, especially within tables housing substantial datasets.
+   However, I kept in mind that while indexes bolster read performance, they might modestly hinder write operations like INSERT, UPDATE, and DELETE due to index maintenance overhead.
    Consequently, I carefully balanced index creation, ensuring they are selectively employed to enhance query performance where necessary.*/
 ```
 
