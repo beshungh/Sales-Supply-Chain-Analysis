@@ -314,19 +314,30 @@ Based on the insights gleaned from the analysis of shipping costs and profitabil
 
   2. WHAT IS THE AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND ARE THERE ANY SIGNIFICANT VARIATIONS?
 ```sql
---AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND SIGNIFICANT VARIATIONS
-/* This SQL query calculates and presents the average shipping cost and standard deviation for different product categories.
-   By joining the 'orders' and 'products' tables, the query groups the results by product category.
-   The output is then sorted in descending order based on the average shipping cost and standard deviation,
-   allowing for the identification of product categories with higher average shipping costs and significant variations in shipping costs.*/
-SELECT category,ROUND(AVG(shipping_cost)::INT,2) AS Avg_shipping_cost,ROUND(STDDEV(shipping_cost)::INT,2) AS shipping_cost_STDDEV
-FROM(
-SELECT order_id,products.product_id,category,shipping_cost
-FROM orders
-INNER JOIN products
-ON orders.product_id = products.product_id)
-GROUP BY category
-ORDER BY avg_shipping_cost DESC,shipping_cost_stddev DESC;
+/* The query starts with a CTE named shipping_costs.
+   It joins the orders, customers, and products tables to gather information about the product category and corresponding 
+   shipping costs.
+   The ON clauses establish the relationships between the tables based on the row_id column.
+   The main query selects data from the shipping_costs CTE.It calculates the average (AVG()), 
+   standard deviation (STDDEV()), maximum (MAX()), and minimum (MIN()) shipping costs for each product category.
+   The ROUND() function is used to round the average and standard deviation values to two decimal places.
+   The results are grouped by product category using the GROUP BY clause.*/
+ 
+WITH shipping_costs AS 
+(SELECT category,shipping_cost FROM orders
+JOIN customers 
+ON orders.row_id = customers.row_id
+JOIN products 
+ON customers.row_id = products.row_id)
+
+SELECT 
+category,
+ROUND(AVG(shipping_cost),2) AS average_shipping_cost,
+ROUND(STDDEV(shipping_cost),2) AS standard_deviation,
+MAX(shipping_cost) AS max_shipping_cost,
+MIN(shipping_cost) AS min_shipping_cost
+FROM shipping_costs
+GROUP BY category;
 ```
 ![What is the average shipping cost for different product categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/be236b96-e65b-4220-a8c0-8c72c4b6c76f)
 
