@@ -209,7 +209,7 @@ All tables have been successfully imported into the database.
 
 ![ERD](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/956e6b6f-80dd-4fa4-ad10-a13f15d038ef)
 
-### **Creating Database Tables
+### **Creating Database Tables**
 
 ```sql
 
