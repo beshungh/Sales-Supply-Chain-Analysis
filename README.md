@@ -270,26 +270,42 @@ CREATE INDEX returned ON returns(returned)
 ```
 
 ### **Exploratory Data Analysis in PostgreSQL**
- I chose to use an SQL database for exploring the data because the dataset was really big. When I tried to delete duplicate values in Excel, it froze because of the size of the dataset. That is why I decided to use an SQL database, as it can handle large amounts of data easily.
+ Due to how huge the dataset was, I used SQL database for exploring the dataset as it can handle large amounts of data easily.
  
  *The EDA involved exploring the Global Superstore dataset to answer these Key questions:*
 
 1. WHICH REGION INCURRED THE HIGHEST SHIPPING COSTS, AND HOW DOES IT COMPARE TO OTHER REGIONS?
  ```sql
- --THE QUERY AIMS TO IDENTIFY THE REGION THAT INCURRED THE HIGHEST SHIPPING COSTS
- /* The SQL query retrieves the total shipping costs for each region by combining information from the 'customers' and 'orders' tables. 
-    The results are then grouped by region and ordered in descending order based on the total shipping cost. 
-    If the optional --LIMIT 1; line is uncommented and executed, 
-    it will return only the top result, indicating the region with the highest shipping cost.*/
-SELECT region,ROUND(SUM(shipping_cost)::numeric,2) AS total_shipping_cost
+ /* This query calculates the total shipping cost and the shipment cost-profit ratio for each region, 
+    providing insights into the shipping expenses and their relationship with profitability. 
+    The results are grouped by region and ordered based on total shipping cost in descending order.*/
+SELECT region,ROUND(SUM(shipping_cost),0) AS total_shipping_cost,ROUND(SUM(shipping_cost) / SUM(profit),2) AS shipment_cost_profit_ratio
 FROM customers
-INNER JOIN orders
-ON customers.customer_id = orders.customer_id
+INNER JOIN orders 
+ON customers.row_id = orders.row_id
+INNER JOIN products 
+ON customers.row_id = products.row_id
 GROUP BY region
-ORDER BY total_shipping_cost DESC
---LIMIT 1;
+ORDER BY total_shipping_cost DESC;
 ```
- ![Region incur the highest shipping costs](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/aa573efe-06a3-4216-ac0a-64f683b3a115)
+![WHICH REGION INCURRED THE HIGHEST SHIPPING COSTS, AND HOW DOES IT COMPARE TO OTHER REGIONS](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/48ff995c-9fb8-4627-9a1b-12ae18ced404)
+- Western Europe: With a total shipping cost of $185,841, it's our highest spender in terms of shipping. However, when we look at the ratio of shipping cost to profit, it's 0.85, indicating a relatively balanced expenditure considering the profits generated from this 
+  region.
+- Central America: Followed closely by Central America, which incurred a total shipping cost of $131,820. Its shipment cost-profit ratio is 0.83, also reflecting a relatively efficient shipping operation.
+- Oceania: Surprisingly, Oceania comes in next with a total shipping cost of $120,802. However, it has the highest shipment cost-profit ratio among all regions, standing at 1.01. This suggests that while shipping costs are high, they are well-aligned with the profits 
+  generated from this region.
+- Southeastern Asia: Despite a total shipping cost of $93,879, this region stands out with a considerably high shipment cost-profit ratio of 5.26. This indicates that our shipping costs here may be disproportionately high compared to the profits generated.
+- Western Asia: On the other hand, Western Asia has a total shipping cost of $34,480, but it shows a negative shipment cost-profit ratio of -0.64. This suggests that our shipping costs exceed the profits generated from this region, warranting further investigation into 
+  cost optimization strategies.
+
+#### *Recommendations*
+Based on the insights gleaned from the analysis of shipping costs and profitability by region, here are some recommendations for optimizing our shipping operations:
+1.	Review Shipping Strategies by Region: Evaluate the shipping strategies currently employed in each region to ensure they are aligned with profitability goals. For regions with high shipping costs relative to profits (e.g., Southeastern Asia), consider alternative shipping methods or renegotiating shipping contracts to reduce costs.
+2.	Optimize Supply Chain Efficiency: Streamline supply chain processes to reduce shipping costs and improve overall efficiency. This could involve optimizing inventory management, minimizing shipping distances, and consolidating shipments to reduce transportation expenses.
+3.	Implement Pricing Adjustments: Consider adjusting product pricing or introducing shipping surcharges for regions where shipping costs exceed profitability. This can help offset high shipping expenses and ensure that shipping operations remain financially sustainable.
+4.	Explore Regional Partnerships: Explore partnerships with local distributors or logistics providers in high-cost regions to leverage their expertise and infrastructure. Collaborating with local partners can help reduce shipping costs and improve delivery efficiency.
+5.	Invest in Technology: Invest in technology solutions such as route optimization software, inventory management systems, and real-time tracking tools to enhance visibility and control over shipping operations. These tools can help identify cost-saving opportunities and improve overall logistics performance.
+
 
   2. WHAT IS THE AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND ARE THERE ANY SIGNIFICANT VARIATIONS?
 ```sql
