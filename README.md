@@ -7,7 +7,8 @@
 - *[Tools Used](#tools-used)*
 - *[Importing csv Files into PostgreSQL Using Python Script ](#importing-csv-files-into-postgresql-using-python-script)*
 - *[Setbacks of the Python Script](#setbacks-of-the-python-script)*
-- [Creating Database Tables](#creating-database-tables)
+- *[Entity Relationship Diagram](entity-relationship-diagram)*
+- *[Creating Database Tables](#creating-database-tables)*
 - *[Exploratory Data Analysis in PostgreSQL](#exploratory-data-analysis-in-postgresql)*
 - *[Findings](#findings)*
 - *[Recommendations](#recommendations)*
@@ -206,6 +207,8 @@ All tables have been successfully imported into the database.
  execution of queries with JOIN statments. Additionally, it neglected the creation of indexes for the tables, causing queries with WHERE and JOIN statements to execute slowly. Constraints were also not added to tables making the database lose 
  its integrity and reliability. Although I plan to address these issues given more time, for now, I created the database manually.
  I started with designing an Entity Relationship Diagram to aid in establishing relationships between the different tables before i proceeded in the creation of the actual tables.
+
+### **Entity Relationship Diagram**
 
 ![ERD](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/956e6b6f-80dd-4fa4-ad10-a13f15d038ef)
 
