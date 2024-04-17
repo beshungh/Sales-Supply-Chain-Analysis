@@ -289,6 +289,8 @@ GROUP BY region
 ORDER BY total_shipping_cost DESC;
 ```
 ![WHICH REGION INCURRED THE HIGHEST SHIPPING COSTS, AND HOW DOES IT COMPARE TO OTHER REGIONS](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/48ff995c-9fb8-4627-9a1b-12ae18ced404)
+
+#### *Findings*
 - Western Europe: With a total shipping cost of $185,841, it's our highest spender in terms of shipping. However, when we look at the ratio of shipping cost to profit, it's 0.85, indicating a relatively balanced expenditure considering the profits generated from this 
   region.
 - Central America: Followed closely by Central America, which incurred a total shipping cost of $131,820. Its shipment cost-profit ratio is 0.83, also reflecting a relatively efficient shipping operation.
