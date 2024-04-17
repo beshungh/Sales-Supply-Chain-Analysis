@@ -291,6 +291,7 @@ ORDER BY total_shipping_cost DESC;
 ![WHICH REGION INCURRED THE HIGHEST SHIPPING COSTS, AND HOW DOES IT COMPARE TO OTHER REGIONS](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/48ff995c-9fb8-4627-9a1b-12ae18ced404)
 
 ![Total Shipment Cost Profit Ratio](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/85dd6525-3bc9-489a-b278-669e469750c7)
+ [Please click here for a full understanding of this report](https://public.tableau.com/views/SupplyChainAnalysis_17133848919640/TotalShipmentCostProfitRatio?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link)
 
 #### *Findings*
 - Western Europe: With a total shipping cost of $185,841, it's our highest spender in terms of shipping. However, when we look at the ratio of shipping cost to profit, it's 0.85, indicating a relatively balanced expenditure considering the profits generated from this 
@@ -392,12 +393,6 @@ ORDER BY ReturnRate DESC;
 ### **Findings**
 
 
-1. ![Highest Shipping Costs](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/dcdb6473-2e92-4b8d-9039-6b96630cdb51)
-
-
-- Western Europe had the highest total shipping costs, followed by Central America and Oceania.
-  [Please click here for a full understanding of this report](https://public.tableau.com/views/SupplyChainAnalysisReport/HighestShippingCosts?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
-
 2. ![Different Product Categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/4fae29d3-bd1a-4144-a455-d32985c88eed)
 
 
@@ -441,7 +436,7 @@ ORDER BY ReturnRate DESC;
 
 Based on the insights derived from this analysis, The company should:
 
-1. Consider establishing partnerships with local distributors or logistics firms in Western Europe. This collaborative approach will aim to harness their regional expertise, potentially leading to a reduction in shipping costs.
+
 2. Investigate the factors contributing to the high variation in shipping costs for Technology products. it should explore potential partnerships or negotiated rates with carriers to reduce shipping costs without compromising on the safety of 
    the products.
 3. Consider optimizing the shipping process for Furniture items. Exploring potential partnerships with logistics companies for bulk shipping discounts or negotiating better rates based on shipping volume.
@@ -458,8 +453,7 @@ Based on the insights derived from this analysis, The company should:
 
 ### **Limitations** 
 
--  The datasets were not normalized,i had to manauelly normalize it to make my analysis accurate.
--  I had to remove all non-numeric characters from the sales,profit and discount columns because they woukd have affected my queries which will require me to clean and convert these columns before i would have gotten my results.
+-  I had to remove all non-numeric characters from the sales,profit and discount columns because they would have affected my queries which will require me to clean and convert these columns before i would have gotten my results.
 -  The Python script i wrote had its own setbacks which required me to manually create each table,create relationships with each table and add constraints.
 
 *[TABLE OF CONTENTS](#table-of-contents)*
