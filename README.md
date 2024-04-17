@@ -7,7 +7,7 @@
 - *[Tools Used](#tools-used)*
 - *[Importing csv Files into PostgreSQL Using Python Script ](#importing-csv-files-into-postgresql-using-python-script)*
 - *[Setbacks of the Python Script](#setbacks-of-the-python-script)*
-- [Creating Database Tables](#creating-database-tables)*
+- [Creating Database Tables](#creating-database-tables)
 - *[Exploratory Data Analysis in PostgreSQL](#exploratory-data-analysis-in-postgresql)*
 - *[Findings](#findings)*
 - *[Recommendations](#recommendations)*
