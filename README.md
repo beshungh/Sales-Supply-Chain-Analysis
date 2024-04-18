@@ -344,6 +344,8 @@ GROUP BY category;
  ![WHAT IS THE AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND ARE THERE ANY SIGNIFICANT VARIATIONS](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/8eb1fd4e-ad3f-43fd-930f-68e0dd60af58)
 
  ![Average Shipping Cost For different product](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/f49319fd-3553-4d47-9809-99afef46495a)
+ 
+ [Please click here for a full understanding of this report](https://public.tableau.com/views/AVERAGESHIPPINGCOSTFORDIFFERENTPRODUCTCATEGORIES/AverageShippingCostFordifferentproduct?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link)
 
   #### *Findings*
  - For furniture items, the average shipping cost is approximately $44.68, but there's quite a bit of variability, with a standard deviation of $72.58. This means that 
@@ -374,20 +376,19 @@ Customer Communication:
 - Regularly monitor shipping costs and analyse trends over time to identify opportunities for further optimization. Keep abreast of changes in carrier rates, fuel prices, and shipping regulations to adapt strategies accordingly and maintain competitiveness in the 
   market.
 
-  3. HOW ARE OUR ORDERS DISTRIBUTED AMONG DIFFERENT PRIORITIES, AND IS THERE ANY IMPACT ON PROFITABILITY?
+3. HOW ARE OUR ORDERS DISTRIBUTED AMONG DIFFERENT PRIORITIES, AND IS THERE ANY IMPACT ON PROFITABILITY?
   ```sql
   --ORDER PRIORITY AND IMPACT ON PROFITABILITY
-  /* This query analyse the impact of order priority on profitability in the 'orders' table. 
+  /* This query analyze the impact of order priority on profitability in the 'orders' and 'products table. 
      It retrieves information such as the count of orders, total profit, average profit, 
      and profit margin for each unique order priority. 
      The results are grouped by order priority and ordered in ascending order.*/
 
-SELECT order_priority,
-COUNT(*) AS order_count,
-SUM(profit) AS total_profit,
-ROUND(AVG(profit),2) AS average_profit,
-ROUND(AVG(profit / sales),2) AS profit_margin
+SELECT order_priority,COUNT(*) AS order_count,SUM(profit) AS total_profit,
+ROUND(AVG(profit),2) AS average_profit,ROUND(AVG(profit / sales),2) AS profit_margin
 FROM orders
+JOIN products
+ON orders.row_id = products.row_id
 GROUP BY order_priority
 ORDER BY order_priority ASC;
 ```
