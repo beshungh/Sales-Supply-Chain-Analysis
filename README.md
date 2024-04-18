@@ -341,7 +341,7 @@ MIN(shipping_cost) AS min_shipping_cost
 FROM shipping_costs
 GROUP BY category;
 ```
- ![How are our orders distributed among different priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/cac496c6-3da0-4220-8548-b04c28be7920)
+ ![WHAT IS THE AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND ARE THERE ANY SIGNIFICANT VARIATIONS](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/8eb1fd4e-ad3f-43fd-930f-68e0dd60af58)
 
   #### *Findings*
  - For furniture items, the average shipping cost is approximately $44.68, but there's quite a bit of variability, with a standard deviation of $72.58. This means that 
@@ -389,6 +389,8 @@ FROM orders
 GROUP BY order_priority
 ORDER BY order_priority ASC;
 ```
+
+![How are our orders distributed among different priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/cac496c6-3da0-4220-8548-b04c28be7920)
 
   4. WHICH PRODUCT CATEGORIES AND SUB-CATEGORIES ARE DRIVING THE MAJORITY OF OUR PROFITS, AND HOW CAN WE OPTIMISE OUR PRODUCT MIX OR MARKETING EFFORTS TO ENHANCE PROFITABILITY IN UNDERPERFORMING CATEGORIES?
  ```sql
