@@ -415,7 +415,7 @@ Based on the insights derived from this analysis, The company should:
   improve profitability. This might include optimizing supply chain processes, reducing overhead costs associated with processing these orders, or exploring partnerships for cost-effective solutions in fulfillment and delivery.
 - Keep a close eye on profit margins and implement measures to maintain or improve them. This might involve monitoring costs, revising pricing strategies, or negotiating better terms with suppliers to improve margins without compromising on quality or service.
 
-  4. WHICH PRODUCT CATEGORIES AND SUB-CATEGORIES ARE DRIVING THE MAJORITY OF OUR PROFITS, AND HOW CAN WE OPTIMISE OUR PRODUCT MIX OR MARKETING EFFORTS TO ENHANCE PROFITABILITY IN UNDERPERFORMING CATEGORIES?
+4.  WHICH PRODUCT CATEGORIES AND SUB-CATEGORIES ARE DRIVING THE MAJORITY OF OUR PROFITS, AND HOW CAN WE OPTIMISE OUR PRODUCT MIX OR MARKETING EFFORTS TO ENHANCE PROFITABILITY IN UNDERPERFORMING CATEGORIES?
  ```sql
 /* This query uses Common Table Expressions (CTEs) to calculate the total profit for each product category
    and sub-category (category_profit) and ranks them based on profitability (category_rank). 
@@ -439,7 +439,62 @@ END AS profitability_status
 FROM
 category_rank;
 ```
-![Which product categories and sub-categories are driving the majority of our profits](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/7bb1bdff-c774-4ca7-8059-5640ca756e49)
+![PRODUCT CATEGORIES AND SUB-CATEGORIES ARE DRIVING THE MAJORITY OF  PROFITS](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/81434a94-932a-49e6-84d4-7f354c3e8578)
+
+#### *Findings*
+- High-Profit Categories and Sub-Categories:
+
+     Technology: Copiers and Phones: These categories are our shining stars in terms of profitability. We've made significant profits from sales in these areas.
+     It suggests that our Copiers and Phones are in high demand or have excellent profit margins, indicating that customers are willing to pay a premium for these products.
+     This is fantastic news as it shows we're doing something right here, whether it's our product quality, pricing strategy, or marketing efforts.
+
+     Furniture: Bookcases: Bookcases are another area where we're doing exceptionally well. It seems that our Bookcases are highly sought after, contributing significantly to our overall profitability in the furniture category.
+     This could be due to their design, functionality, or perhaps they're meeting a particular need in the market that our competitors aren't addressing as effectively.
+
+- Underperforming Categories and Sub-Categories:
+
+     Office Supplies: Appliances, Storage, Binders, Paper, Art, Envelopes, Supplies, Labels, Fasteners: Unfortunately, these categories are not performing as well as we'd hoped.
+     While they still generate revenue, their profitability is lower compared to our high-profit categories. It's crucial for us to analyse why these categories are underperforming.
+     Are there issues with product quality, pricing, or perhaps we're not effectively reaching our target audience with our marketing efforts? These are areas we need to investigate further to turn things around.
+
+     Technology: Accessories and Machines: Within the technology category, Accessories and Machines are also not meeting our profitability expectations.
+     This could indicate that either the demand for these products is lower than anticipated, or our profit margins are not as high as we'd like them to be.We need to reassess our approach to selling these products and explore ways to increase their profitability.
+
+     Furniture: Chairs, Furnishings, Tables: Similarly, in the furniture category, Chairs, Furnishings, and Tables are also underperforming.
+     It's essential for us to understand why these products are not resonating with customers as much as our high-profit products. Are there design issues, pricing concerns, or perhaps we're not effectively targeting the right audience? Addressing these questions will 
+     be crucial in improving profitability in these areas.
+
+ #### *Recommendations*
+- Double Down on High-Profit Categories:
+  
+     Technology (Copiers and Phones) and Furniture (Bookcases): Since these categories are driving the majority of our profits, it's essential to continue investing in them.
+     We should allocate resources to further improve product quality, expand product lines, and enhance marketing efforts to maintain and potentially increase our market share in these lucrative segments.
+
+- Address Underperforming Categories:
+     Office Supplies (Appliances, Storage, Binders, Paper, Art, Envelopes, Supplies, Labels, Fasteners): For these underperforming categories, we need to conduct a thorough analysis to identify the root causes of their lacklustre profitability.
+     This might involve gathering customer feedback, evaluating product quality and pricing, and assessing our marketing strategies. Once we understand the reasons behind their underperformance, we can develop targeted initiatives to address these issues.
+     This could include product redesign, pricing adjustments, targeted marketing campaigns, or even discontinuation of low-performing products.
+
+     Technology (Accessories and Machines) and Furniture (Chairs, Furnishings, Tables):
+     Similarly, we need to reassess our approach to selling products in these categories.It's essential to understand customer preferences and market trends to identify areas for improvement.
+     This might involve product innovation, pricing optimization, or refining our marketing messaging to better resonate with our target audience.
+  
+- Customer Segmentation and Personalization:
+
+     Segmenting our customer base and personalizing our marketing efforts can help us better target our products to specific customer needs and preferences. By understanding the unique requirements of different customer segments,
+     we can tailor our product offerings and promotions to maximize profitability. 
+
+- Continuous Monitoring and Adaptation:
+  
+     Profitability is not static, and market dynamics can change rapidly. Therefore, it's crucial to continuously monitor sales performance, customer feedback, and market trends. Regularly evaluating our product mix and making adjustments in response to changing market 
+     conditions will be essential to maintaining and improving profitability over the long term.
+
+- Invest in Data Analytics and Insights:
+  
+     Leveraging data analytics tools and techniques can provide valuable insights into customer behaviour, product performance, and market trends. By investing in advanced analytics capabilities, we can make more informed decisions and develop targeted strategies to 
+     optimize profitability across all product categories.
+
+
   
   5. WHICH PRODUCTS HAVE THE HIGHEST RETURN RATES, AND WHAT IMPACT DO RETURNS HAVE ON OVERALL SALES AND PROFIT?
 ```sql
