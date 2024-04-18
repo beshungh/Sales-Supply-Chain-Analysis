@@ -393,7 +393,26 @@ GROUP BY order_priority
 ORDER BY order_priority ASC;
 ```
 
-![How are our orders distributed among different priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/cac496c6-3da0-4220-8548-b04c28be7920)
+![Orders Priority](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/13ea50ad-ae87-437e-a95e-093da07bf3ac)
+
+[Please click here for a full understanding of this report](https://public.tableau.com/views/SupplyChainAnalysisReport/DifferentPriorities?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
+
+#### *Findings*
+ - While Critical priority orders had the second lowest order count, they contributed significantly to total profit.They had the highest average profit per order at $31.59, indicating that each order of Critical priority tends to bring in a high profit.The profit 
+   margin for Critical priority orders is the highest among all priority levels at 0.06%, suggesting that a significant portion of the revenue from these orders translates into profit.
+ - High priority orders had a relatively high order count, but their individual contribution to profit is lower compared to Critical priority.The average profit per order for High priority is lower than Critical at $27.12.
+ - Low priority orders also had a higher order count, but their individual contribution to profit is relatively lower.The average profit per order for Low priority is the lowest among all priority levels at $24.20.
+ - Medium priority orders had the highest order count among all priority levels, contributing significantly to total profit.However, the average profit per order for Medium priority is slightly lower compared to Critical priority, at $29.36.
+ - Across all priority levels, the profit margins were consistent at around 0.05-0.06%, indicating a relatively stable profitability across different priority levels.
+
+ #### *Recommendations*
+Based on the insights derived from this analysis, The company should:
+- Consider strategies to increase Critical priority orders as they have a higher average profit. This may involve targeted marketing campaigns, promotions, or enhancing the service for critical items to attract more customers to prioritize their orders as Critical.
+- Analyze high-priority items to identify opportunities for increasing the average profit per order. This could involve negotiating better supplier deals, optimizing shipping costs, or offering complementary products that can enhance the value of high-priority orders.
+- Explore ways to increase efficiency in handling low and medium-priority orders. While low and medium-priority orders contribute significantly to total profit due to their higher order counts, finding ways to increase efficiency in handling these orders can further 
+- improve profitability. This might include optimizing supply chain processes, reducing overhead costs associated with processing these orders, or exploring partnerships for cost-effective solutions in fulfillment and delivery.
+- Keep a close eye on profit margins and implement measures to maintain or improve them. This might involve monitoring costs, revising pricing strategies, or negotiating better terms with suppliers to improve margins without compromising on quality or service.
+- Consider expanding product offerings or enhancing marketing efforts in the "Technology" category since it has a high profitability.
 
   4. WHICH PRODUCT CATEGORIES AND SUB-CATEGORIES ARE DRIVING THE MAJORITY OF OUR PROFITS, AND HOW CAN WE OPTIMISE OUR PRODUCT MIX OR MARKETING EFFORTS TO ENHANCE PROFITABILITY IN UNDERPERFORMING CATEGORIES?
  ```sql
@@ -440,30 +459,6 @@ ORDER BY ReturnRate DESC;
 ### **Findings**
 
 
-2. ![Different Product Categories](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/4fae29d3-bd1a-4144-a455-d32985c88eed)
-
-
- - Technology products had the highest average shipping cost among the categories, and there is a significant variation reflected by the high standard deviation. This may 
-   be due to factors like the fragility or higher value of technology items, leading 
-   to specialized packaging and shipping requirements.
-  
- - The average shipping cost for Furniture was relatively high, and there was a significant variation as indicated by the high standard deviation.This suggests that 
-   shipping costs for Furniture items varies widely.
-
- - The average shipping cost for Office Supplies were lower compared to Furniture, and there was a moderate level of variation as indicated by the standard deviation. 
-   Office Supplies might have standard shipping requirements, resulting in lower overall costs.
- [Please click here for a full understanding of this report](https://public.tableau.com/views/SupplyChainAnalysisReport/DifferentProductCategories?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
-
-3. ![Different Priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/2aa3ae55-942e-4921-9371-ee6e306d4bd9)
-
-
- - While Critical priority orders had the second lowest order count, they contributed significantly to total profit.They had the highest average profit per order at $31.59, indicating that each order of Critical priority tends to bring in a high profit.The profit margin for Critical priority orders is the highest among all priority levels at 0.06%, suggesting that a significant portion of the revenue from these orders translates into profit.
- - High priority orders had a relatively high order count, but their individual contribution to profit is lower compared to Critical priority.The average profit per order for High priority is lower than Critical at $27.12.
- - Low priority orders also had a higher order count, but their individual contribution to profit is relatively lower.The average profit per order for Low priority is the lowest among all priority levels at $24.20.
- - Medium priority orders had the highest order count among all priority levels, contributing significantly to total profit.However, the average profit per order for Medium priority is slightly lower compared to Critical priority, at $29.36.
- - Across all priority levels, the profit margins were consistent at around 0.05-0.06%, indicating a relatively stable profitability across different priority levels.
-   [Please click here for a full understanding of this report](https://public.tableau.com/views/SupplyChainAnalysisReport/DifferentPriorities?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
-
 4. ![Product Categories Driving profit](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/7f69c182-c223-4e9a-842f-fc886ed2291b)
 
 
@@ -482,16 +477,6 @@ ORDER BY ReturnRate DESC;
 ### **Recommendations**
 
 Based on the insights derived from this analysis, The company should:
-
-
-2. Investigate the factors contributing to the high variation in shipping costs for Technology products. it should explore potential partnerships or negotiated rates with carriers to reduce shipping costs without compromising on the safety of 
-   the products.
-3. Consider optimizing the shipping process for Furniture items. Exploring potential partnerships with logistics companies for bulk shipping discounts or negotiating better rates based on shipping volume.
-4. Continue monitoring shipping costs for Office Supplies and explore opportunities for further cost reduction. it should also consider negotiating better rates with shipping carriers based on the consistent shipping patterns of these items.
-5. Consider strategies to increase Critical priority orders as they have a higher average profit. This may involve targeted marketing campaigns, promotions, or enhancing the service for critical items to attract more customers to prioritize their orders as Critical.
-6. Analyse high-priority items to identify opportunities for increasing the average profit per order. This could involve negotiating better supplier deals, optimizing shipping costs, or offering complementary products that can enhance the value of high-priority orders.
-7. Explore ways to increase efficiency in handling low and medium-priority orders. While low and medium-priority orders contribute significantly to total profit due to their higher order counts, finding ways to increase efficiency in handling these orders can further improve profitability. This might include optimizing supply chain processes, reducing overhead costs associated with processing these orders, or exploring partnerships for cost-effective solutions in fulfillment and delivery.
-8. Keep a close eye on profit margins and implement measures to maintain or improve them. This might involve monitoring costs, revising pricing strategies, or negotiating better terms with suppliers to improve margins without compromising on quality or service.
 9. Consider expanding product offerings or enhancing marketing efforts in the "Technology" category since it has a high profitability.
 10. Analyse factors contributing to the negative profit in the "Tables" sub-category. It should identify whether it's due to pricing, demand, or other issues and develop strategies to address these.
 11. Focus marketing efforts on high-profit products like "Copiers" and "Phones" to maximize returns.
