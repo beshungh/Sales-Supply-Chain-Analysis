@@ -397,7 +397,7 @@ ORDER BY order_priority ASC;
 
 ![Different Priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/4b5b7b4a-62fc-4212-998a-330d86dbb92a)
 
-[Please click here for a full understanding of this report](https://public.tableau.com/views/OrdersDistributedAmongDifferentPriorities/DifferentPriorities?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
+[Please click here for a full understanding of this report](https://public.tableau.com/views/OrdersDistributedAmongDifferentPriorities/DifferentPriorities?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link)
 
 #### *Findings*
  - While Critical priority orders had the second lowest order count, they contributed significantly to total profit.They had the highest average profit per order at $31.59, indicating that each order of Critical priority tends to bring in a high profit.The profit 
@@ -412,22 +412,32 @@ Based on the insights derived from this analysis, The company should:
 - Consider strategies to increase Critical priority orders as they have a higher average profit. This may involve targeted marketing campaigns, promotions, or enhancing the service for critical items to attract more customers to prioritize their orders as Critical.
 - Analyze high-priority items to identify opportunities for increasing the average profit per order. This could involve negotiating better supplier deals, optimizing shipping costs, or offering complementary products that can enhance the value of high-priority orders.
 - Explore ways to increase efficiency in handling low and medium-priority orders. While low and medium-priority orders contribute significantly to total profit due to their higher order counts, finding ways to increase efficiency in handling these orders can further 
-- improve profitability. This might include optimizing supply chain processes, reducing overhead costs associated with processing these orders, or exploring partnerships for cost-effective solutions in fulfillment and delivery.
+  improve profitability. This might include optimizing supply chain processes, reducing overhead costs associated with processing these orders, or exploring partnerships for cost-effective solutions in fulfillment and delivery.
 - Keep a close eye on profit margins and implement measures to maintain or improve them. This might involve monitoring costs, revising pricing strategies, or negotiating better terms with suppliers to improve margins without compromising on quality or service.
 
   4. WHICH PRODUCT CATEGORIES AND SUB-CATEGORIES ARE DRIVING THE MAJORITY OF OUR PROFITS, AND HOW CAN WE OPTIMISE OUR PRODUCT MIX OR MARKETING EFFORTS TO ENHANCE PROFITABILITY IN UNDERPERFORMING CATEGORIES?
  ```sql
- --SUB_CATEGORIES DRIVING THE MAJORITY OF PROFITS
- /* This query identifies the sub-categories that contribute the most to overall profits.
-    It combines information from the 'products' and 'orders' tables, summing up the profits for each unique combination of category and sub-category. 
-    The results are then ordered in descending order based on the total profit,
-    providing insights into which sub-categories are driving the majority of profits in the dataset.*/
-SELECT category,sub_category,SUM(profit) AS total_profit
-FROM products
-INNER JOIN orders 
-ON products.product_id = orders.product_id
-GROUP BY category,sub_category
-ORDER BY total_profit DESC;
+/* This query uses Common Table Expressions (CTEs) to calculate the total profit for each product category
+   and sub-category (category_profit) and ranks them based on profitability (category_rank). 
+   Then, it selects the category, sub-category, total profit, 
+   and categorizes them as "High Profit" or "Underperforming" based on their rank.*/
+
+WITH category_profit AS 
+(SELECT category,sub_category,SUM(profit) AS total_profit
+FROM products 
+GROUP BY category,sub_category),
+
+category_rank AS 
+(SELECT category,sub_category,total_profit,RANK() OVER (ORDER BY total_profit DESC) AS profit_rank
+FROM category_profit)
+
+SELECT category,sub_category,total_profit,
+CASE
+WHEN profit_rank <= 3 THEN 'High Profit'
+ELSE 'Underperforming'
+END AS profitability_status
+FROM
+category_rank;
 ```
 ![Which product categories and sub-categories are driving the majority of our profits](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/7bb1bdff-c774-4ca7-8059-5640ca756e49)
   
