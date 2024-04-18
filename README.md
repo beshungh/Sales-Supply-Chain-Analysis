@@ -353,7 +353,7 @@ GROUP BY category;
  - Lastly, for technology products, the average shipping cost is the highest among the categories at $50.01. Similar to furniture, there's a considerable amount of 
    variability, with a standard deviation of $79.01. The highest shipping cost observed for technology items was $933.57, and the lowest was $1.04.
 
-   #### *Recommendations*
+#### *Recommendations*
 Pricing Adjustments:
 - Furniture: Given the higher average shipping costs and significant variability, consider adjusting pricing strategies to incorporate shipping costs effectively. This may involve either absorbing some shipping costs into product prices or offering tiered pricing 
   options based on shipping distances.
@@ -405,7 +405,7 @@ ORDER BY order_priority ASC;
  - Medium priority orders had the highest order count among all priority levels, contributing significantly to total profit.However, the average profit per order for Medium priority is slightly lower compared to Critical priority, at $29.36.
  - Across all priority levels, the profit margins were consistent at around 0.05-0.06%, indicating a relatively stable profitability across different priority levels.
 
- #### *Recommendations*
+#### *Recommendations*
 Based on the insights derived from this analysis, The company should:
 - Consider strategies to increase Critical priority orders as they have a higher average profit. This may involve targeted marketing campaigns, promotions, or enhancing the service for critical items to attract more customers to prioritize their orders as Critical.
 - Analyze high-priority items to identify opportunities for increasing the average profit per order. This could involve negotiating better supplier deals, optimizing shipping costs, or offering complementary products that can enhance the value of high-priority orders.
@@ -465,7 +465,7 @@ category_rank;
   It's essential for us to understand why these products are not resonating with customers as much as our high-profit products. Are there design issues, pricing concerns, or perhaps we're not effectively targeting the right audience? Addressing these questions will 
   be crucial in improving profitability in these areas.
 
- #### *Recommendations*
+#### *Recommendations*
 - Double Down on High-Profit Categories:
   Technology (Copiers and Phones) and Furniture (Bookcases): Since these categories are driving the majority of our profits, it's essential to continue investing in them.
   We should allocate resources to further improve product quality, expand product lines, and enhance marketing efforts to maintain and potentially increase our market share in these lucrative segments.
