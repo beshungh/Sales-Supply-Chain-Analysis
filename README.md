@@ -343,6 +343,8 @@ GROUP BY category;
 ```
  ![WHAT IS THE AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND ARE THERE ANY SIGNIFICANT VARIATIONS](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/8eb1fd4e-ad3f-43fd-930f-68e0dd60af58)
 
+ 
+
   #### *Findings*
  - For furniture items, the average shipping cost is approximately $44.68, but there's quite a bit of variability, with a standard deviation of $72.58. This means that 
    shipping costs for furniture can vary significantly. The most expensive shipping cost observed was $923.63, while the lowest was $1.04.
