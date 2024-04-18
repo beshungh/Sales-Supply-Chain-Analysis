@@ -395,7 +395,9 @@ ORDER BY order_priority ASC;
 
 ![Orders Priority](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/13ea50ad-ae87-437e-a95e-093da07bf3ac)
 
-[Please click here for a full understanding of this report](https://public.tableau.com/views/SupplyChainAnalysisReport/DifferentPriorities?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
+![Different Priorities](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/4b5b7b4a-62fc-4212-998a-330d86dbb92a)
+
+[Please click here for a full understanding of this report](https://public.tableau.com/views/OrdersDistributedAmongDifferentPriorities/DifferentPriorities?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
 
 #### *Findings*
  - While Critical priority orders had the second lowest order count, they contributed significantly to total profit.They had the highest average profit per order at $31.59, indicating that each order of Critical priority tends to bring in a high profit.The profit 
@@ -412,7 +414,6 @@ Based on the insights derived from this analysis, The company should:
 - Explore ways to increase efficiency in handling low and medium-priority orders. While low and medium-priority orders contribute significantly to total profit due to their higher order counts, finding ways to increase efficiency in handling these orders can further 
 - improve profitability. This might include optimizing supply chain processes, reducing overhead costs associated with processing these orders, or exploring partnerships for cost-effective solutions in fulfillment and delivery.
 - Keep a close eye on profit margins and implement measures to maintain or improve them. This might involve monitoring costs, revising pricing strategies, or negotiating better terms with suppliers to improve margins without compromising on quality or service.
-- Consider expanding product offerings or enhancing marketing efforts in the "Technology" category since it has a high profitability.
 
   4. WHICH PRODUCT CATEGORIES AND SUB-CATEGORIES ARE DRIVING THE MAJORITY OF OUR PROFITS, AND HOW CAN WE OPTIMISE OUR PRODUCT MIX OR MARKETING EFFORTS TO ENHANCE PROFITABILITY IN UNDERPERFORMING CATEGORIES?
  ```sql
