@@ -10,8 +10,6 @@
 - *[Entity Relationship Diagram](#entity-relationship-diagram)*
 - *[Creating Database Tables](#creating-database-tables)*
 - *[Exploratory Data Analysis in PostgreSQL](#exploratory-data-analysis-in-postgresql)*
-- *[Findings](#findings)*
-- *[Recommendations](#recommendations)*
 - *[Limitations](#limitations)*
 
 ### **Project Summary**
@@ -441,62 +439,59 @@ category_rank;
 ```
 ![PRODUCT CATEGORIES AND SUB-CATEGORIES ARE DRIVING THE MAJORITY OF  PROFITS](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/81434a94-932a-49e6-84d4-7f354c3e8578)
 
+![Products Categories and Sub-Categories Driving the Majority Profit](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/d7226af2-2d4e-48b8-bee5-0a0d861d59c7)
+
+[Please click here for a full understanding of this report](https://public.tableau.com/views/ProductsCategoriesandSub-CategoriesDrivingtheMajorityProfit/ProductsCategoriesandSub-Categories?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link)
+
+
 #### *Findings*
 - High-Profit Categories and Sub-Categories:
+  Technology: Copiers and Phones: These categories are our shining stars in terms of profitability. We've made significant profits from sales in these areas.
+  It suggests that our Copiers and Phones are in high demand or have excellent profit margins, indicating that customers are willing to pay a premium for these products.
+  This is fantastic news as it shows we're doing something right here, whether it's our product quality, pricing strategy, or marketing efforts.
 
-     Technology: Copiers and Phones: These categories are our shining stars in terms of profitability. We've made significant profits from sales in these areas.
-     It suggests that our Copiers and Phones are in high demand or have excellent profit margins, indicating that customers are willing to pay a premium for these products.
-     This is fantastic news as it shows we're doing something right here, whether it's our product quality, pricing strategy, or marketing efforts.
-
-     Furniture: Bookcases: Bookcases are another area where we're doing exceptionally well. It seems that our Bookcases are highly sought after, contributing significantly to our overall profitability in the furniture category.
-     This could be due to their design, functionality, or perhaps they're meeting a particular need in the market that our competitors aren't addressing as effectively.
+  Furniture: Bookcases: Bookcases are another area where we're doing exceptionally well. It seems that our Bookcases are highly sought after, contributing significantly to our overall profitability in the furniture category.
+  This could be due to their design, functionality, or perhaps they're meeting a particular need in the market that our competitors aren't addressing as effectively.
 
 - Underperforming Categories and Sub-Categories:
+  Office Supplies: Appliances, Storage, Binders, Paper, Art, Envelopes, Supplies, Labels, Fasteners: Unfortunately, these categories are not performing as well as we'd hoped.
+  While they still generate revenue, their profitability is lower compared to our high-profit categories. It's crucial for us to analyse why these categories are underperforming.
+  Are there issues with product quality, pricing, or perhaps we're not effectively reaching our target audience with our marketing efforts? These are areas we need to investigate further to turn things around.
 
-     Office Supplies: Appliances, Storage, Binders, Paper, Art, Envelopes, Supplies, Labels, Fasteners: Unfortunately, these categories are not performing as well as we'd hoped.
-     While they still generate revenue, their profitability is lower compared to our high-profit categories. It's crucial for us to analyse why these categories are underperforming.
-     Are there issues with product quality, pricing, or perhaps we're not effectively reaching our target audience with our marketing efforts? These are areas we need to investigate further to turn things around.
+  Technology: Accessories and Machines: Within the technology category, Accessories and Machines are also not meeting our profitability expectations.
+  This could indicate that either the demand for these products is lower than anticipated, or our profit margins are not as high as we'd like them to be.We need to reassess our approach to selling these products and explore ways to increase their profitability.
 
-     Technology: Accessories and Machines: Within the technology category, Accessories and Machines are also not meeting our profitability expectations.
-     This could indicate that either the demand for these products is lower than anticipated, or our profit margins are not as high as we'd like them to be.We need to reassess our approach to selling these products and explore ways to increase their profitability.
-
-     Furniture: Chairs, Furnishings, Tables: Similarly, in the furniture category, Chairs, Furnishings, and Tables are also underperforming.
-     It's essential for us to understand why these products are not resonating with customers as much as our high-profit products. Are there design issues, pricing concerns, or perhaps we're not effectively targeting the right audience? Addressing these questions will 
-     be crucial in improving profitability in these areas.
+  Furniture: Chairs, Furnishings, Tables: Similarly, in the furniture category, Chairs, Furnishings, and Tables are also underperforming.
+  It's essential for us to understand why these products are not resonating with customers as much as our high-profit products. Are there design issues, pricing concerns, or perhaps we're not effectively targeting the right audience? Addressing these questions will 
+  be crucial in improving profitability in these areas.
 
  #### *Recommendations*
 - Double Down on High-Profit Categories:
-  
-     Technology (Copiers and Phones) and Furniture (Bookcases): Since these categories are driving the majority of our profits, it's essential to continue investing in them.
-     We should allocate resources to further improve product quality, expand product lines, and enhance marketing efforts to maintain and potentially increase our market share in these lucrative segments.
+  Technology (Copiers and Phones) and Furniture (Bookcases): Since these categories are driving the majority of our profits, it's essential to continue investing in them.
+  We should allocate resources to further improve product quality, expand product lines, and enhance marketing efforts to maintain and potentially increase our market share in these lucrative segments.
 
 - Address Underperforming Categories:
-     Office Supplies (Appliances, Storage, Binders, Paper, Art, Envelopes, Supplies, Labels, Fasteners): For these underperforming categories, we need to conduct a thorough analysis to identify the root causes of their lacklustre profitability.
-     This might involve gathering customer feedback, evaluating product quality and pricing, and assessing our marketing strategies. Once we understand the reasons behind their underperformance, we can develop targeted initiatives to address these issues.
-     This could include product redesign, pricing adjustments, targeted marketing campaigns, or even discontinuation of low-performing products.
+  Office Supplies (Appliances, Storage, Binders, Paper, Art, Envelopes, Supplies, Labels, Fasteners): For these underperforming categories, we need to conduct a thorough analysis to identify the root causes of their lacklustre profitability.
+  This might involve gathering customer feedback, evaluating product quality and pricing, and assessing our marketing strategies. Once we understand the reasons behind their underperformance, we can develop targeted initiatives to address these issues.
+  This could include product redesign, pricing adjustments, targeted marketing campaigns, or even discontinuation of low-performing products.
 
-     Technology (Accessories and Machines) and Furniture (Chairs, Furnishings, Tables):
-     Similarly, we need to reassess our approach to selling products in these categories.It's essential to understand customer preferences and market trends to identify areas for improvement.
-     This might involve product innovation, pricing optimization, or refining our marketing messaging to better resonate with our target audience.
+  Technology (Accessories and Machines) and Furniture (Chairs, Furnishings, Tables):
+  Similarly, we need to reassess our approach to selling products in these categories.It's essential to understand customer preferences and market trends to identify areas for improvement.
+  This might involve product innovation, pricing optimization, or refining our marketing messaging to better resonate with our target audience.
   
 - Customer Segmentation and Personalization:
-
-     Segmenting our customer base and personalizing our marketing efforts can help us better target our products to specific customer needs and preferences. By understanding the unique requirements of different customer segments,
-     we can tailor our product offerings and promotions to maximize profitability. 
+  Segmenting our customer base and personalizing our marketing efforts can help us better target our products to specific customer needs and preferences. By understanding the unique requirements of different customer segments,
+  we can tailor our product offerings and promotions to maximize profitability. 
 
 - Continuous Monitoring and Adaptation:
-  
-     Profitability is not static, and market dynamics can change rapidly. Therefore, it's crucial to continuously monitor sales performance, customer feedback, and market trends. Regularly evaluating our product mix and making adjustments in response to changing market 
-     conditions will be essential to maintaining and improving profitability over the long term.
+  Profitability is not static, and market dynamics can change rapidly. Therefore, it's crucial to continuously monitor sales performance, customer feedback, and market trends. Regularly evaluating our product mix and making adjustments in response to changing market 
+  conditions will be essential to maintaining and improving profitability over the long term.
 
 - Invest in Data Analytics and Insights:
-  
-     Leveraging data analytics tools and techniques can provide valuable insights into customer behaviour, product performance, and market trends. By investing in advanced analytics capabilities, we can make more informed decisions and develop targeted strategies to 
-     optimize profitability across all product categories.
+  Leveraging data analytics tools and techniques can provide valuable insights into customer behaviour, product performance, and market trends. By investing in advanced analytics capabilities, we can make more informed decisions and develop targeted strategies to 
+  optimize profitability across all product categories.
 
-
-  
-  5. WHICH PRODUCTS HAVE THE HIGHEST RETURN RATES, AND WHAT IMPACT DO RETURNS HAVE ON OVERALL SALES AND PROFIT?
+5.  WHICH PRODUCTS HAVE THE HIGHEST RETURN RATES, AND WHAT IMPACT DO RETURNS HAVE ON OVERALL SALES AND PROFIT?
 ```sql
 --PRODUCTS WITH THE HIGHEST RETURN RATES
 /* This query Joins the Returns table with the Products table using the common column Product_id to identify the products that have been returned,
@@ -521,33 +516,6 @@ GROUP BY Products.Product_id, Products.Product_name
 ORDER BY ReturnRate DESC;
 ```
 ![Which products have the highest return rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/a5249736-9788-4fd3-9708-c69b36ecc443)
-
-### **Findings**
-
-
-4. ![Product Categories Driving profit](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/7f69c182-c223-4e9a-842f-fc886ed2291b)
-
-
-  - "Technology" and specifically "Copiers" were the top contributors to profits, followed by "Phones". These products seem to be performing exceptionally well.
-  - "Furniture" as a category had mixed performance. While "Bookcases" and "Chairs" are profitable, "Tables" show a negative profit, indicating potential issues in this sub-category.
-  - "Office Supplies" also contribute significantly, with "Appliances","Storage", and "Binders" being the top performers.
-    [Please click here for a full understanding of this report](https://public.tableau.com/views/SupplyChainAnalysisReport/ProductCategoriesDrivingprofit?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
-
-5. ![Products with the Highest Return Rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/3fe6787a-8cf1-485f-bdbb-f15b4f033226)
-
-
-- Products like "Harbour Creations Executive Leather Armchair, Black" and "Novimex Executive Leather Armchair, Adjustable" had a 100% return rate.
-- Products with high return rates also exhibited significant negative profit values, such as "Harbour Creations Executive Leather Armchair, Black" with a profit of -189.46 but a return rate of 100%.
-  [Please click here for a full understanding of this report](https://public.tableau.com/views/SupplyChainAnalysisReport/ProductswiththeHighestReturnRates?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link).
-
-### **Recommendations**
-
-Based on the insights derived from this analysis, The company should:
-9. Consider expanding product offerings or enhancing marketing efforts in the "Technology" category since it has a high profitability.
-10. Analyse factors contributing to the negative profit in the "Tables" sub-category. It should identify whether it's due to pricing, demand, or other issues and develop strategies to address these.
-11. Focus marketing efforts on high-profit products like "Copiers" and "Phones" to maximize returns.
-12. Implement stringent quality control measures for products with high return rates. Ensure that product descriptions are accurate and provide comprehensive information to set realistic customer expectations.
-13. Implement a system to continuously monitor return rates and customer feedback. Regularly analyze the data to identify trends and make informed decisions about product offerings and improvements.
 
 ### **Limitations** 
 
