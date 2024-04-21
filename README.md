@@ -524,7 +524,10 @@ GROUP BY product_id, product_name
 ORDER BY total_return_count DESC;
 ```
 
-  I then used the quantitative form of the result to find the product with the hightest return rate and the impact of the return rate on the overall sales and profit
+![Quantitative form](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/e8f9c238-2b48-4cb1-af9c-f7ca0cf792b6)
+
+
+  I then used the quantitative form of the result to find the products with the hightest return rate and the overall impact on sales and profit
 
 ```sql
 
