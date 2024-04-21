@@ -523,9 +523,7 @@ FROM productreturns
 GROUP BY product_id, product_name
 ORDER BY total_return_count DESC;
 ```
-
 ![Quantitative form](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/e8f9c238-2b48-4cb1-af9c-f7ca0cf792b6)
-
 
   I then used the quantitative form of the result to find the products with the hightest return rate and the overall impact on sales and profit
 
@@ -564,8 +562,36 @@ LEFT JOIN totalsalesprofit AS ts
 ON pr.product_id = ts.product_id
 GROUP BY pr.product_id, pr.product_name, ts.total_sales, ts.total_profit
 ORDER BY total_return_count DESC;
-
 ```
+![product_returned](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/d52e80f7-a9ad-405a-b818-86938b5b2e3e)
+
+#### *Findings*
+
+
+
+
+
+
+
+
+
+
+
+
+#### *Recommendations*
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ### **Limitations** 
 
