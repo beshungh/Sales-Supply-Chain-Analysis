@@ -530,46 +530,40 @@ ORDER BY total_return_count DESC;
   I then used the quantitative form of the result to find the products with the hightest return rate and the overall impact on sales and profit
 
 ```sql
+/* This SQL query first calculates the count of returned orders for each product, 
+   associating them with their respective product names and IDs, and then determines the total sales and profit for each product. 
+   It further calculates the return rate as the percentage of returned items compared to total sales, rounding it to two decimal places. */
 
+WITH returncounts AS (
+SELECT orders.row_id,COUNT(*) AS return_count
+FROM returns 
+JOIN orders
+ON returns.order_id = orders.order_id
+WHERE returns.returned = 'Yes'
+GROUP BY orders.row_id
+),
 
+productreturns AS (
+SELECT products.product_id,products.product_name,COALESCE(returncounts.return_count, 0) AS return_count
+FROM products
+LEFT JOIN returncounts
+ON products.row_id = returncounts.row_id
+),
 
+totalsalesprofit AS (
+SELECT product_id,SUM(sales) AS total_sales,SUM(profit) AS total_profit
+FROM products
+GROUP BY product_id
+)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+SELECT pr.product_id,pr.product_name,SUM(pr.return_count) AS total_return_count,
+COALESCE(ts.total_sales, 0) AS total_sales,COALESCE(ts.total_profit, 0) AS total_profit,
+ROUND((SUM(pr.return_count)::NUMERIC / NULLIF(COALESCE(ts.total_sales, 0), 0) * 100)::NUMERIC,2) AS return_rate
+FROM ProductReturns AS pr
+LEFT JOIN totalsalesprofit AS ts 
+ON pr.product_id = ts.product_id
+GROUP BY pr.product_id, pr.product_name, ts.total_sales, ts.total_profit
+ORDER BY total_return_count DESC;
 
 ```
 
