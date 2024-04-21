@@ -492,6 +492,16 @@ category_rank;
   optimize profitability across all product categories.
 
 5.  WHICH PRODUCTS HAVE THE HIGHEST RETURN RATES, AND WHAT IMPACT DO RETURNS HAVE ON OVERALL SALES AND PROFIT?
+
+ I faced a challenge in accurately quantifying the returned items, as they were recorded simply as 'YES' without any specific numerical values attached to them.
+ I wrote an SQL script that first counted all the 'YES' entries in the returned column, associated them with the corresponding order_ids, and then linked those order_ids to the particular product names.
+ This helped me determine the quantitative form of orders that were returned for each product. 
+
+
+
+
+
+
 ```sql
 --PRODUCTS WITH THE HIGHEST RETURN RATES
 /* This query Joins the Returns table with the Products table using the common column Product_id to identify the products that have been returned,
