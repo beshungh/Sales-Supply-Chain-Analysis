@@ -569,7 +569,6 @@ ORDER BY total_return_count DESC;
 
 
 ```
-![Which products have the highest return rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/a5249736-9788-4fd3-9708-c69b36ecc443)
 
 ### **Limitations** 
 
