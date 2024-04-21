@@ -493,12 +493,15 @@ category_rank;
 
 5.  WHICH PRODUCTS HAVE THE HIGHEST RETURN RATES, AND WHAT IMPACT DO RETURNS HAVE ON OVERALL SALES AND PROFIT?
 
- ![returns_sample](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/163d2197-3f75-4665-95b4-f24d67f38a36)
+    I faced a challenge in accurately quantifying the returned items, as they were recorded simply as 'YES' without any specific numerical values attached to them in the dataset.
+    To fix this, I wrote an SQL script that first counted all the 'YES' entries in the returned column, associated them with the corresponding order_ids, and then linked those order_ids to the particular product names.
+    This helped me determine the quantitative form of orders that were returned for each product.
 
- I faced a challenge in accurately quantifying the returned items, as they were recorded simply as 'YES' without any specific numerical values attached to them in the dataset.
- To fix this, I wrote an SQL script that first counted all the 'YES' entries in the returned column, associated them with the corresponding order_ids, and then linked those order_ids to the particular product names.
- This helped me determine the quantitative form of orders that were returned for each product.
+ ![returns_sample](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/163d2197-3f75-4665-95b4-f24d67f38a36)
+ 
 ```sql
+-- Quantifying the returned items
+
 WITH returncounts AS (
 SELECT order_id,COUNT(*) AS return_count
 FROM returns 
@@ -521,33 +524,50 @@ GROUP BY product_id, product_name
 ORDER BY total_return_count DESC;
 ```
 
-
-
-
-
+  I then used the quantitative form of the result to find the product with the hightest return rate and the impact of the return rate on the overall sales and profit
 
 ```sql
---PRODUCTS WITH THE HIGHEST RETURN RATES
-/* This query Joins the Returns table with the Products table using the common column Product_id to identify the products that have been returned,
-   it then gives a list of products with an indication of whether they were returned or not.*/
-SELECT products.product_id, products.Product_name, returns.returned 
-FROM products 
-JOIN returns
-ON products.product_id = returns.product_id; 
 
-/* The query calculates the return rate for each product, displaying the total returns, total sales, and return rate percentage.
-   It includes information about total sales amount and total profit for each product.*/
-SELECT Products.Product_id, Products.Product_name,COUNT(Returns.Returned) AS TotalReturns,
-COUNT(*) AS TotalSales,ROUND((COUNT(Returns.Returned) * 100.0 / COUNT(*)),0) AS ReturnRate,
-SUM(orders.Sales) AS TotalSalesAmount,
-SUM(orders.Profit) AS TotalProfit
-FROM Products
-LEFT JOIN Returns
-ON Products.Product_id = Returns.Product_id
-LEFT JOIN Orders
-ON Products.Product_id = orders.Product_id
-GROUP BY Products.Product_id, Products.Product_name
-ORDER BY ReturnRate DESC;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ```
 ![Which products have the highest return rates](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/a5249736-9788-4fd3-9708-c69b36ecc443)
 
