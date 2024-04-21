@@ -294,22 +294,30 @@ ORDER BY total_shipping_cost DESC;
 #### *Findings*
 - Western Europe: With a total shipping cost of $185,841, it's our highest spender in terms of shipping. However, when we look at the ratio of shipping cost to profit, it's 0.85, indicating a relatively balanced expenditure considering the profits generated from this 
   region.
+
 - Central America: Followed closely by Central America, which incurred a total shipping cost of $131,820. Its shipment cost-profit ratio is 0.83, also reflecting a relatively efficient shipping operation.
+
 - Oceania: Surprisingly, Oceania comes in next with a total shipping cost of $120,802. However, it has the highest shipment cost-profit ratio among all regions, standing at 1.01. This suggests that while shipping costs are high, they are well-aligned with the profits 
   generated from this region.
+
 - Southeastern Asia: Despite a total shipping cost of $93,879, this region stands out with a considerably high shipment cost-profit ratio of 5.26. This indicates that our shipping costs here may be disproportionately high compared to the profits generated.
+
 - Western Asia: On the other hand, Western Asia has a total shipping cost of $34,480, but it shows a negative shipment cost-profit ratio of -0.64. This suggests that our shipping costs exceed the profits generated from this region, warranting further investigation into 
   cost optimization strategies.
 
 #### *Recommendations*
 Based on the insights gleaned from the analysis of shipping costs and profitability by region, here are some recommendations for optimizing our shipping operations:
-- Review Shipping Strategies by Region: Evaluate the shipping strategies currently employed in each region to ensure they are aligned with profitability goals. For regions with high shipping costs relative to profits (e.g., Southeastern Asia), consider alternative s 
+- Evaluate the shipping strategies currently employed in each region to ensure they are aligned with profitability goals. For regions with high shipping costs relative to profits (e.g., Southeastern Asia), consider alternative s 
   shipping methods or renegotiating shipping contracts to reduce costs.
-- Optimize Supply Chain Efficiency: Streamline supply chain processes to reduce shipping costs and improve overall efficiency. This could involve optimizing inventory management, minimizing shipping distances, and consolidating shipments to reduce transportation 
+
+- Streamline supply chain processes to reduce shipping costs and improve overall efficiency. This could involve optimizing inventory management, minimizing shipping distances, and consolidating shipments to reduce transportation 
   expenses.
-- Implement Pricing Adjustments: Consider adjusting product pricing or introducing shipping surcharges for regions where shipping costs exceed profitability. This can help offset high shipping expenses and ensure that shipping operations remain financially sustainable.
-- Explore Regional Partnerships: Explore partnerships with local distributors or logistics providers in high-cost regions to leverage their expertise and infrastructure. Collaborating with local partners can help reduce shipping costs and improve delivery efficiency.
-- Invest in Technology: Invest in technology solutions such as route optimization software, inventory management systems, and real-time tracking tools to enhance visibility and control over shipping operations. These tools can help identify cost-saving opportunities 
+
+- Consider adjusting product pricing or introducing shipping surcharges for regions where shipping costs exceed profitability. This can help offset high shipping expenses and ensure that shipping operations remain financially sustainable.
+
+- Explore partnerships with local distributors or logistics providers in high-cost regions to leverage their expertise and infrastructure. Collaborating with local partners can help reduce shipping costs and improve delivery efficiency.
+
+- Invest in technology solutions such as route optimization software, inventory management systems, and real-time tracking tools to enhance visibility and control over shipping operations. These tools can help identify cost-saving opportunities 
   and improve overall logistics performance.
 
 2. *WHAT IS THE AVERAGE SHIPPING COST FOR DIFFERENT PRODUCT CATEGORIES, AND ARE THERE ANY SIGNIFICANT VARIATIONS?*
@@ -348,29 +356,40 @@ GROUP BY category;
   #### *Findings*
  - For furniture items, the average shipping cost is approximately $44.68, but there's quite a bit of variability, with a standard deviation of $72.58. This means that 
    shipping costs for furniture can vary significantly. The most expensive shipping cost observed was $923.63, while the lowest was $1.04.
+
  - Moving on to office supplies, the average shipping cost is notably lower at $13.11. However, there's still some variability, with a standard deviation of $35.03. The 
    highest shipping cost observed for office supplies was $867.69, while the lowest was $1.002.
+ 
  - Lastly, for technology products, the average shipping cost is the highest among the categories at $50.01. Similar to furniture, there's a considerable amount of 
    variability, with a standard deviation of $79.01. The highest shipping cost observed for technology items was $933.57, and the lowest was $1.04.
 
 #### *Recommendations*
 Pricing Adjustments:
+
 - Furniture: Given the higher average shipping costs and significant variability, consider adjusting pricing strategies to incorporate shipping costs effectively. This may involve either absorbing some shipping costs into product prices or offering tiered pricing 
   options based on shipping distances.
+
 - Office Supplies: With lower average shipping costs compared to other categories, there may be opportunities to offer competitive pricing to attract more customers. Consider leveraging this advantage in marketing campaigns to emphasize affordability.
+
 - Technology: Since technology products have the highest average shipping costs, explore strategies to optimize shipping logistics and negotiate better rates with carriers. Additionally, consider adjusting product pricing to reflect these higher shipping costs, 
   ensuring profitability while remaining competitive in the market.
 
 Logistics Optimization:
+
 - Furniture and Technology: Given the significant variability in shipping costs within these categories, focus on optimizing logistics to minimize costs. This could involve consolidating shipments, optimizing shipping routes, and negotiating volume discounts with 
   carriers. Implementing efficient inventory management practices can also help reduce shipping distances and associated costs.
+
 - Office Supplies: While shipping costs for office supplies are comparatively lower, there's still room for optimization. Consider implementing efficient packaging practices to reduce dimensional weight charges and exploring alternative shipping methods for cost 
   savings.
 
 Customer Communication:
+
 - Clearly communicate shipping policies and costs to customers upfront to manage expectations and avoid surprises at checkout. Transparency regarding shipping costs can help build trust and loyalty among customers.
+
 - Consider offering incentives such as free shipping thresholds or discounted shipping rates for bulk orders to incentivize larger purchases and increase customer satisfaction.
-- Continuous Monitoring:
+
+Continuous Monitoring:
+
 - Regularly monitor shipping costs and analyse trends over time to identify opportunities for further optimization. Keep abreast of changes in carrier rates, fuel prices, and shipping regulations to adapt strategies accordingly and maintain competitiveness in the 
   market.
 
@@ -400,17 +419,24 @@ ORDER BY order_priority ASC;
 #### *Findings*
  - While Critical priority orders had the second lowest order count, they contributed significantly to total profit.They had the highest average profit per order at $31.59, indicating that each order of Critical priority tends to bring in a high profit.The profit 
    margin for Critical priority orders is the highest among all priority levels at 0.06%, suggesting that a significant portion of the revenue from these orders translates into profit.
+ 
  - High priority orders had a relatively high order count, but their individual contribution to profit is lower compared to Critical priority.The average profit per order for High priority is lower than Critical at $27.12.
+ 
  - Low priority orders also had a higher order count, but their individual contribution to profit is relatively lower.The average profit per order for Low priority is the lowest among all priority levels at $24.20.
+ 
  - Medium priority orders had the highest order count among all priority levels, contributing significantly to total profit.However, the average profit per order for Medium priority is slightly lower compared to Critical priority, at $29.36.
+
  - Across all priority levels, the profit margins were consistent at around 0.05-0.06%, indicating a relatively stable profitability across different priority levels.
 
 #### *Recommendations*
 Based on the insights derived from this analysis, The company should:
 - Consider strategies to increase Critical priority orders as they have a higher average profit. This may involve targeted marketing campaigns, promotions, or enhancing the service for critical items to attract more customers to prioritize their orders as Critical.
+
 - Analyze high-priority items to identify opportunities for increasing the average profit per order. This could involve negotiating better supplier deals, optimizing shipping costs, or offering complementary products that can enhance the value of high-priority orders.
+
 - Explore ways to increase efficiency in handling low and medium-priority orders. While low and medium-priority orders contribute significantly to total profit due to their higher order counts, finding ways to increase efficiency in handling these orders can further 
   improve profitability. This might include optimizing supply chain processes, reducing overhead costs associated with processing these orders, or exploring partnerships for cost-effective solutions in fulfillment and delivery.
+
 - Keep a close eye on profit margins and implement measures to maintain or improve them. This might involve monitoring costs, revising pricing strategies, or negotiating better terms with suppliers to improve margins without compromising on quality or service.
 
 4.  WHICH PRODUCT CATEGORIES AND SUB-CATEGORIES ARE DRIVING THE MAJORITY OF OUR PROFITS, AND HOW CAN WE OPTIMISE OUR PRODUCT MIX OR MARKETING EFFORTS TO ENHANCE PROFITABILITY IN UNDERPERFORMING CATEGORIES?
@@ -446,6 +472,7 @@ category_rank;
 
 #### *Findings*
 - High-Profit Categories and Sub-Categories:
+  
   Technology: Copiers and Phones: These categories are our shining stars in terms of profitability. We've made significant profits from sales in these areas.
   It suggests that our Copiers and Phones are in high demand or have excellent profit margins, indicating that customers are willing to pay a premium for these products.
   This is fantastic news as it shows we're doing something right here, whether it's our product quality, pricing strategy, or marketing efforts.
@@ -454,6 +481,7 @@ category_rank;
   This could be due to their design, functionality, or perhaps they're meeting a particular need in the market that our competitors aren't addressing as effectively.
 
 - Underperforming Categories and Sub-Categories:
+  
   Office Supplies: Appliances, Storage, Binders, Paper, Art, Envelopes, Supplies, Labels, Fasteners: Unfortunately, these categories are not performing as well as we'd hoped.
   While they still generate revenue, their profitability is lower compared to our high-profit categories. It's crucial for us to analyse why these categories are underperforming.
   Are there issues with product quality, pricing, or perhaps we're not effectively reaching our target audience with our marketing efforts? These are areas we need to investigate further to turn things around.
@@ -466,29 +494,23 @@ category_rank;
   be crucial in improving profitability in these areas.
 
 #### *Recommendations*
-- Double Down on High-Profit Categories:
-  Technology (Copiers and Phones) and Furniture (Bookcases): Since these categories are driving the majority of our profits, it's essential to continue investing in them.
+- Technology (Copiers and Phones) and Furniture (Bookcases): Since these categories are driving the majority of our profits, it's essential to continue investing in them.
   We should allocate resources to further improve product quality, expand product lines, and enhance marketing efforts to maintain and potentially increase our market share in these lucrative segments.
 
-- Address Underperforming Categories:
-  Office Supplies (Appliances, Storage, Binders, Paper, Art, Envelopes, Supplies, Labels, Fasteners): For these underperforming categories, we need to conduct a thorough analysis to identify the root causes of their lacklustre profitability.
+- Office Supplies (Appliances, Storage, Binders, Paper, Art, Envelopes, Supplies, Labels, Fasteners): For these underperforming categories, we need to conduct a thorough analysis to identify the root causes of their lacklustre profitability.
   This might involve gathering customer feedback, evaluating product quality and pricing, and assessing our marketing strategies. Once we understand the reasons behind their underperformance, we can develop targeted initiatives to address these issues.
   This could include product redesign, pricing adjustments, targeted marketing campaigns, or even discontinuation of low-performing products.
 
-  Technology (Accessories and Machines) and Furniture (Chairs, Furnishings, Tables):
-  Similarly, we need to reassess our approach to selling products in these categories.It's essential to understand customer preferences and market trends to identify areas for improvement.
+- Technology (Accessories and Machines) and Furniture (Chairs, Furnishings, Tables): Similarly, we need to reassess our approach to selling products in these categories.It's essential to understand customer preferences and market trends to identify areas forimprovement.
   This might involve product innovation, pricing optimization, or refining our marketing messaging to better resonate with our target audience.
-  
-- Customer Segmentation and Personalization:
-  Segmenting our customer base and personalizing our marketing efforts can help us better target our products to specific customer needs and preferences. By understanding the unique requirements of different customer segments,
+
+- Segmenting our customer base and personalizing our marketing efforts can help us better target our products to specific customer needs and preferences. By understanding the unique requirements of different customer segments,
   we can tailor our product offerings and promotions to maximize profitability. 
 
-- Continuous Monitoring and Adaptation:
-  Profitability is not static, and market dynamics can change rapidly. Therefore, it's crucial to continuously monitor sales performance, customer feedback, and market trends. Regularly evaluating our product mix and making adjustments in response to changing market 
+- Profitability is not static, and market dynamics can change rapidly. Therefore, it's crucial to continuously monitor sales performance, customer feedback, and market trends. Regularly evaluating our product mix and making adjustments in response to changing market 
   conditions will be essential to maintaining and improving profitability over the long term.
 
-- Invest in Data Analytics and Insights:
-  Leveraging data analytics tools and techniques can provide valuable insights into customer behaviour, product performance, and market trends. By investing in advanced analytics capabilities, we can make more informed decisions and develop targeted strategies to 
+- Leveraging data analytics tools and techniques can provide valuable insights into customer behaviour, product performance, and market trends. By investing in advanced analytics capabilities, we can make more informed decisions and develop targeted strategies to 
   optimize profitability across all product categories.
 
 5.  WHICH PRODUCTS HAVE THE HIGHEST RETURN RATES, AND WHAT IMPACT DO RETURNS HAVE ON OVERALL SALES AND PROFIT?
@@ -561,24 +583,31 @@ FROM ProductReturns AS pr
 LEFT JOIN totalsalesprofit AS ts 
 ON pr.product_id = ts.product_id
 GROUP BY pr.product_id, pr.product_name, ts.total_sales, ts.total_profit
-ORDER BY total_return_count DESC;
+ORDER BY total_return_count DESC
+LIMIT 25;
 ```
 ![product_returned](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/d52e80f7-a9ad-405a-b818-86938b5b2e3e)
 
 #### *Findings*
-
-
-
-
-
-
-
-
-
-
-
+ The product return analysis unveils a spectrum of return counts and rates across various products. Notably, Staples stands out with 12 returns and a 17% return rate, yet maintaining robust sales of $7,008.19 and profit of $2,611.04. 
+ Conversely, Smead File Cart, Single Width, and Smead File Cart, Blue, exhibit 9 and 6 returns respectively, alongside meager return rates of 4% and 5%, coupled with negative profit margins of -$237.69 and -$1,381.01. 
+ Additionally, products like Tenex Folders, Single Width, reveal 6 returns, with a noteworthy 25% return rate, albeit generating only modest profit of $123.60, indicating potential avenues for enhancing customer satisfaction.
 
 #### *Recommendations*
+Based on the findings of the product return analysis, here are some recommendations:
+-  Conduct a thorough investigation into the reasons behind the high return rates for specific products, such as Staples and Smead File Cart, to identify any underlying issues with product quality, design, or customer satisfaction.
+
+-  Collaborate with product development teams to implement improvements or modifications to products with high return rates, focusing on addressing customer complaints or enhancing product features to meet market expectations.
+
+-  trengthen quality control processes throughout the product lifecycle, including manufacturing, packaging, and shipping, to minimize defects and ensure products meet customer expectations upon delivery.
+
+-  Analyse customer feedback and reviews associated with products exhibiting high return rates to gain insights into specific pain points or areas for improvement, guiding product development and marketing strategies.
+
+-  Enhance customer support services to streamline the return process and provide timely assistance to customers experiencing issues with products, aiming to improve overall satisfaction and reduce return rates.
+
+-  Optimize inventory management practices to mitigate the impact of returns on overall profitability, including monitoring stock levels, forecasting demand accurately, and implementing efficient return handling procedures.
+
+-  Establish a system for ongoing monitoring and evaluation of product return data, allowing for real-time insights into emerging trends or issues, and enabling proactive interventions to address them effectively.
 
 
 
