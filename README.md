@@ -493,9 +493,33 @@ category_rank;
 
 5.  WHICH PRODUCTS HAVE THE HIGHEST RETURN RATES, AND WHAT IMPACT DO RETURNS HAVE ON OVERALL SALES AND PROFIT?
 
- I faced a challenge in accurately quantifying the returned items, as they were recorded simply as 'YES' without any specific numerical values attached to them.
- I wrote an SQL script that first counted all the 'YES' entries in the returned column, associated them with the corresponding order_ids, and then linked those order_ids to the particular product names.
- This helped me determine the quantitative form of orders that were returned for each product. 
+ ![returns_sample](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/163d2197-3f75-4665-95b4-f24d67f38a36)
+
+ I faced a challenge in accurately quantifying the returned items, as they were recorded simply as 'YES' without any specific numerical values attached to them in the dataset.
+ To fix this, I wrote an SQL script that first counted all the 'YES' entries in the returned column, associated them with the corresponding order_ids, and then linked those order_ids to the particular product names.
+ This helped me determine the quantitative form of orders that were returned for each product.
+```sql
+WITH returncounts AS (
+SELECT order_id,COUNT(*) AS return_count
+FROM returns 
+WHERE returned = 'Yes'
+GROUP BY order_id
+),
+
+productreturns AS (
+SELECT product_id,product_name,return_count
+FROM returncounts
+JOIN orders 
+ON returncounts.order_id = orders.order_id
+JOIN products 
+ON orders.row_id = products.row_id
+)
+
+SELECT product_id,product_name,COALESCE(SUM(return_count), 0) AS total_return_count
+FROM productreturns
+GROUP BY product_id, product_name
+ORDER BY total_return_count DESC;
+```
 
 
 
