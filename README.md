@@ -589,9 +589,20 @@ LIMIT 25;
 ![product_returned](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/d52e80f7-a9ad-405a-b818-86938b5b2e3e)
 
 #### *Findings*
- The product return analysis unveils a spectrum of return counts and rates across various products. Notably, Staples stands out with 12 returns and a 17% return rate, yet maintaining robust sales of $7,008.19 and profit of $2,611.04. 
- Conversely, Smead File Cart, Single Width, and Smead File Cart, Blue, exhibit 9 and 6 returns respectively, alongside meager return rates of 4% and 5%, coupled with negative profit margins of -$237.69 and -$1,381.01. 
- Additionally, products like Tenex Folders, Single Width, reveal 6 returns, with a noteworthy 25% return rate, albeit generating only modest profit of $123.60, indicating potential avenues for enhancing customer satisfaction.
+- Staples: Despite having a relatively high return count of 12, it still contributes significantly to total sales and profit.
+
+- Smead File Cart, Single Width: While it has a high return count of 9, its impact on profit is negative (-$237.69), indicating that returns are affecting profitability.
+
+- Binney & Smith Sketch Pad, Blue: With a return count of 6, it has a moderate impact on sales and profit.
+
+- Tenex Folders, Single Width: Although it has a high return rate of 0.25, its total sales are relatively low compared to other products.
+
+- Boston Pens, Fluorescent: Despite a high return rate of 0.31, it contributes positively to profit.
+
+- Rogers Trays, Wire Frame: While it has a return count of 5, it significantly contributes to total sales and profit.
+
+- Novimex Executive Leather Armchair, Adjustable: Despite a return rate of 0.01, it has a substantial impact on sales and profit.
+
 
 #### *Recommendations*
 Based on the findings of the product return analysis, here are some recommendations:
@@ -609,22 +620,10 @@ Based on the findings of the product return analysis, here are some recommendati
 
 -  Establish a system for ongoing monitoring and evaluation of product return data, allowing for real-time insights into emerging trends or issues, and enabling proactive interventions to address them effectively.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### **Limitations** 
 
 -  I had to remove all non-numeric characters from the sales,profit and discount columns because they would have affected my queries which will require me to clean and convert these columns before i would have gotten my results.
+
 -  The Python script i wrote had its own setbacks which required me to manually create each table,create relationships with each table and add constraints.
 
 *[TABLE OF CONTENTS](#table-of-contents)*
