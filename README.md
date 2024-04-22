@@ -588,6 +588,10 @@ LIMIT 25;
 ```
 ![product_returned](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/d52e80f7-a9ad-405a-b818-86938b5b2e3e)
 
+![Returns Dashboard ](https://github.com/beshungh/Sales-Supply-Chain-Analysis/assets/135900689/765ec12d-d62b-4aa9-b70a-647fe87ea799)
+
+[Please click here for a full understanding of this report](https://public.tableau.com/views/ProductsReturned_17137930674220/ReturnsDashboard?:language=en-US&publish=yes&:sid=&:display_count=n&:origin=viz_share_link)
+
 #### *Findings*
 - Staples: Despite having a relatively high return count of 12, it still contributes significantly to total sales and profit.
 
@@ -602,7 +606,6 @@ LIMIT 25;
 - Rogers Trays, Wire Frame: While it has a return count of 5, it significantly contributes to total sales and profit.
 
 - Novimex Executive Leather Armchair, Adjustable: Despite a return rate of 0.01, it has a substantial impact on sales and profit.
-
 
 #### *Recommendations*
 Based on the findings of the product return analysis, here are some recommendations:
